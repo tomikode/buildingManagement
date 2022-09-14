@@ -17,7 +17,6 @@ const workOrderSchema = new mongoose.Schema({
     response: String,
     workDate: Date,
     status: String
-    
 })
 
 const workOrder = mongoose.models.WorkOrder || mongoose.model('WorkOrder', workOrderSchema)
