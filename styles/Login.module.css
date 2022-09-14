@@ -1,0 +1,56 @@
+.centreWrapper {
+    height: calc(100vh - 80px);
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginBox {
+    height: 400px;
+    width: 400px;
+    border: 1px solid black;
+    box-shadow: 0px 10px 10px rgb(180, 180, 180);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    padding: 30px;
+    font-size: x-large;
+    text-align: center;
+}
+
+.form {
+    width: 60%;
+    margin: 0 auto;
+    
+}
+
+.form input {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid var(--superdark);
+    transition: border 0.5s ease;
+    outline: none;
+}
+
+.form input[type=submit] {
+    color: white;
+    background-color: var(--primary);
+    border: none;
+}
+
+.form input[type=submit]:hover {
+    cursor: pointer;
+    background-color: var(--superdark);
+}
+
+.form input:focus {
+    border-color: var(--primary);
+}

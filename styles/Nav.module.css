@@ -2,6 +2,7 @@
     border-bottom: 1px solid black;
     height: 80px;
     padding: 0 20px;
+    box-shadow: 0 2px 2px var(--light);
 }
 
 .navFlex {
@@ -29,29 +30,29 @@
 .menu {
     margin: 0;
     margin-left: auto;
-}
-
-.menu ul {
-    list-style: none;
-}
-
-.menu ul li {
+    list-style-type: none;
     display: flex;
     align-items: center;
-    user-select: none;
+    justify-content: center;
 }
 
-.menu ul li:hover {
+.menu p {
+    display: flex;
+    align-items: center;
+    margin: 5px;
+}
+
+.menu p:hover {
     cursor: pointer;
     color: var(--primary);
 }
 
-.menu ul li:hover {
+.menu p:hover {
     color: var(--primary);
 }
 
-.loginIcon {
+.icon {
     width: 28px;
     height: 28px;
-    margin-left: 8px;
+    margin-right: 8px;
 }

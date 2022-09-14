@@ -9,6 +9,6 @@ const noticeSchema = new mongoose.Schema({
     postDate: Date,
 })
 
-const notice = mongoose.models.Notice || mongoose.model('Notice', noticeSchema)
+const Notice = mongoose.models.Notice || mongoose.model('Notice', noticeSchema)
 
-export default notice
+export default Notice

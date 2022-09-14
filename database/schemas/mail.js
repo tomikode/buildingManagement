@@ -13,6 +13,6 @@ const mailSchema = new mongoose.Schema({
     content: String,
 })
 
-const mail = mongoose.models.Mail || mongoose.model('Mail', mailSchema)
+const Mail = mongoose.models.Mail || mongoose.model('Mail', mailSchema)
 
-export default mail
+export default Mail

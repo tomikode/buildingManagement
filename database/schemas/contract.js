@@ -19,6 +19,6 @@ const contractSchema = new mongoose.Schema({
     chargeRate: String
 })
 
-const contract = mongoose.models.Contract || mongoose.model('Contract', contractSchema)
+const Contract = mongoose.models.Contract || mongoose.model('Contract', contractSchema)
 
-export default contract
+export default Contract

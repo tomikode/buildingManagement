@@ -19,6 +19,6 @@ const workOrderSchema = new mongoose.Schema({
     status: String
 })
 
-const workOrder = mongoose.models.WorkOrder || mongoose.model('WorkOrder', workOrderSchema)
+const WorkOrder = mongoose.models.WorkOrder || mongoose.model('WorkOrder', workOrderSchema)
 
-export default workOrder
+export default WorkOrder

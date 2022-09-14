@@ -10,6 +10,6 @@ const invoiceSchema = new mongoose.Schema({
     description: String
 })
 
-const invoice = mongoose.models.Invoice || mongoose.model('Invoice', invoiceSchema)
+const Invoice = mongoose.models.Invoice || mongoose.model('Invoice', invoiceSchema)
 
-export default invoice
+export default Invoice

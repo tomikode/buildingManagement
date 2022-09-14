@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../styles/Nav.module.css";
-import { UserCircleIcon } from "@heroicons/react/24/outline";
+import { HomeIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 const Nav = () => {
 	return (
@@ -14,14 +15,24 @@ const Nav = () => {
 						<span className={styles.first}>M</span>anagement
 					</p>
 				</div>
-				<div className={styles.menu}>
-					<ul>
-						<li>
-							Login
-							<UserCircleIcon className={styles.loginIcon} />
-						</li>
-					</ul>
-				</div>
+				<ul className={styles.menu}>
+					<li>
+						<Link href="/">
+							<p>
+								<HomeIcon className={styles.icon} />
+								Home
+							</p>
+						</Link>
+					</li>
+					<li>
+						<Link href="/login">
+							<p>
+								<UserCircleIcon className={styles.icon} />
+								Login
+							</p>
+						</Link>
+					</li>
+				</ul>
 			</div>
 		</div>
 	);
