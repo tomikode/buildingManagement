@@ -3,11 +3,14 @@ import User from "../../database/schemas/user";
 
 const tryLogin = async (req) => {
     const { email, password } = req.body
+    if (!email || !password)
+        return { status: 401, body: {error: "Invalid credentials"} }
     const foundUser = await User.findOne({ email, password })
-    if (foundUser){
-        return foundUser
-    }
-    return { error: "Invalid credentials" }
+    console.log(foundUser)
+    if (foundUser)
+        return { status: 201, body: { foundUser }}
+    else 
+        return { status: 401, body: {error: "Invalid credentials"} }
 }
 
 export default async function (req, res){
@@ -17,13 +20,11 @@ export default async function (req, res){
 	let result = { error: "Something went wrong" }
     switch (method){
         case "POST":
-            result = tryLogin()
-            if (result)
-                res.status(201).json(result)
-            else
-                res.status(401).json(result)
-            break;
+            result = await tryLogin(req)
+            res.status(result.status).json(result.body)
+            break
         default:
             res.status(401).json(result)
+            break
     }
 }

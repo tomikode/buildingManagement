@@ -4,9 +4,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-image: url("../public/skyscraper.jpg");
+    background-size: cover;
 }
 
 .loginBox {
+    background-color: white;
     height: 400px;
     width: 400px;
     border: 1px solid black;
@@ -21,6 +24,10 @@
     padding: 30px;
     font-size: x-large;
     text-align: center;
+}
+
+.error {
+    color: red;
 }
 
 .form {
