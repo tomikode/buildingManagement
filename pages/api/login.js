@@ -6,9 +6,9 @@ const tryLogin = async (req) => {
     if (!email || !password)
         return { status: 401, body: {error: "Invalid credentials"} }
     const foundUser = await User.findOne({ email, password })
-    console.log(foundUser)
-    if (foundUser)
+    if (foundUser){
         return { status: 201, body: { foundUser }}
+    }
     else 
         return { status: 401, body: {error: "Invalid credentials"} }
 }
