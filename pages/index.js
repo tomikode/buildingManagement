@@ -13,3 +13,6 @@ export default function Home() {
 		</Layout>
 	);
 }
+
+//add sign in attempts and allow people to see them
+//maybe use callback to share user state across to other components

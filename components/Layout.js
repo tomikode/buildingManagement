@@ -19,21 +19,26 @@ const Layout = ({ children, pageType, logout }) => {
 			return;
 		}
 		const prevUser = sessionStorage.getItem("user");
+		const type = null;
 		if (prevUser) {
 			prevUser = JSON.parse(prevUser);
+			type = prevUser.type;
 			setUser(prevUser);
-			if (prevUser.type !== pageType) {
-				switch (prevUser.type) {
-					case "t":
-						router.push("/tenantHome");
-						break;
-					case "m":
-						router.push("/managerHome");
-						break;
-					case "c":
-						router.push("/contractorHome");
-						break;
-				}
+		}
+		if (type !== pageType) {
+			switch (type) {
+				case "t":
+					router.push("/tenantHome");
+					break;
+				case "m":
+					router.push("/managerHome");
+					break;
+				case "c":
+					router.push("/contractorHome");
+					break;
+				default:
+					router.push("/");
+					break;
 			}
 		}
 	}, []);
