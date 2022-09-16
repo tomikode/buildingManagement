@@ -25,7 +25,7 @@ const Layout = ({ children, pageType, logout }) => {
 			type = prevUser.type;
 			setUser(prevUser);
 		}
-		if (type !== pageType) {
+		if (pageType && type !== pageType) {
 			switch (type) {
 				case "t":
 					router.push("/tenantHome");
