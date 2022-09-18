@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HomeIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import styles from "../styles/Nav.module.css";
 import Link from "next/link";
@@ -8,46 +8,43 @@ import TenantNav from "./TenantNav";
 import BaseNav from "./BaseNav";
 import ManagerNav from "./ManagerNav";
 import ContractorNav from "./ContractorNav";
+import { UserContext } from "../pages/_app";
 
 const Layout = ({ children, pageType, logout }) => {
-	const [user, setUser] = useState(null);
+	const userCon = useContext(UserContext)
 	const router = useRouter();
 
 	useEffect(() => {
 		if (logout) {
-			setUser(null);
+			userCon.setUser(null);
 			return;
 		}
 		const prevUser = sessionStorage.getItem("user");
 		const type = null;
 		if (prevUser) {
 			prevUser = JSON.parse(prevUser);
-			type = prevUser.type;
-			setUser(prevUser);
-		}
-		if (pageType && type !== pageType) {
-			switch (type) {
-				case "t":
-					router.push("/tenantHome");
-					break;
-				case "m":
-					router.push("/managerHome");
-					break;
-				case "c":
-					router.push("/contractorHome");
-					break;
-				default:
-					router.push("/");
-					break;
+			userCon.setUser(prevUser);
+			if (pageType !== "all" && prevUser.type !== pageType) {
+				switch (prevUser.type) {
+					case "t":
+						router.push("/tenantHome");
+						break;
+					case "m":
+						router.push("/managerHome");
+						break;
+					case "c":
+						router.push("/contractorHome");
+						break;
+				}
 			}
 		}
 	}, []);
 
 	const renderNav = () => {
-		if (!user) {
+		if (!userCon.user) {
 			return <BaseNav />;
 		}
-		switch (user.type) {
+		switch (userCon.user.type) {
 			case "t":
 				return <TenantNav />;
 			case "m":

@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     password: String,
     phone: String,
     type: String,
+    accessAttempts: [String]
 })
 
 const User = mongoose.models.User || mongoose.model('User', userSchema)

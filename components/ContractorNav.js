@@ -18,12 +18,12 @@ const ContractorNav = () => {
 						<XMarkIcon className={styles.menuIcon} />
 					</button>
 					<ul id="menu" className={styles.menu}>
-						<Link href="/">
+						<Link href="/contractorHome">
 							<li>
 								<p>Home</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/profile">
 							<li>
 								<p>Profile</p>
 							</li>
