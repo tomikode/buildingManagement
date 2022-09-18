@@ -19,14 +19,14 @@ const TenantNav = () => {
 				<>
 					<button className={styles.button} onClick={showMenu}><XMarkIcon className={styles.menuIcon} /></button>
 					<ul id="menu" className={styles.menu}>
-						<Link href="/">
+						<Link href="/tenantHome">
 							<li>
 								<p>
 									Home
 								</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/profile">
 							<li>
 								<p>
 									Profile
