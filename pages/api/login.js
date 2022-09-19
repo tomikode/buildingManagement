@@ -17,13 +17,13 @@ const tryLogin = async (req) => {
 			addAccessAttempt(req, foundUser, "Successful");
 			return { status: 201, body: { foundUser } };
 		} else {
-            addAccessAttempt(req, foundUser, "Failed");
-            return { status: 401, body: { error: "Invalid credentials" } };
-        }
+			addAccessAttempt(req, foundUser, "Failed");
+			return { status: 401, body: { error: "Invalid credentials" } };
+		}
 	} else return { status: 401, body: { error: "Invalid credentials" } };
 };
 
-export default async function (req, res) {
+const loginHandler = async (req, res) => {
 	const method = req.method;
 	console.log(method + " login");
 	connect().catch((err) => console.log(err));
@@ -37,4 +37,6 @@ export default async function (req, res) {
 			res.status(401).json(result);
 			break;
 	}
-}
+};
+
+export default loginHandler;

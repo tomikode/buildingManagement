@@ -11,7 +11,7 @@ import ContractorNav from "./ContractorNav";
 import { UserContext } from "../pages/_app";
 
 const Layout = ({ children, pageType, logout }) => {
-	const userCon = useContext(UserContext)
+	const userCon = useContext(UserContext);
 	const router = useRouter();
 
 	useEffect(() => {
@@ -38,7 +38,7 @@ const Layout = ({ children, pageType, logout }) => {
 				}
 			}
 		}
-	}, []);
+	}, []); // eslint-disable-line
 
 	const renderNav = () => {
 		if (!userCon.user) {

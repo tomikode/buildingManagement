@@ -4,7 +4,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 
-const login = () => {
+const Login = () => {
 	const [error, setError] = useState("");
 	const router = useRouter();
 
@@ -53,4 +53,4 @@ const login = () => {
 	);
 };
 
-export default login;
+export default Login;

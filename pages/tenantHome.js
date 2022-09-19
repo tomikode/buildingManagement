@@ -1,12 +1,8 @@
-import React from 'react'
-import Layout from '../components/Layout'
+import React from "react";
+import Layout from "../components/Layout";
 
-const tenantHome = () => {
-  return (
-    <Layout pageType="t">
-      Tenant Home
-    </Layout>
-  )
-}
+const TenantHome = () => {
+	return <Layout pageType="t">Tenant Home</Layout>;
+};
 
-export default tenantHome
+export default TenantHome;

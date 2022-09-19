@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import styles from "../styles/Profile.module.css";
 import { UserContext } from "./_app";
 
-const profile = () => {
+const Profile = () => {
 	const userCon = useContext(UserContext);
 	const [attempts, setAttempts] = useState([]);
 
@@ -41,7 +41,10 @@ const profile = () => {
 					<h2>Login Access Attempts</h2>
 					<div className={styles.filterBox}>
 						<p className={styles.filterText}>Filter</p>
-						<select onChange={filter} className={styles.filterSelect}>
+						<select
+							onChange={filter}
+							className={styles.filterSelect}
+						>
 							<option value="All">All</option>
 							<option value="Successful">Successful</option>
 							<option value="Failed">Failed</option>
@@ -76,4 +79,4 @@ const profile = () => {
 	);
 };
 
-export default profile;
+export default Profile;
