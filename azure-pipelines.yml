@@ -9,6 +9,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+
 steps:
 - task: NodeTool@0
   inputs:
@@ -19,3 +20,12 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+- task: Npm@1
+  displayName: npm run test
+  env:
+    MONGODB_URI: $(MONDODB_URI)
+  inputs:
+    command: 'custom'
+    workingDir: 'src/client-app'
+    customCommand: 'run test'
