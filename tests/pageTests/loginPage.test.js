@@ -10,7 +10,6 @@ import Login from '../../pages/login'
 //https://testing-library.com/
 //https://jestjs.io/docs/tutorial-react
 //https://github.com/testing-library/jest-dom
-//https://seanconnolly.dev/unit-testing-nextjs-api-routes
 
 describe('Login', () => {
   it('Login page renders inputs', () => {
