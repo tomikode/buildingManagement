@@ -1,5 +1,5 @@
 import axios from "axios";
-import { exec } from "node:child_process";
+import { spawn } from "node:child_process";
 
 jest.retryTimes(10000);
 
@@ -7,15 +7,21 @@ let testServer;
 
 beforeAll(() => {
 	console.log("spawning");
-	testServer = exec(/^win/.test(process.platform) ? "npm.cmd" : "npm", [
+	testServer = spawn(/^win/.test(process.platform) ? "npm.cmd" : "npm", [
 		"run",
 		"dev",
 	]);
-});
+	testServer.stdout.on("data", (data) => {
+		console.log(`stdout: ${data}`);
+	});
 
-afterAll(() => {
-	console.log("killing");
-	testServer.kill();
+	testServer.stderr.on("data", (data) => {
+		console.error(`stderr: ${data}`);
+	});
+
+	testServer.on("close", (code) => {
+		console.log(`child process exited with code ${code}`);
+	});
 });
 
 describe("apitest", () => {
