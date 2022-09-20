@@ -21,6 +21,7 @@ steps:
     npm run build
   displayName: 'npm install and build'
 - script: |
+    npm --version
     npm run testFront
     npm run testBack
   env:
