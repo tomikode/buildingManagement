@@ -21,12 +21,8 @@ steps:
     npm run build
   displayName: 'npm install and build'
 - script: |
-    npm run dev
+    npm run testFront
+    npm run testBack
   env:
     MONGODB_URI: $(MONDODB_URI)
-  displayName: 'npm run dev'
-- script: |
-    npm run test
-  env:
-    MONGODB_URI: $(MONDODB_URI)
-  displayName: 'npm run test'
+  displayName: 'test runs'
