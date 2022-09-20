@@ -20,12 +20,8 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
-
-- task: Npm@1
-  displayName: npm run test
+- script: |
+    npm run test
   env:
     MONGODB_URI: $(MONDODB_URI)
-  inputs:
-    command: 'custom'
-    workingDir: './'
-    customCommand: 'run test'
+  displayName: 'npm run test'
