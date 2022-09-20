@@ -22,6 +22,7 @@ steps:
   displayName: 'npm install and build'
 - script: |
     npm run test
+    npm run mocha
   env:
     MONGODB_URI: $(MONDODB_URI)
   displayName: 'npm run test'
