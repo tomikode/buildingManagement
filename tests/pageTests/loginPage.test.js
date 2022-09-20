@@ -20,6 +20,6 @@ describe('Login', () => {
     expect(email.value).toBe("failed@mail")
     const password = dom.getByTestId('password')
     fireEvent.change(password, {target: {value: "fail"}})
-    expect(password.value).toBe("fail")
+    expect(password.value).toBe("WILL FAIL TEST")
   })
 })
