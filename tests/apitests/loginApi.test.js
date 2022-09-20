@@ -9,11 +9,25 @@ import loginHandler from "../../pages/api/login.js";
 
 describe("Login backend", () => {
 	it("Failed login with wrong credentials", async () => {
-		const { req, res } = createMocks({
-			method: "GET",
+		let { req, res } = createMocks({
+			method: "POST",
 		});
 		await loginHandler(req, res)
-		expect(res.statusCode).eql(401)
+		expect(res.statusCode).equals(401)
 	});
+
+	it("Logs in correctly", async () => {
+		let { req, res } = createMocks({
+			method: "POST",
+			body: {
+				email: 'tom@mail',
+				password: 'tom'
+			},
+		})
+		console.log(req)
+		await loginHandler(req, res)
+		expect(res.statusCode).eql(201)
+		console.log(res)
+	})
 });
 

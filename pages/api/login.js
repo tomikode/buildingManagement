@@ -8,6 +8,7 @@ const addAccessAttempt = async (req, foundUser, result) => {
 };
 
 const tryLogin = async (req) => {
+	console.log(req.body)
 	const { email, password } = req.body;
 	if (!email || !password)
 		return { status: 401, body: { error: "Invalid credentials" } };
@@ -28,6 +29,7 @@ const loginHandler = async (req, res) => {
 	console.log(method + " login");
 	connect().catch((err) => console.log(err));
 	let result = { error: "Something went wrong" };
+	console.log('here')
 	switch (method) {
 		case "POST":
 			result = await tryLogin(req);

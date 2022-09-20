@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch ./tests/pageTests",
-    "mocha": "mocha ./tests/apitests"
+    "mocha": "mocha ./tests/apitests --timeout 12000"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.10",
