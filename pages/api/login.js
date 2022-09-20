@@ -11,7 +11,8 @@ const tryLogin = async (req) => {
 	const { email, password } = req.body;
 	if (!email || !password)
 		return { status: 401, body: { error: "Invalid credentials" } };
-	const foundUser = await User.findOne({ email });
+	const foundUser = await User.findOne({ email: email });
+	console.log(foundUser)
 	if (foundUser) {
 		if (foundUser.password === password) {
 			addAccessAttempt(req, foundUser, "Successful");
