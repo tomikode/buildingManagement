@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
 const connect = async () => {
-	if (mongoose.connections[0].readyState === 0) {
+	if (mongoose.connection.readyState === 0) {
 		const uri = process.env.MONGODB_URI
-		mongoose.connect(uri);
+		console.log(uri)
+		mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 		console.log("connected");
 	}
 };

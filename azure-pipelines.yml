@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- testSetup
+- main
 
 pool:
   vmImage: ubuntu-latest
@@ -13,15 +13,18 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14.6'
+    versionSpec: '16.17.0'
   displayName: 'Install Node.js'
 
 - script: |
+    node --version
     npm install
     npm run build
   displayName: 'npm install and build'
 - script: |
-    npm run test
+    npm --version
+    npm run testFront
+    npm run testBack
   env:
     MONGODB_URI: $(MONDODB_URI)
-  displayName: 'npm run test'
+  displayName: 'test runs'

@@ -1,5 +1,5 @@
-import connect from "../../database/connection";
-import User from "../../database/schemas/user";
+import connect from "../../database/connection.js";
+import User from "../../database/schemas/user.js";
 
 const addAccessAttempt = async (req, foundUser, result) => {
 	const date = new Date();
@@ -12,6 +12,7 @@ const tryLogin = async (req) => {
 	if (!email || !password)
 		return { status: 401, body: { error: "Invalid credentials" } };
 	const foundUser = await User.findOne({ email });
+	console.log(foundUser);
 	if (foundUser) {
 		if (foundUser.password === password) {
 			addAccessAttempt(req, foundUser, "Successful");
@@ -26,8 +27,9 @@ const tryLogin = async (req) => {
 const loginHandler = async (req, res) => {
 	const method = req.method;
 	console.log(method + " login");
-	connect().catch((err) => console.log(err));
+	await connect().catch((err) => console.log(err));
 	let result = { error: "Something went wrong" };
+	console.log("here");
 	switch (method) {
 		case "POST":
 			result = await tryLogin(req);

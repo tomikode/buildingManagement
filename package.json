@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "testFront": "jest ./tests/frontTests --env=jsdom --forceExit",
+    "testBack": "jest ./tests/backTests --env=node --forceExit"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.10",
