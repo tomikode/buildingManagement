@@ -20,7 +20,6 @@ const Layout = ({ children, pageType, logout }) => {
 			return;
 		}
 		const prevUser = sessionStorage.getItem("user");
-		const type = null;
 		if (prevUser) {
 			prevUser = JSON.parse(prevUser);
 			userCon.setUser(prevUser);
@@ -41,7 +40,7 @@ const Layout = ({ children, pageType, logout }) => {
 	}, []); // eslint-disable-line
 
 	const renderNav = () => {
-		if (!userCon.user) {
+		if (!userCon || !userCon.user) {
 			return <BaseNav />;
 		}
 		switch (userCon.user.type) {

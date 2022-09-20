@@ -1,5 +1,5 @@
-import connect from "../../database/connection";
-import User from "../../database/schemas/user";
+import connect from "../../database/connection.js";
+import User from "../../database/schemas/user.js";
 
 const addAccessAttempt = async (req, foundUser, result) => {
 	const date = new Date();
