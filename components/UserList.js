@@ -1,11 +1,11 @@
 import UserRecord from "../components/UserRecord"
 
-const UserList = ({users, onDisable}) => {
+const UserList = ({users, onDisable, onDelete}) => {
 
   return (
     <>
         {users.map((user) => (
-            <UserRecord key={user.id} name={user.name} onDisable={onDisable}/>)
+            <UserRecord key={user.id} user={user} onDisable={onDisable} onDelete={onDelete}/>)
         )}
     </>
   )

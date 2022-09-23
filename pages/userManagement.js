@@ -31,7 +31,13 @@ const UserManagement = () => {
     ])
 
 	const disableUser = (id) => {
-		console.log("Disabling", id)
+		setUsers(users.map((user) => user.id === id
+		? {...user, active: !user.active}
+		: user))
+	}
+
+	const deleteUser = (id) => {
+		setUsers(users.filter((user) => user.id !== id))
 	}
 
 	useEffect(() => {
@@ -66,7 +72,9 @@ const UserManagement = () => {
 			<div className={styles.maxWidth}>
 				<div>
 					<h2>User Management</h2>
-					<UserList users={users} onDisable={disableUser}/>
+					{(users.length > 0) 
+					? (<UserList users={users} onDisable={disableUser} onDelete={deleteUser} />)
+					: "No users"}
 					<div className={styles.filterBox}>
 						<p className={styles.filterText}>Filter</p>
 						<select
