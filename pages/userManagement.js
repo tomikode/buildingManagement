@@ -3,135 +3,101 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./_app";
 import Layout from "../components/Layout";
 import styles from "../styles/Profile.module.css";
-import UserList from "../components/UserList"
-import Link from "next/link";
+import UserList from "../components/user_management/UserList"
+import Button from "../components/Button"
 
 const UserManagement = () => {
 	const userCon = useContext(UserContext);
-	const [attempts, setAttempts] = useState([]);
 
+	// Data storing users, only stored in view - no database backend
     const [users, setUsers] = useState([
         {
             id: 1,
             name: "Atilla Bongs",
+			phone: "1800 666 666",
+			email: "bongs@cometpizza.com",
+			sex: "Male",
             type: "p",
-            active: false,
+			active: true,
+			password: "moloch"
         },
         {
             id: 2,
             name: "Craig Dunsfield",
+			phone: "0477 805 468",
+			email: "craig@unitedright.com",
+			sex: "Male",
             type: "m",
             active: true,
+			password: "letmein"
         },
         {
             id: 3,
             name: "Your Mum",
+			phone: "1831 494 673",
+			email: "qt314@yourmums.accesscam.org",
+			sex: "Yes, please",
             type: "t",
             active: true,
+			password: "allaboard"
+        },
+        {
+            id: 4,
+            name: "Suzanne Vega",
+			phone: "1831 238 123",
+			email: "svega@outlook.com",
+			sex: "Female",
+            type: "c",
+            active: true,
+			password: "luca"
         },
     ])
 
 	const addUser = (newUser) => {
-		console.log("fdsafsaf")
+		console.log("New user added")
 	}
 
 	const disableUser = (id) => {
+		// Log a message about the state toggle
+		users.map((user) => user.id === id
+		? console.log(`Toggling ${user.name}'s 'active' state to ${!user.active}`)
+		: null)
+		
+		// Toggle User 'active' state by given User ID
 		setUsers(users.map((user) => user.id === id
 		? {...user, active: !user.active}
 		: user))
 	}
 
 	const deleteUser = (id) => {
+		// Log a message about User deletion
+		users.map((user) => user.id === id
+		? console.log(`Deleting ${user.name}`)
+		: null)
+
+		// Delete the User by given User ID
 		setUsers(users.filter((user) => user.id !== id))
 	}
-
-	useEffect(() => {
-		setAttempts(userCon.user ? userCon.user.accessAttempts : []);
-	}, [userCon]);
-
-	const filter = (e) => {
-		const filter = e.target.value;
-		switch (filter) {
-			case "All":
-				setAttempts(userCon.user.accessAttempts);
-				break;
-			case "Successful":
-				setAttempts(
-					userCon.user.accessAttempts.filter((attempt) =>
-						attempt.includes("Successful")
-					)
-				);
-				break;
-			case "Failed":
-				setAttempts(
-					userCon.user.accessAttempts.filter((attempt) =>
-						attempt.includes("Failed")
-					)
-				);
-				break;
-		}
-	};
 
 	return (
 		<Layout pageType="m">
 			<div className={styles.maxWidth}>
-				<div>
 
-					<h2>User Management</h2>
+					<h2>
+						User Management 
+						<Button text="Add User" onClick={() => console.log("Adding User")} />
+					</h2>
 
+					{/* Display message if no users to show */}
 					{(users.length > 0) 
-					? (<UserList users={users} onDisable={disableUser} onDelete={deleteUser} />)
+					? (<UserList
+						users={users}
+						onDisable={disableUser}
+						onDelete={deleteUser} />)
 					: "No users"}
-
-					<Link href="/editUser" state={{ type: "Create" }}>
-						<li>
-							<p>
-								 Create User
-							</p>
-						</li>
-					</Link>
-
-					<div className={styles.filterBox}>
-						<p className={styles.filterText}>Filter</p>
-						<select
-							onChange={filter}
-							className={styles.filterSelect}
-						>
-							<option value="All">All</option>
-							<option value="Successful">Successful</option>
-							<option value="Failed">Failed</option>
-						</select>
-					</div>
-					{userCon.user ? (
-						<table className={styles.table}>
-							<thead>
-								<tr>
-									<th>Date</th>
-									<th>Result</th>
-								</tr>
-							</thead>
-							<tbody>
-								{attempts.map((attempt, key) => {
-									attempt = attempt.split("|");
-									const date = attempt[0];
-									const result = attempt[1];
-									return (
-										<tr key={key}>
-											<td>{date}</td>
-											<td>{result}</td>
-										</tr>
-									);
-								})}
-							</tbody>
-						</table>
-					) : null}
 				</div>
-			</div>
 		</Layout>
 	);
-	var title = "User Management"
-
-	return <Layout pageType="m">{title}</Layout>;
 };
 
 export default UserManagement;

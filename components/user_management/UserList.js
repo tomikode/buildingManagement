@@ -1,4 +1,4 @@
-import UserRecord from "../components/UserRecord"
+import UserRecord from "../user_management/UserRecord"
 
 const UserList = ({users, onDisable, onDelete}) => {
 
