@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import styles from "../styles/Profile.module.css";
 import UserList from "../components/user_management/UserList"
 import Button from "../components/Button"
+import EditUser from "../components/user_management/EditUser";
 
 const UserManagement = () => {
 	const userCon = useContext(UserContext);
@@ -25,10 +26,10 @@ const UserManagement = () => {
             id: 2,
             name: "Craig Dunsfield",
 			phone: "0477 805 468",
-			email: "craig@unitedright.com",
+			email: "craig@hotmail.com",
 			sex: "Male",
             type: "m",
-            active: true,
+            active: false,
 			password: "letmein"
         },
         {
@@ -87,6 +88,8 @@ const UserManagement = () => {
 						User Management 
 						<Button text="Add User" onClick={() => console.log("Adding User")} />
 					</h2>
+
+					<EditUser />
 
 					{/* Display message if no users to show */}
 					{(users.length > 0) 

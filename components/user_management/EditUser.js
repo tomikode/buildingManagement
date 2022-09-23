@@ -1,31 +1,41 @@
 import React from "react";
-import Layout from "../Layout";
 import { useState } from "react"
 
 const EditUser = ({type}) => {
-	const [id, setID] = useState('')
 	const [name, setName] = useState('')
+	const [phone, setPhone] = useState('')
+	const [email, setEmail] = useState('')
+	const [sex, setSex] = useState('')
 	const [userType, setUserType] = useState('')
 	const [active, setActive] = useState(true)
+	const [password, setPassword] = useState('')
 
-	return (
+return (
 	<>
-		<Layout pageType="all">{type} user</Layout>
 		<form>
-			<div>
-				<label>ID</label>
-				<input
-				type="text"
-				placeholder="Add user ID"
-				value={id}
-				onChange={(e) => setID(e.target.value)}
-				/>
-			</div>
 			<div>
 				<label>Name</label>
 				<input type="text" placeholder="Add user full name" 
 				value={name}
 				onChange={(e) => setName(e.target.value)}/>
+			</div>
+			<div>
+				<label>Phone</label>
+				<input type="text" placeholder="Add phone number" 
+				value={phone}
+				onChange={(e) => setPhone(e.target.value)}/>
+			</div>
+			<div>
+				<label>Email</label>
+				<input type="text" placeholder="Add email" 
+				value={email}
+				onChange={(e) => setEmail(e.target.value)}/>
+			</div>
+			<div>
+				<label>Sex</label>
+				<input type="text" placeholder="Add sex" 
+				value={sex}
+				onChange={(e) => setSex(e.target.value)}/>
 			</div>
 			<div>
 				<label>User Type</label>
@@ -39,6 +49,12 @@ const EditUser = ({type}) => {
 				value={active}
 				onChange={(e) => setActive(e.currentTarget.checked)}
 				/>
+			</div>
+			<div>
+				<label>Password</label>
+				<input type="text" placeholder="Add password" 
+				value={password}
+				onChange={(e) => setPassword(e.target.value)}/>
 			</div>
 
 			<input type="submit" value="Save User" />
