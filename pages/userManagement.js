@@ -4,6 +4,7 @@ import { UserContext } from "./_app";
 import Layout from "../components/Layout";
 import styles from "../styles/Profile.module.css";
 import UserList from "../components/UserList"
+import Link from "next/link";
 
 const UserManagement = () => {
 	const userCon = useContext(UserContext);
@@ -68,13 +69,24 @@ const UserManagement = () => {
 	};
 
 	return (
-		<Layout pageType="all">
+		<Layout pageType="m">
 			<div className={styles.maxWidth}>
 				<div>
+
 					<h2>User Management</h2>
+
 					{(users.length > 0) 
 					? (<UserList users={users} onDisable={disableUser} onDelete={deleteUser} />)
 					: "No users"}
+
+					<Link href="/editUser" state={{ type: "Create" }}>
+						<li>
+							<p>
+								 Create User
+							</p>
+						</li>
+					</Link>
+
 					<div className={styles.filterBox}>
 						<p className={styles.filterText}>Filter</p>
 						<select
