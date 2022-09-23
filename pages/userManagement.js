@@ -31,6 +31,10 @@ const UserManagement = () => {
         },
     ])
 
+	const addUser = (newUser) => {
+		console.log("fdsafsaf")
+	}
+
 	const disableUser = (id) => {
 		setUsers(users.map((user) => user.id === id
 		? {...user, active: !user.active}
