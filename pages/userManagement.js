@@ -3,15 +3,36 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./_app";
 import Layout from "../components/Layout";
 import styles from "../styles/Profile.module.css";
-import Button from "../components/Button"
 import UserList from "../components/UserList"
 
 const UserManagement = () => {
 	const userCon = useContext(UserContext);
 	const [attempts, setAttempts] = useState([]);
-    const onClick = () => {
-        console.log("Clicky")
-    }
+
+    const [users, setUsers] = useState([
+        {
+            id: 1,
+            name: "Atilla Bongs",
+            type: "p",
+            active: false,
+        },
+        {
+            id: 2,
+            name: "Craig Dunsfield",
+            type: "m",
+            active: true,
+        },
+        {
+            id: 3,
+            name: "Your Mum",
+            type: "t",
+            active: true,
+        },
+    ])
+
+	const disableUser = (id) => {
+		console.log("Disabling", id)
+	}
 
 	useEffect(() => {
 		setAttempts(userCon.user ? userCon.user.accessAttempts : []);
@@ -44,9 +65,8 @@ const UserManagement = () => {
 		<Layout pageType="all">
 			<div className={styles.maxWidth}>
 				<div>
-					<h2>Login Access Attempts</h2>
-					<Button color="green" text="SHISTIHSAF" onClick={onClick}/>
-					<UserList/>
+					<h2>User Management</h2>
+					<UserList users={users} onDisable={disableUser}/>
 					<div className={styles.filterBox}>
 						<p className={styles.filterText}>Filter</p>
 						<select

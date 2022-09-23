@@ -1,6 +1,12 @@
-const UserRecord = ({name}) => {
-  return (
-    <h3>{name}</h3>
+import Button from "./Button"
+
+const UserRecord = ({name, onDisable}) => {
+
+   return (
+        <h3>
+            {name}
+            <Button color="red" text="DELETE" onClick={() => onDisable(name)}/>
+        </h3>
   )
 }
 
