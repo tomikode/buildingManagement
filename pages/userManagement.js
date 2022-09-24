@@ -93,7 +93,7 @@ const UserManagement = () => {
 						<Button text="Add User" onClick={() => console.log("Adding User")} />
 					</h2>
 
-					<EditUser />
+					<EditUser editType={"Frank Herbet"} onEdit={() => console.log("Saving user")}/>
 
 					{/* Display message if no users to show */}
 					{(users.length > 0) 
