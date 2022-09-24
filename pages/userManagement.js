@@ -71,7 +71,17 @@ const UserManagement = () => {
 
 	const addUser = (newUser) => {
 		console.log("New user added")
-		setUsers([...users,newUser])
+		if (getUser(newUser.id) !== undefined) {
+			alert(`User ${newUser.name} updated`)
+			setUsers(users.map((user) => user.id === newUser.id
+				? newUser
+				: user))
+				setViewState(ViewStates.UserList)
+		}
+		else {
+			alert(`New user ${newUser.name} created`)
+			setUsers([...users,newUser])
+		}
 	}
 
 	const editUser = (user) => {

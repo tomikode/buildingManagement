@@ -20,11 +20,11 @@ const onSubmit = (e) => {
 		return
 	}
 
-	id = Math.floor(Math.random() * 1_000_000_000_000) + 1
-	setID(id)
+	if(!id) {
+		id = Math.floor(Math.random() * 1_000_000_000_000) + 1
+		setID(id)
+	}
 	onEdit({id, name, phone, email, sex, userType, active, password})
-
-	alert(`User ${name} created.`)
 
 	setName("")
 	setPhone("")
@@ -36,6 +36,7 @@ const onSubmit = (e) => {
 }
 
 const loadUser = (user) => {
+	setID(user.id)
 	setName(user.name)
 	setPhone(user.phone)
 	setEmail(user.email)
