@@ -8,6 +8,8 @@ import Button from "../components/Button"
 import EditUser from "../components/user_management/EditUser";
 
 const UserManagement = () => {
+	const [showAddUser, setShowAddUser] = useState(false)
+
 	const userCon = useContext(UserContext);
 
 	// Data storing users, only stored in view - no database backend
@@ -91,13 +93,17 @@ const UserManagement = () => {
 
 					<h2>
 						User Management 
-						<Button text="Add User" onClick={() => console.log("Adding User")} />
+						<Button
+							text={showAddUser ? "Cancel" : "Add User"}
+							onClick={() => setShowAddUser(!showAddUser)}
+						/>
 					</h2>
 
-					<EditUser editType={"Frank Herbet"} onEdit={addUser}/>
+					{showAddUser && <EditUser editType={"Frank Herbet"} onEdit={addUser}/>}
 
 					{/* Display message if no users to show */}
-					{(users.length > 0) 
+					{!showAddUser && 
+					(users.length > 0) 
 					? (<UserList
 						users={users}
 						onDisable={disableUser}

@@ -20,9 +20,18 @@ const onSubmit = (e) => {
 	}
 
 	id = Math.floor(Math.random() * 1_000_000_000_000) + 1
-	console.log("fdasf", id)
 	setID(id)
 	onEdit({id, name, phone, email, sex, userType, active, password})
+
+	alert(`User ${name} created.`)
+
+	setName("")
+	setPhone("")
+	setEmail("")
+	setSex("")
+	setUserType("")
+	setActive(true)
+	setPassword("")
 }
 
 return (
