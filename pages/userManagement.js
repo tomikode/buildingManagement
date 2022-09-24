@@ -8,9 +8,17 @@ import Button from "../components/Button"
 import EditUser from "../components/user_management/EditUser";
 
 const UserManagement = () => {
-	const [showAddUser, setShowAddUser] = useState(false)
+	const [showEditUser, setShowEditUser] = useState(0)
 
 	const userCon = useContext(UserContext);
+
+	const ViewStates = {
+		UserList: 0,
+		NewUser:  1,
+		EditUser: 2,
+	}
+
+	const [viewState, setViewState] = useState(0)
 
 	// Data storing users, only stored in view - no database backend
     const [users, setUsers] = useState([
@@ -56,13 +64,19 @@ const UserManagement = () => {
         },
     ])
 
+	const getUser = (id) => {
+		console.log(`Getting user ${id}`)
+		return users.find((user) => user.id === id)
+	}
+
 	const addUser = (newUser) => {
 		console.log("New user added")
 		setUsers([...users,newUser])
 	}
 
 	const editUser = (user) => {
-		console.log("Edit user", user)
+		setViewState(2)
+		setShowEditUser(user)
 	}
 
 	const disableUser = (id) => {
@@ -94,22 +108,25 @@ const UserManagement = () => {
 					<h2>
 						User Management 
 						<Button
-							text={showAddUser ? "Cancel" : "Add User"}
-							onClick={() => setShowAddUser(!showAddUser)}
+							text={viewState === ViewStates.UserList ? "Add User" : "Cancel"}
+							onClick={() => {
+								viewState > 0 ? setViewState(0) : setViewState(1)
+							}}
 						/>
 					</h2>
 
-					{showAddUser && <EditUser editType={"Frank Herbet"} onEdit={addUser}/>}
+					{viewState === ViewStates.NewUser && <EditUser onEdit={addUser}/>}
+					{viewState === ViewStates.EditUser && <EditUser onEdit={addUser} user={getUser(showEditUser)}/>}
 
 					{/* Display message if no users to show */}
-					{!showAddUser && 
-					(users.length > 0) 
-					? (<UserList
-						users={users}
-						onDisable={disableUser}
-						onDelete={deleteUser}
-						onEdit={editUser}/>)
-					: "No users"}
+					{viewState === ViewStates.UserList &&
+						(users.length > 0) 
+						? (<UserList
+							users={users}
+							onDisable={disableUser}
+							onDelete={deleteUser}
+							onEdit={editUser}/>)
+						: "No users"}
 				</div>
 		</Layout>
 	);

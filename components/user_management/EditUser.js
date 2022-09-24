@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react"
 
-const EditUser = ({editType, onEdit}) => {
+const EditUser = ({onEdit, user=null}) => {
 	const [id, setID] = useState('')
 	const [name, setName] = useState('')
 	const [phone, setPhone] = useState('')
@@ -10,6 +10,7 @@ const EditUser = ({editType, onEdit}) => {
 	const [userType, setUserType] = useState('')
 	const [active, setActive] = useState(true)
 	const [password, setPassword] = useState('')
+	const [userLoaded, setUserLoaded] = useState(false)
 
 const onSubmit = (e) => {
 	e.preventDefault()
@@ -34,11 +35,24 @@ const onSubmit = (e) => {
 	setPassword("")
 }
 
+const loadUser = (user) => {
+	setName(user.name)
+	setPhone(user.phone)
+	setEmail(user.email)
+	setSex(user.sex)
+	setUserType(user.type)
+	setActive(user.active)
+	setPassword(user.password)
+
+	setUserLoaded(true)
+}
+
 return (
 	<form onSubmit={onSubmit}>
+		{ user && !userLoaded && loadUser(user) }
 		<div>
 			<label>Name</label>
-			<input type="text" placeholder="Add user full name" 
+			<input type="text" placeholder="Add user full name"
 			value={name}
 			onChange={(e) => setName(e.target.value)}/>
 		</div>
