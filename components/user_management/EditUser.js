@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react"
 
 const EditUser = ({editType, onEdit}) => {
+	const [id, setID] = useState('')
 	const [name, setName] = useState('')
 	const [phone, setPhone] = useState('')
 	const [email, setEmail] = useState('')
@@ -18,7 +19,10 @@ const onSubmit = (e) => {
 		return
 	}
 
-	onEdit({name, phone, email, sex, userType, active, password})
+	id = Math.floor(Math.random() * 1_000_000_000_000) + 1
+	console.log("fdasf", id)
+	setID(id)
+	onEdit({id, name, phone, email, sex, userType, active, password})
 }
 
 return (

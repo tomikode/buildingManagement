@@ -56,10 +56,11 @@ const UserManagement = () => {
 
 	const addUser = (newUser) => {
 		console.log("New user added")
+		setUsers([...users,newUser])
 	}
 
-	const editUser = () => {
-		console.log("Edit user")
+	const editUser = (user) => {
+		console.log("Edit user", user)
 	}
 
 	const disableUser = (id) => {
@@ -93,7 +94,7 @@ const UserManagement = () => {
 						<Button text="Add User" onClick={() => console.log("Adding User")} />
 					</h2>
 
-					<EditUser editType={"Frank Herbet"} onEdit={() => console.log("Saving user")}/>
+					<EditUser editType={"Frank Herbet"} onEdit={addUser}/>
 
 					{/* Display message if no users to show */}
 					{(users.length > 0) 
