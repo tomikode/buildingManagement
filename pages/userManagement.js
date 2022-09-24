@@ -58,6 +58,10 @@ const UserManagement = () => {
 		console.log("New user added")
 	}
 
+	const editUser = () => {
+		console.log("Edit user")
+	}
+
 	const disableUser = (id) => {
 		// Log a message about the state toggle
 		users.map((user) => user.id === id
@@ -96,7 +100,8 @@ const UserManagement = () => {
 					? (<UserList
 						users={users}
 						onDisable={disableUser}
-						onDelete={deleteUser} />)
+						onDelete={deleteUser}
+						onEdit={editUser}/>)
 					: "No users"}
 				</div>
 		</Layout>
