@@ -6,7 +6,6 @@ import Button from "../components/Button"
 import EditNotice from "../components/noticeboard/EditNotice";
 
 const Noticeboard = () => {
-
     // Constants
     const NO_SELECTED_NOTICE = 0
     const ACTIVE_VIEW = {
@@ -77,7 +76,7 @@ const Noticeboard = () => {
     }
 
     return (
-        <Layout pageType="m">
+        <Layout pageType="all">
             <div className={styles.maxWidth}>
 
                 <h2>

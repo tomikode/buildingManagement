@@ -40,7 +40,7 @@ const TenantNav = () => {
 								</p>
 							</li>
 						</Link>
-                        <Link href="/">
+                        <Link href="/noticeboard">
 							<li>
 								<p>
 									Noticeboard
