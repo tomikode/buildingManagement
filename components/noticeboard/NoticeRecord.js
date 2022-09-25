@@ -1,15 +1,15 @@
 import Button from "../Button"
 
-const NoticeRecord = ({notice, onDelete, onEdit}) => {
+const NoticeRecord = ({ notice, onDelete, onEdit }) => {
 
-   return (
+  return (
     <>
-        <h3>
-            {notice.name}
-            <Button color="red" text="DELETE" onClick={() => onDelete(notice.id)}/>
-            <Button color="green" text="EDIT" onClick={() => onEdit(notice.id)}/>
-        </h3>
-        {notice.active
+      <h3>
+        {notice.content}
+        <Button color="red" text="DELETE" onClick={() => onDelete(notice.id)} />
+        <Button color="green" text="EDIT" onClick={() => onEdit(notice.id)} />
+      </h3>
+      {notice.active
         ? "Active"
         : "Disabled"}
     </>
