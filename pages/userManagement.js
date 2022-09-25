@@ -6,15 +6,17 @@ import styles from "../styles/Profile.module.css";
 import UserList from "../components/user_management/UserList"
 import Button from "../components/Button"
 import EditUser from "../components/user_management/EditUser";
+//import User from "../database/schemas/user";
 
 const UserManagement = () => {
-	const [showEditUser, setShowEditUser] = useState(0)
-
+    // Contexts
 	const userCon = useContext(UserContext);
+
+	const [showEditUser, setShowEditUser] = useState(0)
 
 	const ViewStates = {
 		UserList: 0,
-		NewUser:  1,
+		NewUser: 1,
 		EditUser: 2,
 	}
 
@@ -70,6 +72,7 @@ const UserManagement = () => {
 	}
 
 	const addUser = (newUser) => {
+		console.log(User.findById(1))
 		console.log("New user added")
 		if (getUser(newUser.id) !== undefined) {
 			alert(`User ${newUser.name} updated`)
