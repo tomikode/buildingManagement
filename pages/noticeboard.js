@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import styles from "../styles/Profile.module.css";
 import NoticeList from "../components/noticeboard/NoticeList"
 import Button from "../components/Button"
-//import beginEditNotice from "../components/notice_management/beginEditNotice";
+import EditNotice from "../components/noticeboard/EditNotice";
 
 const Noticeboard = () => {
 
@@ -92,14 +92,14 @@ const Noticeboard = () => {
                     />}
                 </h2>
 
-                {activeViewState === ACTIVE_VIEW.CREATE_NOTICE && <beginEditNotice onEdit={addnotice} />}
-                {activeViewState === ACTIVE_VIEW.EDIT_NOTICE && <beginEditNotice onEdit={addnotice}
+                {activeViewState === ACTIVE_VIEW.CREATE_NOTICE && <EditNotice onEdit={addNotice} />}
+                {activeViewState === ACTIVE_VIEW.EDIT_NOTICE && <EditNotice onEdit={addNotice}
                     notice={getNotice(selectedNoticeID)} />}
 
                 {/* Display message if no notices to show */}
                 {activeViewState === ACTIVE_VIEW.NOTICEBOARD_LIST &&
                     (notices.length > 0)
-                    ? (<noticeList
+                    ? (<NoticeList
                         notices={notices}
                         onDelete={deleteNotice}
                         onEdit={beginEditNotice} />)
