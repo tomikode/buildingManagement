@@ -9,9 +9,6 @@ const NoticeRecord = ({ notice, onDelete, onEdit }) => {
         <Button color="red" text="DELETE" onClick={() => onDelete(notice.id)} />
         <Button color="green" text="EDIT" onClick={() => onEdit(notice.id)} />
       </h3>
-      {notice.active
-        ? "Active"
-        : "Disabled"}
     </>
   )
 }

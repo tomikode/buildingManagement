@@ -46,17 +46,17 @@ const Noticeboard = () => {
         return notices.find((notice) => notice.id === id)
     }
 
-    const postNotice = (notice) => {
-        if (getNotice(notice.id) !== undefined) {
-            setNotices(notices.map((notices) => notice.id === notice.id
-                ? notice
+    const postNotice = (newNotice) => {
+        if (getNotice(newNotice.id) !== undefined) {
+            setNotices(notices.map((notice) => notice.id === newNotice.id
+                ? newNotice
                 : notice))
-            alert(`Notice ${notice.id} updated`)
+            alert(`Notice ${newNotice.id} updated`)
             setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST)
         }
         else {
-            setNotices([...notices, notice])
-            alert(`New notice ${notice.id} posted`)
+            setNotices([...notices, newNotice])
+            alert(`New notice ${newNotice.id} posted`)
             setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST)
         }
     }
@@ -87,7 +87,7 @@ const Noticeboard = () => {
                         onClick={() => {
                             activeViewState !== ACTIVE_VIEW.NOTICEBOARD_LIST
                                 ? setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST)
-                                : setActiveViewState(ACTIVE_VIEW.VIEW_NOTICE)
+                                : setActiveViewState(ACTIVE_VIEW.CREATE_NOTICE)
                         }}
                     />}
                 </h2>
