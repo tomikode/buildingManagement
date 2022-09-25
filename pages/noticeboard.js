@@ -92,8 +92,8 @@ const Noticeboard = () => {
                     />}
                 </h2>
 
-                {activeViewState === ACTIVE_VIEW.CREATE_NOTICE && <EditNotice onEdit={addNotice} />}
-                {activeViewState === ACTIVE_VIEW.EDIT_NOTICE && <EditNotice onEdit={addNotice}
+                {activeViewState === ACTIVE_VIEW.CREATE_NOTICE && <EditNotice onEdit={postNotice} />}
+                {activeViewState === ACTIVE_VIEW.EDIT_NOTICE && <EditNotice onEdit={postNotice}
                     notice={getNotice(selectedNoticeID)} />}
 
                 {/* Display message if no notices to show */}

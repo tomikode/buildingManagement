@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react"
 
-const EditNotice = ({onEdit, user=null}) => {
+const EditNotice = ({onEdit, notice=null}) => {
 	const [id, setID] = useState('')
 	const [userID, setUserID] = useState('')
 	const [postedAt, setPostedAt] = useState('')
