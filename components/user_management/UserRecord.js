@@ -1,20 +1,16 @@
-import Button from "../Button"
+import Button from "../Button";
 
-const UserRecord = ({user, onDisable, onDelete, onEdit}) => {
-
-   return (
+const UserRecord = ({ user, onDisable, onDelete, onEdit }) => {
+  return (
     <>
-        <h3>
-            {user.firstName + " " + user.lastName}
-            <Button color="blue" text="DISABLE" onClick={() => onDisable(user.id)}/>
-            <Button color="red" text="DELETE" onClick={() => onDelete(user.id)}/>
-            <Button color="green" text="EDIT" onClick={() => onEdit(user.id)}/>
-        </h3>
-        {user.active
-        ? "Active"
-        : "Disabled"}
+      <h3>
+        {user.firstName + " " + user.lastName + " " + user._id}
+        <br />
+        <Button color="red" text="DELETE" onClick={() => onDelete(user._id)} />
+        <Button color="green" text="EDIT" onClick={() => onEdit(user._id)} />
+      </h3>
     </>
-  )
-}
+  );
+};
 
-export default UserRecord
+export default UserRecord;

@@ -6,7 +6,6 @@ import styles from "../styles/Profile.module.css";
 import UserList from "../components/user_management/UserList";
 import Button from "../components/Button";
 import EditUser from "../components/user_management/EditUser";
-import { useRouter } from "next/router";
 import axios from "axios";
 
 const UserManagement = () => {
@@ -26,84 +25,43 @@ const UserManagement = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-	const getUsers = async () => {
-		const usersFromMongo = await fetchUsers()
-		setUsers(usersFromMongo)
-	}
+    const getUsers = async () => {
+      const usersFromMongo = await fetchUsers();
+      setUsers(usersFromMongo);
+    };
     getUsers();
   }, []);
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.post("/api/userManagement", null);
+      const res = await axios.get("/api/userManagement");
       var loadedUsers = JSON.parse(JSON.stringify(res.data.foundUsers));
-      return(loadedUsers);
+      return loadedUsers;
     } catch (e) {
       console.log(e.message);
     }
   };
 
-  // Data storing users, only stored in view - no database backend
-  //const [users, setUsers] = useState([
-  const losers = [
-    {
-      id: 1,
-      name: "Atilla Bongs",
-      phone: "1800 666 666",
-      email: "bongs@cometpizza.com",
-      sex: "Male",
-      type: "p",
-      active: true,
-      password: "moloch",
-    },
-    {
-      id: 2,
-      name: "Craig Dunsfield",
-      phone: "0477 805 468",
-      email: "craig@hotmail.com",
-      sex: "Male",
-      type: "m",
-      active: false,
-      password: "letmein",
-    },
-    {
-      id: 3,
-      name: "Your Mum",
-      phone: "1831 494 673",
-      email: "qt314@yourmums.accesscam.org",
-      sex: "Yes, please",
-      type: "t",
-      active: true,
-      password: "allaboard",
-    },
-    {
-      id: 4,
-      name: "Suzanne Vega",
-      phone: "1831 238 123",
-      email: "svega@outlook.com",
-      sex: "Female",
-      type: "c",
-      active: true,
-      password: "luca",
-    },
-  ];
-
   const getUser = (id) => {
     console.log(`Getting user ${id}`);
-    return users.find((user) => user.id === id);
+    return users.find((user) => user._id === id);
   };
 
-  const addUser = (newUser) => {
-    console.log(User.findById(1));
-    console.log("New user added");
-    if (getUser(newUser.id) !== undefined) {
-      alert(`User ${newUser.name} updated`);
-      setUsers(users.map((user) => (user.id === newUser.id ? newUser : user)));
-      setViewState(ViewStates.UserList);
-    } else {
-      alert(`New user ${newUser.name} created`);
-      setUsers([...users, newUser]);
-    }
+  const addUser = async (newUser) => {
+    console.log(newUser)
+    const userData = {
+      _id: newUser._id,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      email: newUser.email,
+      password: newUser.password,
+      phone: newUser.phone,
+      type: newUser.type,
+    };
+    const res = await axios.post("/api/userManagement", userData);
+    setViewState(ViewStates.UserList);
+    setUsers(await fetchUsers());
+    setShowEditUser(0);
   };
 
   const editUser = (user) => {
@@ -113,30 +71,30 @@ const UserManagement = () => {
 
   const disableUser = (id) => {
     // Log a message about the state toggle
-    users.map((user) =>
+    /*users.map((user) =>
       user.id === id
         ? console.log(
             `Toggling ${user.name}'s 'active' state to ${!user.active}`
           )
         : null
-    );
-
+    );*/
     // Toggle User 'active' state by given User ID
-    setUsers(
+    /*setUsers(
       users.map((user) =>
         user.id === id ? { ...user, active: !user.active } : user
       )
-    );
+    );*/
   };
 
-  const deleteUser = (id) => {
+  const deleteUser = async (id) => {
     // Log a message about User deletion
-    users.map((user) =>
-      user.id === id ? console.log(`Deleting ${user.name}`) : null
-    );
+    const userData = {
+      _id: id,
+    };
+    const res = await axios.patch("/api/userManagement/", userData);
 
     // Delete the User by given User ID
-    setUsers(users.filter((user) => user.id !== id));
+    setUsers(await fetchUsers());
   };
 
   return (
