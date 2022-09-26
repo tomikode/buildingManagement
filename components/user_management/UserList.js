@@ -6,7 +6,7 @@ const UserList = ({users, onDisable, onDelete, onEdit}) => {
     <>
         {users.map((user) => (
             <UserRecord
-            key={user.id}
+            key={user._id}
             user={user}
             onDisable={onDisable}
             onDelete={onDelete}
