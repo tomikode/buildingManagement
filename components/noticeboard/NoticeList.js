@@ -5,7 +5,7 @@ const NoticeList = ({ notices, onDelete, onEdit }) => {
     <>
       {notices.map((notice) => (
         <NoticeRecord
-          key={notice.id}
+          key={notice._id}
           notice={notice}
           onDelete={onDelete}
           onEdit={onEdit} />))

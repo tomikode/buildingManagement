@@ -7,17 +7,61 @@ const getNotices = async () => {
   else return { status: 401, body: { error: "Shit the bed" } };
 };
 
+const postNotice = async (req) => {
+  const { _id, postDate, content, user } = req.body;
+  console.log(req.body);
+  if (_id) {
+    if (user) {
+      const newNotice = await Notice.updateOne(
+        { _id: [`${_id}`] },
+        { user: [`${user}`] },
+        { content: `${content}` }
+      );
+      if (newNotice) return { status: 201, body: { newNotice } };
+    } else {
+      const newNotice = await Notice.updateOne(
+        { _id: [`${_id}`] },
+        { content: `${content}` }
+      );
+      if (newNotice) return { status: 201, body: { newNotice } };
+    }
+  } else {
+    const newNotice = await Notice.create({ content, user, postDate });
+    if (newNotice) return { status: 201, body: { newNotice } };
+  }
+  return { status: 401, body: { error: "Shit the bed" } };
+};
+
+const deleteNotice = async (req) => {
+  const { _id } = req.body;
+
+  const foundUser = await Notice.findById({ _id });
+  console.log(foundUser.content);
+
+  const deletedNotice = await Notice.deleteOne({ _id });
+  console.log(deletedNotice);
+  if (deletedNotice) return { status: 201, body: { deletedNotice } };
+  else return { status: 401, body: { error: "Shit the bed" } };
+};
+
 const noticeHandler = async (req, res) => {
   const method = req.method;
   console.log("Request for Notice data by", method);
 
   await connect().catch((err) => console.log(err));
 
-  let result = { error: "Something went wrong" };
+  let result = { error: "Something went horribly wrong" };
   switch (method) {
-    case "POST":
+    case "GET":
       result = await getNotices();
-	  console.log("Here's the body:", result.body)
+      res.status(result.status).json(result.body);
+      break;
+    case "POST":
+      result = await postNotice(req);
+      res.status(result.status).json(result.body);
+      break;
+    case "PATCH":
+      result = await deleteNotice(req);
       res.status(result.status).json(result.body);
       break;
     default:

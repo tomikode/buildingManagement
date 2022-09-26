@@ -4,8 +4,8 @@ import styles from "../styles/Profile.module.css";
 import NoticeList from "../components/noticeboard/NoticeList";
 import Button from "../components/Button";
 import EditNotice from "../components/noticeboard/EditNotice";
-import { useRouter } from "next/router";
 import axios from "axios";
+import { UserContext } from "./_app";
 
 const Noticeboard = () => {
   const NoticeContext = createContext();
@@ -30,7 +30,7 @@ const Noticeboard = () => {
 
   const fetchNotices = async () => {
     try {
-      const res = await axios.post("/api/noticeboard", null);
+      const res = await axios.get("/api/noticeboard");
       var loadedNotices = JSON.parse(JSON.stringify(res.data.foundNotices));
       return loadedNotices;
     } catch (e) {
@@ -43,75 +43,51 @@ const Noticeboard = () => {
     ACTIVE_VIEW.NOTICEBOARD_LIST
   );
   const [selectedNoticeID, setSelectedNoticeID] = useState(NO_SELECTED_NOTICE);
-  //const [notices, setNotices] = useState([
-  [
-    {
-      id: 1,
-      userID: 1,
-      postedAt: "Five O'clock!",
-      content: "One two three O'clock, four O'clock rock!",
-    },
-    {
-      id: 2,
-      userID: 1,
-      postedAt: "EOD",
-      content:
-        "Chaos is in the hearts and minds of all children, until the machine grows and chaos dies.",
-    },
-    {
-      id: 3,
-      userID: 2,
-      postedAt: "Now",
-      content: "I have to stop hitting Ctrl-Shft-S.",
-    },
-  ];
+  var user = undefined;
 
   // Methods, are they even methods?
   const getNotice = (id) => {
-    console.log(`Getting notice ${id}`);
-    return notices.find((notice) => notice.id === id);
+    return notices.find((notice) => notice._id === id);
   };
 
   const postNotice = async (newNotice) => {
-    try {
-      const noticeID = {
-        id: "1",
-      };
-    } catch (e) {
-      console.log(e.message);
+    if (!newNotice.postDate) {
+      newNotice.postDate = "" + new Date();
+      newNotice.user = user;
     }
-    if (getNotice(newNotice.id) !== undefined) {
-      setNotices(
-        notices.map((notice) =>
-          notice.id === newNotice.id ? newNotice : notice
-        )
-      );
-      alert(`Notice ${newNotice.id} updated`);
-      setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST);
-    } else {
-      setNotices([...notices, newNotice]);
-      alert(`New notice ${newNotice.id} posted`);
-      setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST);
-    }
+    const noticeData = {
+      _id: selectedNoticeID,
+      user: newNotice.user,
+      postDate: newNotice.postDate,
+      content: newNotice.content,
+    };
+    console.log("New notice data:", noticeData);
+    const res = await axios.post("/api/noticeboard", noticeData);
+    setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST);
+    setNotices(await fetchNotices());
+    setSelectedNoticeID(NO_SELECTED_NOTICE);
   };
 
   const beginEditNotice = (notice) => {
-    setSelectedNoticeID(notice);
     setActiveViewState(ACTIVE_VIEW.EDIT_NOTICE);
+    setSelectedNoticeID(notice);
   };
 
-  const deleteNotice = (id) => {
-    // Log a message about notice deletion
-    notices.map((notice) =>
-      notice.id === id ? console.log(`Deleting ${notice.id}`) : null
-    );
-
-    // Delete the notice by given notice ID
-    setNotices(notices.filter((notice) => notice.id !== id));
+  const deleteNotice = async (id) => {
+    const noticeData = {
+      _id: id,
+    };
+    const res = await axios.patch("/api/noticeboard/", noticeData);
+    setNotices(await fetchNotices());
   };
 
   return (
     <Layout pageType="all">
+      <UserContext.Consumer>
+        {(value) => {
+          user = value.user;
+        }}
+      </UserContext.Consumer>
       <div className={styles.maxWidth}>
         <h2>
           Noticeboard
