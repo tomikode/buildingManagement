@@ -60,7 +60,11 @@ const Noticeboard = () => {
         id: "1",
       };
       const res = await axios.post("/api/noticeboard", noticeID);
+<<<<<<< HEAD
       console.log("Here's the user:", JSON.stringify(res.data.foundUsers));
+=======
+      console.log("Here's the user:", JSON.stringify(res.data.foundUser));
+>>>>>>> 5cee7ad (Implement simple database lookup for Noticeboard)
     } catch (e) {
       console.log(e.message);
     }
