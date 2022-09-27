@@ -9,7 +9,6 @@ const getNotices = async () => {
 
 const postNotice = async (req) => {
   const { _id, postDate, content, user } = req.body;
-  console.log(req.body);
   if (_id) {
     if (user) {
       const newNotice = await Notice.updateOne(
@@ -47,6 +46,7 @@ const deleteNotice = async (req) => {
 const noticeHandler = async (req, res) => {
   const method = req.method;
   console.log("Request for Notice data by", method);
+  console.log("Received Data:", req.body);
 
   await connect().catch((err) => console.log(err));
 

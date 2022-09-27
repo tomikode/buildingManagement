@@ -21,6 +21,7 @@ const Noticeboard = () => {
   const [notices, setNotices] = useState([]);
 
   useEffect(() => {
+    console.log("Loading notices");
     const getNotices = async () => {
       const noticesFromMongo = await fetchNotices();
       setNotices(noticesFromMongo);
