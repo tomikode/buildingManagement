@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import styles from "../styles/Profile.module.css";
+//import styles from "../styles/Profile.module.css";
+import styles from "../styles/Login.module.css";
 import NoticeList from "../components/noticeboard/NoticeList";
 import Button from "../components/Button";
 import EditNotice from "../components/noticeboard/EditNotice";
@@ -84,51 +85,55 @@ const Noticeboard = () => {
 
   return (
     <Layout pageType="all">
-      <UserContext.Consumer>
-        {(value) => {
-          user = value.user;
-        }}
-      </UserContext.Consumer>
-      <div className={styles.maxWidth}>
-        <h2>
-          Noticeboard
-          {
-            <Button
-              text={
-                activeViewState === ACTIVE_VIEW.NOTICEBOARD_LIST
-                  ? "Add notice"
-                  : "Cancel"
+      <div className={styles.centreWrapper}>
+        <div className={styles.loginBox}>
+          <UserContext.Consumer>
+            {(value) => {
+              user = value.user;
+            }}
+          </UserContext.Consumer>
+          <div className={styles.maxWidth}>
+            <h2>
+              Noticeboard
+              {
+                <Button
+                  text={
+                    activeViewState === ACTIVE_VIEW.NOTICEBOARD_LIST
+                      ? "Add notice"
+                      : "Cancel"
+                  }
+                  onClick={() => {
+                    activeViewState !== ACTIVE_VIEW.NOTICEBOARD_LIST
+                      ? setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST)
+                      : setActiveViewState(ACTIVE_VIEW.CREATE_NOTICE);
+                  }}
+                />
               }
-              onClick={() => {
-                activeViewState !== ACTIVE_VIEW.NOTICEBOARD_LIST
-                  ? setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST)
-                  : setActiveViewState(ACTIVE_VIEW.CREATE_NOTICE);
-              }}
-            />
-          }
-        </h2>
+            </h2>
 
-        {activeViewState === ACTIVE_VIEW.CREATE_NOTICE && (
-          <EditNotice onEdit={postNotice} />
-        )}
-        {activeViewState === ACTIVE_VIEW.EDIT_NOTICE && (
-          <EditNotice
-            onEdit={postNotice}
-            notice={getNotice(selectedNoticeID)}
-          />
-        )}
+            {activeViewState === ACTIVE_VIEW.CREATE_NOTICE && (
+              <EditNotice onEdit={postNotice} />
+            )}
+            {activeViewState === ACTIVE_VIEW.EDIT_NOTICE && (
+              <EditNotice
+                onEdit={postNotice}
+                notice={getNotice(selectedNoticeID)}
+              />
+            )}
 
-        {/* Display message if no notices to show */}
-        {activeViewState === ACTIVE_VIEW.NOTICEBOARD_LIST &&
-        notices.length > 0 ? (
-          <NoticeList
-            notices={notices}
-            onDelete={deleteNotice}
-            onEdit={beginEditNotice}
-          />
-        ) : (
-          "No notices"
-        )}
+            {/* Display message if no notices to show */}
+            {activeViewState === ACTIVE_VIEW.NOTICEBOARD_LIST &&
+            notices.length > 0 ? (
+              <NoticeList
+                notices={notices}
+                onDelete={deleteNotice}
+                onEdit={beginEditNotice}
+              />
+            ) : (
+              "No notices"
+            )}
+          </div>
+        </div>
       </div>
     </Layout>
   );

@@ -2,7 +2,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./_app";
 import Layout from "../components/Layout";
-import styles from "../styles/Profile.module.css";
+//import styles from "../styles/Profile.module.css";
+import styles from "../styles/Login.module.css";
 import UserList from "../components/user_management/UserList";
 import Button from "../components/Button";
 import EditUser from "../components/user_management/EditUser";
@@ -48,7 +49,7 @@ const UserManagement = () => {
   };
 
   const addUser = async (newUser) => {
-    console.log(newUser)
+    console.log(newUser);
     const userData = {
       _id: newUser._id,
       firstName: newUser.firstName,
@@ -99,33 +100,35 @@ const UserManagement = () => {
 
   return (
     <Layout pageType="m">
-      <div className={styles.maxWidth}>
-        <h2>
-          User Management
-          <Button
-            text={viewState === ViewStates.UserList ? "Add User" : "Cancel"}
-            onClick={() => {
-              viewState > 0 ? setViewState(0) : setViewState(1);
-            }}
-          />
-        </h2>
+      <div className={styles.centreWrapper}>
+        <div className={styles.loginBox}>
+          <h2>
+            User Management
+            <Button
+              text={viewState === ViewStates.UserList ? "Add User" : "Cancel"}
+              onClick={() => {
+                viewState > 0 ? setViewState(0) : setViewState(1);
+              }}
+            />
+          </h2>
 
-        {viewState === ViewStates.NewUser && <EditUser onEdit={addUser} />}
-        {viewState === ViewStates.EditUser && (
-          <EditUser onEdit={addUser} user={getUser(showEditUser)} />
-        )}
+          {viewState === ViewStates.NewUser && <EditUser onEdit={addUser} />}
+          {viewState === ViewStates.EditUser && (
+            <EditUser onEdit={addUser} user={getUser(showEditUser)} />
+          )}
 
-        {/* Display message if no users to show */}
-        {viewState === ViewStates.UserList && users.length > 0 ? (
-          <UserList
-            users={users}
-            onDisable={disableUser}
-            onDelete={deleteUser}
-            onEdit={editUser}
-          />
-        ) : (
-          "No users"
-        )}
+          {/* Display message if no users to show */}
+          {viewState === ViewStates.UserList && users.length > 0 ? (
+            <UserList
+              users={users}
+              onDisable={disableUser}
+              onDelete={deleteUser}
+              onEdit={editUser}
+            />
+          ) : (
+            "No users"
+          )}
+        </div>
       </div>
     </Layout>
   );
