@@ -15,7 +15,7 @@ const UserList = ({ users, onDisable, onDelete, onEdit }) => {
         {users.map((user) => (
           <UserRecord
             key={user._id}
-            rowColor={++row_number % 2 === 0 ? "white" : "lightgrey"}
+            rowColor={++row_number % 2 === 0 ? "white" : "Gainsboro"}
             user={user}
             onDisable={onDisable}
             onDelete={onDelete}

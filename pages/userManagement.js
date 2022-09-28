@@ -112,7 +112,6 @@ const UserManagement = () => {
               onClick={() => {
                 viewState > 0 ? setViewState(0) : setViewState(1);
               }}
-              color="lightgreen"
             />
           </div>
           <br />
