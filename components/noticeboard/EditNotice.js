@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import styles from "../../styles/UserManagment.module.css";
 
 const EditNotice = ({ onEdit, notice = null }) => {
   const [id, setID] = useState("");
@@ -36,22 +37,25 @@ const EditNotice = ({ onEdit, notice = null }) => {
   return (
     <form onSubmit={onSubmit}>
       {notice && !noticeLoaded && loadNotice(notice)}
-      {id}
-      <br />
-      {postDate}
-      <br />
-      {user}
-      <div>
-        <label>Content</label>
-        <input
-          type="text"
-          placeholder="Add post content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
-      </div>
+      <table style={{ borderSpacing: "10px 15px" }}>
+        <tbody>
+          <tr>
+            <td style={{ textAlign: "right" }}>
+              <label>Content</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Add post content"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-      <input type="submit" value="Post Notice" />
+      <input type="submit" value="POST NOTICE" className={styles.rightButton} />
     </form>
   );
 };

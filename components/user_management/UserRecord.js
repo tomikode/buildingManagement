@@ -4,10 +4,10 @@ const UserRecord = ({ user, onDisable, onDelete, onEdit, rowColor }) => {
   return (
     <>
       <tr style={{ backgroundColor: rowColor}}>
-        <td>{user.firstName}</td>
-        <td>{user.lastName}</td>
-        <td>{user.email}</td>
-        <td>{user.phone}</td>
+        <td style={{ padding: "0 50px" }}>{user.firstName}</td>
+        <td style={{ padding: "0 50px" }}>{user.lastName}</td>
+        <td style={{ padding: "0 50px" }}>{user.email}</td>
+        <td style={{ padding: "0 50px" }}>{user.phone}</td>
         <td style={{ textAlign: "center" }}>{user.type}</td>
         <td style={{backgroundColor: "white"}}>
           <Button

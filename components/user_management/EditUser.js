@@ -48,9 +48,10 @@ const EditUser = ({ onEdit, user = null }) => {
     <form onSubmit={onSubmit}>
       {user && !userLoaded && loadUser(user)}
       {_id}
-      <table style={{borderSpacing: "10px 15px"}}>
-        <tr>
-            <td style={{textAlign: "right"}}>
+      <table style={{ borderSpacing: "10px 15px" }}>
+        <tbody>
+          <tr>
+            <td style={{ textAlign: "right" }}>
               <label>First Name</label>
             </td>
             <td>
@@ -61,9 +62,9 @@ const EditUser = ({ onEdit, user = null }) => {
                 onChange={(e) => setFirstName(e.target.value)}
               />
             </td>
-        </tr>
-        <tr>
-            <td style={{textAlign: "right"}}>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right" }}>
               <label>Last Name</label>
             </td>
             <td>
@@ -74,9 +75,9 @@ const EditUser = ({ onEdit, user = null }) => {
                 onChange={(e) => setLastName(e.target.value)}
               />
             </td>
-        </tr>
-        <tr>
-            <td style={{textAlign: "right"}}>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right" }}>
               <label>Phone</label>
             </td>
             <td>
@@ -87,9 +88,9 @@ const EditUser = ({ onEdit, user = null }) => {
                 onChange={(e) => setPhone(e.target.value)}
               />
             </td>
-        </tr>
-        <tr>
-            <td style={{textAlign: "right"}}>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right" }}>
               <label>Email</label>
             </td>
             <td>
@@ -100,9 +101,9 @@ const EditUser = ({ onEdit, user = null }) => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </td>
-        </tr>
-        <tr>
-            <td style={{textAlign: "right"}}>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right" }}>
               <label>User Type</label>
             </td>
             <td>
@@ -113,9 +114,9 @@ const EditUser = ({ onEdit, user = null }) => {
                 onChange={(e) => setType(e.target.value)}
               />
             </td>
-        </tr>
-        <tr>
-            <td style={{textAlign: "right"}}>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right" }}>
               <label>Password</label>
             </td>
             <td>
@@ -126,7 +127,8 @@ const EditUser = ({ onEdit, user = null }) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </td>
-        </tr>
+          </tr>
+        </tbody>
       </table>
       <br />
       <input type="submit" value="SAVE USER" className={styles.rightButton} />

@@ -20,14 +20,16 @@ const Noticeboard = () => {
     CREATE_NOTICE: 3,
   };
   const [notices, setNotices] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    console.log("Loading notices");
-    const getNotices = async () => {
+    const getData = async () => {
       const noticesFromMongo = await fetchNotices();
       setNotices(noticesFromMongo);
+      const usersFromMongo = await fetchUsers();
+      setUsers(usersFromMongo);
     };
-    getNotices();
+    getData();
   }, []);
 
   const fetchNotices = async () => {
@@ -38,6 +40,20 @@ const Noticeboard = () => {
     } catch (e) {
       console.log(e.message);
     }
+  };
+
+  const fetchUsers = async () => {
+    try {
+      const res = await axios.get("/api/userManagement");
+      var loadedNotices = JSON.parse(JSON.stringify(res.data.foundUsers));
+      return loadedNotices;
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  const getUser = (who) => {
+    return users.find((user) => user._id === who);
   };
 
   // State
@@ -63,7 +79,6 @@ const Noticeboard = () => {
       postDate: newNotice.postDate,
       content: newNotice.content,
     };
-    console.log("New notice data:", noticeData);
     const res = await axios.post("/api/noticeboard", noticeData);
     setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST);
     setNotices(await fetchNotices());
@@ -127,15 +142,16 @@ const Noticeboard = () => {
 
           {/* Display message if no notices to show */}
           {activeViewState === ACTIVE_VIEW.NOTICEBOARD_LIST &&
-          notices.length > 0 ? (
-            <NoticeList
-              notices={notices}
-              onDelete={deleteNotice}
-              onEdit={beginEditNotice}
-            />
-          ) : (
-            "No notices"
-          )}
+            (notices.length === 0 ? (
+              "No notices"
+            ) : (
+              <NoticeList
+                notices={notices}
+                onDelete={deleteNotice}
+                onEdit={beginEditNotice}
+                getUser={getUser}
+              />
+            ))}
         </div>
       </div>
     </Layout>
