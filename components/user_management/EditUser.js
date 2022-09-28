@@ -1,5 +1,7 @@
+import { withRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
+import styles from "../../styles/UserManagment.module.css";
 
 const EditUser = ({ onEdit, user = null }) => {
   const [_id, set_Id] = useState("");
@@ -46,62 +48,88 @@ const EditUser = ({ onEdit, user = null }) => {
     <form onSubmit={onSubmit}>
       {user && !userLoaded && loadUser(user)}
       {_id}
-      <h3>{firstName + " " + lastName}</h3>
-      <div>
-        <label>FirstName</label>
-        <input
-          type="text"
-          placeholder="Add user first name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>LastName</label>
-        <input
-          type="text"
-          placeholder="Add user last name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Phone</label>
-        <input
-          type="text"
-          placeholder="Add phone number"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          placeholder="Add email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>User Type</label>
-        <input
-          type="text"
-          placeholder="Add user type"
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type="text"
-          placeholder="Add password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <input type="submit" value="Save User" />
+      <table style={{borderSpacing: "10px 15px"}}>
+        <tr>
+            <td style={{textAlign: "right"}}>
+              <label>First Name</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Add first name"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </td>
+        </tr>
+        <tr>
+            <td style={{textAlign: "right"}}>
+              <label>Last Name</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Add last name"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </td>
+        </tr>
+        <tr>
+            <td style={{textAlign: "right"}}>
+              <label>Phone</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Add phone number"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </td>
+        </tr>
+        <tr>
+            <td style={{textAlign: "right"}}>
+              <label>Email</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Add email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </td>
+        </tr>
+        <tr>
+            <td style={{textAlign: "right"}}>
+              <label>User Type</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Add user type"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              />
+            </td>
+        </tr>
+        <tr>
+            <td style={{textAlign: "right"}}>
+              <label>Password</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Add password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </td>
+        </tr>
+      </table>
+      <br />
+      <input type="submit" value="SAVE USER" className={styles.rightButton} />
     </form>
   );
 };

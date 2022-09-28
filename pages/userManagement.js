@@ -105,14 +105,18 @@ const UserManagement = () => {
           <div className={styles.titleWithButton}>
             <h2>User Management</h2>
             <Button
-              text={viewState === ViewStates.UserList ? "ADD USER" : "Cancel"}
+              text={viewState === ViewStates.UserList ? "ADD USER" : "CANCEL"}
+              color={
+                viewState === ViewStates.UserList ? "lightgreen" : "papayawhip"
+              }
               onClick={() => {
                 viewState > 0 ? setViewState(0) : setViewState(1);
               }}
               color="lightgreen"
             />
           </div>
-          <hr />
+          <br />
+          <hr className={styles.hr} />
 
           {viewState === ViewStates.NewUser && <EditUser onEdit={addUser} />}
           {viewState === ViewStates.EditUser && (
@@ -120,16 +124,17 @@ const UserManagement = () => {
           )}
 
           {/* Display message if no users to show */}
-          {viewState === ViewStates.UserList && users.length > 0 ? (
-            <UserList
-              users={users}
-              onDisable={disableUser}
-              onDelete={deleteUser}
-              onEdit={editUser}
-            />
-          ) : (
-            "No users"
-          )}
+          {viewState === ViewStates.UserList &&
+            (users.length === 0 ? (
+              "No Users"
+            ) : (
+              <UserList
+                users={users}
+                onDisable={disableUser}
+                onDelete={deleteUser}
+                onEdit={editUser}
+              />
+            ))}
         </div>
       </div>
     </Layout>
