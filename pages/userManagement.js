@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "./_app";
 import Layout from "../components/Layout";
 //import styles from "../styles/Profile.module.css";
-import styles from "../styles/Login.module.css";
+import styles from "../styles/UserManagment.module.css";
 import UserList from "../components/user_management/UserList";
 import Button from "../components/Button";
 import EditUser from "../components/user_management/EditUser";
@@ -102,15 +102,17 @@ const UserManagement = () => {
     <Layout pageType="m">
       <div className={styles.centreWrapper}>
         <div className={styles.loginBox}>
-          <h2>
-            User Management
+          <div className={styles.titleWithButton}>
+            <h2>User Management</h2>
             <Button
-              text={viewState === ViewStates.UserList ? "Add User" : "Cancel"}
+              text={viewState === ViewStates.UserList ? "ADD USER" : "Cancel"}
               onClick={() => {
                 viewState > 0 ? setViewState(0) : setViewState(1);
               }}
+              color="lightgreen"
             />
-          </h2>
+          </div>
+          <hr />
 
           {viewState === ViewStates.NewUser && <EditUser onEdit={addUser} />}
           {viewState === ViewStates.EditUser && (
