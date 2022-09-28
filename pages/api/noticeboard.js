@@ -13,8 +13,7 @@ const postNotice = async (req) => {
     if (user) {
       const newNotice = await Notice.updateOne(
         { _id: [`${_id}`] },
-        { user: [`${user}`] },
-        { content: `${content}` }
+        { user: `${user}`, content: `${content}` }
       );
       if (newNotice) return { status: 201, body: { newNotice } };
     } else {

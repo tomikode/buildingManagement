@@ -9,9 +9,7 @@ const getUsers = async () => {
 
 const saveUser = async (req) => {
   const { _id, firstName, lastName, email, password, phone, type } = req.body;
-  console.log("Body:",_id, firstName, lastName);
   if (_id) {
-    console.log("Updating user" + _id);
     const saveUser = await User.updateOne(
       { _id: [`${_id}`] },
       {
@@ -25,7 +23,6 @@ const saveUser = async (req) => {
     );
     if (saveUser) return { status: 201, body: { saveUser } };
   } else {
-    console.log("Creating user");
     const saveUser = await User.create({
       firstName,
       lastName,
@@ -43,17 +40,14 @@ const deleteUser = async (req) => {
   const { _id } = req.body;
 
   const foundUser = await User.findById({ _id });
-  console.log(foundUser.firstname + " " + foundUser.lastName);
 
   const deletedUser = await User.deleteOne({ _id });
-  console.log(deletedUser);
   if (deletedUser) return { status: 201, body: { deletedUser } };
   else return { status: 401, body: { error: "Shit the bed" } };
 };
 
 const userHandler = async (req, res) => {
   const method = req.method;
-  console.log("Request for User data by", method);
 
   await connect().catch((err) => console.log(err));
 
