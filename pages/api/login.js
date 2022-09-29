@@ -12,7 +12,6 @@ const tryLogin = async (req) => {
 	if (!email || !password)
 		return { status: 401, body: { error: "Invalid credentials" } };
 	const foundUser = await User.findOne({ email });
-	console.log(foundUser);
 	if (foundUser) {
 		if (foundUser.password === password) {
 			addAccessAttempt(req, foundUser, "Successful");
@@ -29,7 +28,6 @@ const loginHandler = async (req, res) => {
 	console.log(method + " login");
 	await connect().catch((err) => console.log(err));
 	let result = { error: "Something went wrong" };
-	console.log("here");
 	switch (method) {
 		case "POST":
 			result = await tryLogin(req);
