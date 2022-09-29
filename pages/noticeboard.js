@@ -105,7 +105,9 @@ const Noticeboard = () => {
           <div className={styles.titleWithButton}>
             <UserContext.Consumer>
               {(value) => {
-                user = value.user;
+                if (value) {
+                  user = value.user;
+                }
               }}
             </UserContext.Consumer>
             <h2>Noticeboard</h2>
