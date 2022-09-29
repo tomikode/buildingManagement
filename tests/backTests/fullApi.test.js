@@ -14,7 +14,11 @@ const waitForServer = () => {
 };
 
 beforeAll(async () => {
-	await killPort(3000);
+	try {
+		await killPort(3000);
+	} catch (e) {
+		console.log(e);
+	}
 	console.log("spawning");
 	testServer = spawn(/^win/.test(process.platform) ? "npm.cmd" : "npm", [
 		"run",
