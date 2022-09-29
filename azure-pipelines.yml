@@ -27,4 +27,5 @@ steps:
     npm run testBack
   env:
     MONGODB_URI: $(MONDODB_URI)
+    TEST_URI: $(TEST_URI)
   displayName: 'test runs'
