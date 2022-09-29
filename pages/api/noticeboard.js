@@ -34,18 +34,14 @@ const deleteNotice = async (req) => {
   const { _id } = req.body;
 
   const foundUser = await Notice.findById({ _id });
-  console.log(foundUser.content);
 
   const deletedNotice = await Notice.deleteOne({ _id });
-  console.log(deletedNotice);
   if (deletedNotice) return { status: 201, body: { deletedNotice } };
   else return { status: 401, body: { error: "Shit the bed" } };
 };
 
 const noticeHandler = async (req, res) => {
   const method = req.method;
-  console.log("Request for Notice data by", method);
-  console.log("Received Data:", req.body);
 
   await connect().catch((err) => console.log(err));
 

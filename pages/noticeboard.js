@@ -1,156 +1,158 @@
-import React, { createContext, useEffect, useState } from "react";
-import Layout from "../components/Layout";
-//import styles from "../styles/Profile.module.css";
-import styles from "../styles/UserManagment.module.css";
-import NoticeList from "../components/noticeboard/NoticeList";
+import { UserContext } from "./_app";
+import axios from "axios";
 import Button from "../components/Button";
 import EditNotice from "../components/noticeboard/EditNotice";
-import axios from "axios";
-import { UserContext } from "./_app";
+import Layout from "../components/Layout";
+import NoticeList from "../components/noticeboard/NoticeList";
+import React, { createContext, useEffect, useState } from "react";
+import styles from "../styles/UserManagment.module.css";
 
 const Noticeboard = () => {
-  const NoticeContext = createContext();
-
-  // Constants
-  const NO_SELECTED_NOTICE = 0;
   const ACTIVE_VIEW = {
     NOTICEBOARD_LIST: 0,
     VIEW_NOTICE: 1,
     EDIT_NOTICE: 2,
     CREATE_NOTICE: 3,
   };
+
+  const ANONYMOUS_USER = undefined;
+  const BECAUSE_TRAVERSY_SAID_SO = [];
+  const EMPTY = "";
+  const NO_SELECTED_NOTICE = 0;
+
+  var loggedInUser = ANONYMOUS_USER;
+
   const [notices, setNotices] = useState([]);
-  const [users, setUsers] = useState([]);
+  const [editNoticeSelection, setEditNoticeSelection] =
+    useState(NO_SELECTED_NOTICE);
+  const [usersTable, setUsersTable] = useState([]);
+  const [viewState, setViewState] = useState(ACTIVE_VIEW.NOTICEBOARD_LIST);
 
   useEffect(() => {
     const getData = async () => {
-      const noticesFromMongo = await fetchNotices();
-      setNotices(noticesFromMongo);
-      const usersFromMongo = await fetchUsers();
-      setUsers(usersFromMongo);
+      const noticesFromDatabase = await fetchNoticesFromDatabase();
+      setNotices(noticesFromDatabase);
+      const usersFromMongo = await fetchUsersFromDatabase();
+      setUsersTable(usersFromMongo);
     };
     getData();
-  }, []);
+  }, BECAUSE_TRAVERSY_SAID_SO);
 
-  const fetchNotices = async () => {
+  const fetchNoticesFromDatabase = async () => {
     try {
-      const res = await axios.get("/api/noticeboard");
-      var loadedNotices = JSON.parse(JSON.stringify(res.data.foundNotices));
+      const fetchResult = await axios.get("/api/noticeboard");
+      var loadedNotices = fetchResult.data.foundNotices;
       return loadedNotices;
     } catch (e) {
       console.log(e.message);
     }
   };
 
-  const fetchUsers = async () => {
+  const fetchUsersFromDatabase = async () => {
     try {
-      const res = await axios.get("/api/userManagement");
-      var loadedNotices = JSON.parse(JSON.stringify(res.data.foundUsers));
+      const fetchResult = await axios.get("/api/userManagement");
+      var loadedNotices = fetchResult.data.foundUsers;
       return loadedNotices;
     } catch (e) {
       console.log(e.message);
     }
   };
 
-  const getUser = (who) => {
-    return users.find((user) => user._id === who);
-  };
-
-  // State
-  const [activeViewState, setActiveViewState] = useState(
-    ACTIVE_VIEW.NOTICEBOARD_LIST
-  );
-  const [selectedNoticeID, setSelectedNoticeID] = useState(NO_SELECTED_NOTICE);
-  var user = undefined;
-
-  // Methods, are they even methods?
   const getNotice = (id) => {
     return notices.find((notice) => notice._id === id);
   };
 
-  const postNotice = async (newNotice) => {
-    if (!newNotice.postDate) {
-      newNotice.postDate = "" + new Date();
-      newNotice.user = user;
-    }
-    const noticeData = {
-      _id: selectedNoticeID,
-      user: newNotice.user,
-      postDate: newNotice.postDate,
-      content: newNotice.content,
-    };
-    const res = await axios.post("/api/noticeboard", noticeData);
-    setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST);
-    setNotices(await fetchNotices());
-    setSelectedNoticeID(NO_SELECTED_NOTICE);
+  const getUser = (who) => {
+    return usersTable.find((user) => user._id === who);
   };
 
-  const beginEditNotice = (notice) => {
-    setActiveViewState(ACTIVE_VIEW.EDIT_NOTICE);
-    setSelectedNoticeID(notice);
+  const postNotice = async (newNotice) => {
+    if (newNotice.postDate === EMPTY) {
+      newNotice.postDate = `${new Date()}`;
+      newNotice.user = loggedInUser;
+    }
+    const noticeData = {
+      ...newNotice,
+      _id: editNoticeSelection,
+    };
+    try {
+      const res = await axios.post("/api/noticeboard", noticeData);
+      setNotices(await fetchNoticesFromDatabase());
+    } catch (e) {
+      console.log(e);
+    }
+    setEditNoticeSelection(NO_SELECTED_NOTICE);
+    setViewState(ACTIVE_VIEW.NOTICEBOARD_LIST);
+  };
+
+  const editSelectedNotice = (notice) => {
+    setEditNoticeSelection(notice);
+    setViewState(ACTIVE_VIEW.EDIT_NOTICE);
   };
 
   const deleteNotice = async (id) => {
-    const noticeData = {
-      _id: id,
-    };
-    const res = await axios.patch("/api/noticeboard/", noticeData);
-    setNotices(await fetchNotices());
+    const noticeData = { _id: id };
+    try {
+      const res = await axios.patch("/api/noticeboard/", noticeData);
+      setNotices(await fetchNoticesFromDatabase());
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <Layout pageType="all">
       <div className={styles.centreWrapper}>
-        <div className={styles.loginBox}>
+        <div className={styles.contentBox}>
           <div className={styles.titleWithButton}>
             <UserContext.Consumer>
               {(value) => {
                 if (value) {
-                  user = value.user;
+                  loggedInUser = value.user;
                 }
               }}
             </UserContext.Consumer>
             <h2>Noticeboard</h2>
             <Button
               text={
-                activeViewState === ACTIVE_VIEW.NOTICEBOARD_LIST
+                viewState === ACTIVE_VIEW.NOTICEBOARD_LIST
                   ? "POST NOTICE"
                   : "CANCEL"
               }
               color={
-                activeViewState === ACTIVE_VIEW.NOTICEBOARD_LIST
+                viewState === ACTIVE_VIEW.NOTICEBOARD_LIST
                   ? "lightgreen"
                   : "papayawhip"
               }
               onClick={() => {
-                activeViewState !== ACTIVE_VIEW.NOTICEBOARD_LIST
-                  ? setActiveViewState(ACTIVE_VIEW.NOTICEBOARD_LIST)
-                  : setActiveViewState(ACTIVE_VIEW.CREATE_NOTICE);
+                viewState !== ACTIVE_VIEW.NOTICEBOARD_LIST
+                  ? setViewState(ACTIVE_VIEW.NOTICEBOARD_LIST)
+                  : setViewState(ACTIVE_VIEW.CREATE_NOTICE);
               }}
             />
           </div>
           <br />
           <hr className={styles.hr} />
 
-          {activeViewState === ACTIVE_VIEW.CREATE_NOTICE && (
+          {viewState === ACTIVE_VIEW.CREATE_NOTICE && (
             <EditNotice onEdit={postNotice} />
           )}
-          {activeViewState === ACTIVE_VIEW.EDIT_NOTICE && (
+          {viewState === ACTIVE_VIEW.EDIT_NOTICE && (
             <EditNotice
               onEdit={postNotice}
-              notice={getNotice(selectedNoticeID)}
+              notice={getNotice(editNoticeSelection)}
             />
           )}
 
           {/* Display message if no notices to show */}
-          {activeViewState === ACTIVE_VIEW.NOTICEBOARD_LIST &&
+          {viewState === ACTIVE_VIEW.NOTICEBOARD_LIST &&
             (notices.length === 0 ? (
               "No notices"
             ) : (
               <NoticeList
                 notices={notices}
                 onDelete={deleteNotice}
-                onEdit={beginEditNotice}
+                onEdit={editSelectedNotice}
                 getUser={getUser}
               />
             ))}
