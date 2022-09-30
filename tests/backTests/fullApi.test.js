@@ -2,6 +2,7 @@ import killPort from "kill-port";
 import { spawn } from "node:child_process";
 import loginTest from "./loginApi.test";
 import noticeboardTest from "./noticeboardApi.test";
+import userManagementTest from "./userManagementApi.test";
 
 let testServer;
 jest.setTimeout(15000);
@@ -42,3 +43,4 @@ beforeAll(async () => {
 
 loginTest();
 noticeboardTest();
+userManagementTest();
