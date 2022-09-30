@@ -14,7 +14,7 @@ import Noticeboard from '../../pages/noticeboard'
 describe('Noticeboard', () => {
   it('Noticeboard page renders inputs', () => {
     const dom = render(<Noticeboard />)
-    expect(screen.getByText('Noticeboard')).toBeVisible()
+    expect(screen.getByText('Nooooooooooooooooooticeboard')).toBeVisible()
     //const email = dom.getByTestId('email')
     //fireEvent.change(email, {target: {value: "failed@mail"}}) //changing inputs
     //expect(email.value).toBe("failed@mail")
