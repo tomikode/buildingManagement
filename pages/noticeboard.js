@@ -7,6 +7,9 @@ import NoticeList from "../components/noticeboard/NoticeList";
 import React, { createContext, useEffect, useState } from "react";
 import styles from "../styles/UserManagment.module.css";
 
+const ANONYMOUS_USER = undefined;
+var loggedInUser = ANONYMOUS_USER;
+
 const Noticeboard = () => {
   const ACTIVE_VIEW = {
     NOTICEBOARD_LIST: 0,
@@ -15,12 +18,10 @@ const Noticeboard = () => {
     CREATE_NOTICE: 3,
   };
 
-  const ANONYMOUS_USER = undefined;
+  const NOT_LOGGED_IN = 0;
   const BECAUSE_TRAVERSY_SAID_SO = [];
   const EMPTY = "";
   const NO_SELECTED_NOTICE = 0;
-
-  var loggedInUser = ANONYMOUS_USER;
 
   const [notices, setNotices] = useState([]);
   const [editNoticeSelection, setEditNoticeSelection] =
@@ -105,31 +106,33 @@ const Noticeboard = () => {
       <div className={styles.centreWrapper}>
         <div className={styles.contentBox}>
           <div className={styles.titleWithButton}>
+            <h2>Noticeboard</h2>
             <UserContext.Consumer>
               {(value) => {
-                if (value) {
+                try {
                   loggedInUser = value.user;
-                }
+                } catch {}
               }}
             </UserContext.Consumer>
-            <h2>Noticeboard</h2>
-            <Button
-              text={
-                viewState === ACTIVE_VIEW.NOTICEBOARD_LIST
-                  ? "POST NOTICE"
-                  : "CANCEL"
-              }
-              color={
-                viewState === ACTIVE_VIEW.NOTICEBOARD_LIST
-                  ? "lightgreen"
-                  : "papayawhip"
-              }
-              onClick={() => {
-                viewState !== ACTIVE_VIEW.NOTICEBOARD_LIST
-                  ? setViewState(ACTIVE_VIEW.NOTICEBOARD_LIST)
-                  : setViewState(ACTIVE_VIEW.CREATE_NOTICE);
-              }}
-            />
+            {loggedInUser && (
+              <Button
+                text={
+                  viewState === ACTIVE_VIEW.NOTICEBOARD_LIST
+                    ? "POST NOTICE"
+                    : "CANCEL"
+                }
+                color={
+                  viewState === ACTIVE_VIEW.NOTICEBOARD_LIST
+                    ? "lightgreen"
+                    : "papayawhip"
+                }
+                onClick={() => {
+                  viewState !== ACTIVE_VIEW.NOTICEBOARD_LIST
+                    ? setViewState(ACTIVE_VIEW.NOTICEBOARD_LIST)
+                    : setViewState(ACTIVE_VIEW.CREATE_NOTICE);
+                }}
+              />
+            )}
           </div>
           <br />
           <hr className={styles.hr} />
@@ -154,6 +157,7 @@ const Noticeboard = () => {
                 onDelete={deleteNotice}
                 onEdit={editSelectedNotice}
                 getUser={getUser}
+                loggedInUser={loggedInUser}
               />
             ))}
         </div>

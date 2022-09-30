@@ -1,6 +1,6 @@
 import NoticeRecord from "../noticeboard/NoticeRecord";
 
-const NoticeList = ({ notices, onDelete, getUser, onEdit }) => {
+const NoticeList = ({ notices, onDelete, getUser, onEdit, loggedInUser }) => {
   let row_number = 0;
   return (
     <table style={{ borderCollapse: "collapse" }}>
@@ -19,6 +19,10 @@ const NoticeList = ({ notices, onDelete, getUser, onEdit }) => {
             onDelete={onDelete}
             onEdit={onEdit}
             getUser={getUser}
+            withEdit={
+              loggedInUser &&
+              (loggedInUser._id === notice.user || loggedInUser.type === "m")
+            }
           />
         ))}
       </tbody>

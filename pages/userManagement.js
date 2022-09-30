@@ -1,3 +1,4 @@
+import { UserContext } from "./_app";
 import axios from "axios";
 import Button from "../components/Button";
 import EditUser from "../components/user_management/EditUser";
@@ -5,8 +6,13 @@ import Layout from "../components/Layout";
 import React, { useEffect, useState } from "react";
 import styles from "../styles/UserManagment.module.css";
 import UserList from "../components/user_management/UserList";
+import { useRouter } from "next/router";
+
+const ANONYMOUS_USER = undefined;
+var loggedInUser = ANONYMOUS_USER;
 
 const UserManagement = () => {
+  const router = useRouter();
   const VIEW_STATES = {
     USER_LIST: 0,
     NEW_USER: 1,
@@ -18,13 +24,19 @@ const UserManagement = () => {
   const NO_SELECTED_USER = 0;
 
   const [editUserSelection, setEditUserSelection] = useState(NO_SELECTED_USER);
+  const [lUser, setLUser] = useState(NO_SELECTED_USER);
   const [usersTable, setUsersTable] = useState(EMPTY);
   const [viewState, setViewState] = useState(VIEW_STATES.USER_LIST);
 
   useEffect(() => {
     const getUsers = async () => {
-      const usersFromDatabase = await fetchUsersFromDatabase();
-      setUsersTable(usersFromDatabase);
+      loggedInUser = JSON.parse(sessionStorage.getItem("user"));
+      if (!loggedInUser && router) {
+        router.push("/login");
+      } else {
+        const usersFromDatabase = await fetchUsersFromDatabase();
+        setUsersTable(usersFromDatabase);
+      }
     };
     getUsers();
   }, BECAUSE_TRAVERSY_SAID_SO);
@@ -71,25 +83,29 @@ const UserManagement = () => {
   };
 
   return (
-    <Layout pageType="m">
+    <Layout pageType="all">
       <div className={styles.centreWrapper}>
         <div className={styles.contentBox}>
           {/* User Management header */}
           <div className={styles.titleWithButton}>
             <h2>User Management</h2>
-            <Button
-              text={viewState === VIEW_STATES.USER_LIST ? "ADD USER" : "CANCEL"}
-              color={
-                viewState === VIEW_STATES.USER_LIST
-                  ? "lightgreen"
-                  : "papayawhip"
-              }
-              onClick={() => {
-                viewState !== VIEW_STATES.USER_LIST
-                  ? setViewState(VIEW_STATES.USER_LIST)
-                  : setViewState(VIEW_STATES.NEW_USER);
-              }}
-            />
+            {loggedInUser && loggedInUser.type === "m" && (
+              <Button
+                text={
+                  viewState === VIEW_STATES.USER_LIST ? "ADD USER" : "CANCEL"
+                }
+                color={
+                  viewState === VIEW_STATES.USER_LIST
+                    ? "lightgreen"
+                    : "papayawhip"
+                }
+                onClick={() => {
+                  viewState !== VIEW_STATES.USER_LIST
+                    ? setViewState(VIEW_STATES.USER_LIST)
+                    : setViewState(VIEW_STATES.NEW_USER);
+                }}
+              />
+            )}
           </div>
           <br />
           <hr className={styles.hr} />
@@ -109,6 +125,7 @@ const UserManagement = () => {
                 users={usersTable}
                 onDelete={deleteUser}
                 onEdit={editUser}
+                lUser={loggedInUser}
               />
             ))}
         </div>

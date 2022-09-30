@@ -68,6 +68,11 @@ const TenantNav = () => {
 								</p>
 							</li>
 						</Link>
+						<Link href="/userManagement">
+							<li>
+								<p>User Management</p>
+							</li>
+						</Link>
                         <Link href="/logout">
 							<li>
 								<p>
