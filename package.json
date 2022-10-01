@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "childServer": "cross-env CHILD_ENV=test next dev",
-    "testFront": "jest ./tests/frontTests --env=jsdom --runInBand --forceExit",
+    "testFront": "jest ./tests/frontTests/ --env=jsdom --runInBand --forceExit",
     "testBack": "jest ./tests/backTests/fullApi.test.js --runInBand --env=node --forceExit"
   },
   "dependencies": {

@@ -1,9 +1,9 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { useState } from "react";
-import styles from "../styles/Nav.module.css";
+import styles from "../../styles/Nav.module.css";
 
-const ContractorNav = () => {
+const BaseNav = () => {
 	const [menu, setMenu] = useState(false);
 
 	const showMenu = () => {
@@ -18,39 +18,14 @@ const ContractorNav = () => {
 						<XMarkIcon className={styles.menuIcon} />
 					</button>
 					<ul id="menu" className={styles.menu}>
-						<Link href="/contractorHome">
+						<Link href="/">
 							<li>
 								<p>Home</p>
 							</li>
 						</Link>
-						<Link href="/profile">
+						<Link href="/login">
 							<li>
-								<p>Profile</p>
-							</li>
-						</Link>
-						<Link href="/">
-							<li>
-								<p>Mail</p>
-							</li>
-						</Link>
-						<Link href="/noticeboard">
-							<li>
-								<p>Noticeboard</p>
-							</li>
-						</Link>
-						<Link href="/">
-							<li>
-								<p>Work Orders</p>
-							</li>
-						</Link>
-						<Link href="/userManagement">
-							<li>
-								<p>User Management</p>
-							</li>
-						</Link>
-						<Link href="/logout">
-							<li>
-								<p>Logout</p>
+								<p>Login</p>
 							</li>
 						</Link>
 					</ul>
@@ -64,4 +39,4 @@ const ContractorNav = () => {
 	);
 };
 
-export default ContractorNav;
+export default BaseNav;

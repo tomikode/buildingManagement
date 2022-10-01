@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import styles from "../styles/Profile.module.css";
-import { UserContext } from "./_app";
+import { UserContext } from "../utils/UserContext";
 
 const Profile = () => {
 	const userCon = useContext(UserContext);

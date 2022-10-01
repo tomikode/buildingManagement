@@ -28,7 +28,6 @@ export default function loginTest() {
 
 		it("post request with correct credentials", async () => {
 			const res = await axios.post(loginApi, validCreds);
-			console.log(res);
 			expect(res.status).toBe(201);
 			expect(res.data.foundUser.email).toBe(validCreds.email);
 		});

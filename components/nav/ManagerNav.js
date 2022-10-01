@@ -1,7 +1,7 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { useState } from "react";
-import styles from "../styles/Nav.module.css";
+import styles from "../../styles/Nav.module.css";
 
 const ManagerNav = () => {
 	const [menu, setMenu] = useState(false);
