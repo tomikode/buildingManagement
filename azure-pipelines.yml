@@ -14,21 +14,24 @@ steps:
       inputs:
           versionSpec: "16.17.0"
       displayName: "Install Node.js"
-    - task: CmdLine@2
-      inputs:
-        script: |
+
+    - script: |
+          node --version
+          npm install
+          npm run build
+      displayName: "npm install and build"
+    - script: |
           npm --version
           npm run testFront
-      displayName: "Frontend tests"
       env:
           MONGODB_URI: $(MONDODB_URI)
           TEST_URI: $(TEST_URI)
-    - task: CmdLine@2
-      inputs:
-        script: |
+      displayName: "frontend tests"
+    - script: |
           npm --version
           npm run testBack
-      displayName: "Backend tests"
       env:
           MONGODB_URI: $(MONDODB_URI)
           TEST_URI: $(TEST_URI)
+      displayName: "backend test"
+      condition: succeededOrFailed()
