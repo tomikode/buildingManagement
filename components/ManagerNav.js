@@ -63,7 +63,7 @@ const ManagerNav = () => {
 								<p>User Management</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/buildingManagement">
 							<li>
 								<p>Building</p>
 							</li>
