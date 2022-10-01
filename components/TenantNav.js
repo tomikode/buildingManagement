@@ -33,7 +33,7 @@ const TenantNav = () => {
 								<p>Mail</p>
 							</li>
 						</Link>
-                        <Link href="/noticeboard">
+						<Link href="/noticeboard">
 							<li>
 								<p>Noticeboard</p>
 							</li>
@@ -53,16 +53,12 @@ const TenantNav = () => {
 								<p>Invoices</p>
 							</li>
 						</Link>
-<<<<<<< HEAD
-						<Link href="/logout">
-=======
 						<Link href="/userManagement">
 							<li>
 								<p>User Management</p>
 							</li>
 						</Link>
-                        <Link href="/logout">
->>>>>>> 67ecbe725481bfd34edda1dd88182aac9c197aaa
+						<Link href="/logout">
 							<li>
 								<p>Logout</p>
 							</li>
