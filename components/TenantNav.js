@@ -1,7 +1,4 @@
-import {
-	Bars3Icon,
-	XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { useState } from "react";
 import styles from "../styles/Nav.module.css";
@@ -17,68 +14,60 @@ const TenantNav = () => {
 		<>
 			{menu ? (
 				<>
-					<button className={styles.button} onClick={showMenu}><XMarkIcon className={styles.menuIcon} /></button>
+					<button className={styles.button} onClick={showMenu}>
+						<XMarkIcon className={styles.menuIcon} />
+					</button>
 					<ul id="menu" className={styles.menu}>
 						<Link href="/tenantHome">
 							<li>
-								<p>
-									Home
-								</p>
+								<p>Home</p>
 							</li>
 						</Link>
-						<Link href="/profile">
+						<Link href="/profile" data-testid="profile">
 							<li>
-								<p>
-									Profile
-								</p>
+								<p>Profile</p>
 							</li>
 						</Link>
 						<Link href="/">
 							<li>
-								<p>
-									Mail
-								</p>
+								<p>Mail</p>
 							</li>
 						</Link>
-                        <Link href="/">
+						<Link href="/">
 							<li>
-								<p>
-									Noticeboard
-								</p>
+								<p>Noticeboard</p>
 							</li>
 						</Link>
-                        <Link href="/">
+						<Link href="/">
 							<li>
-								<p>
-									Rent
-								</p>
+								<p>Rent</p>
 							</li>
 						</Link>
-                        <Link href="/">
+						<Link href="/">
 							<li>
-								<p>
-									Report Damages
-								</p>
+								<p>Report Damages</p>
 							</li>
 						</Link>
-                        <Link href="/">
+						<Link href="/">
 							<li>
-								<p>
-									Invoices
-								</p>
+								<p>Invoices</p>
 							</li>
 						</Link>
-                        <Link href="/logout">
+						<Link href="/logout">
 							<li>
-								<p>
-									Logout
-								</p>
+								<p>Logout</p>
 							</li>
 						</Link>
 					</ul>
 				</>
 			) : (
-				<button className={styles.button} onClick={showMenu}><Bars3Icon className={styles.menuIcon} /></button>
+				<button
+					data-testid="menu"
+					className={styles.button}
+					onClick={showMenu}
+				>
+					<Bars3Icon className={styles.menuIcon} />
+				</button>
 			)}
 		</>
 	);

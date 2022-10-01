@@ -4,28 +4,33 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+    - main
 
 pool:
-  vmImage: ubuntu-latest
-
+    vmImage: ubuntu-latest
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '16.17.0'
-  displayName: 'Install Node.js'
+    - task: NodeTool@0
+      inputs:
+          versionSpec: "16.17.0"
+      displayName: "Install Node.js"
 
-- script: |
-    node --version
-    npm install
-    npm run build
-  displayName: 'npm install and build'
-- script: |
-    npm --version
-    npm run testFront
-    npm run testBack
-  env:
-    MONGODB_URI: $(MONDODB_URI)
-    TEST_URI: $(TEST_URI)
-  displayName: 'test runs'
+    - script: |
+          node --version
+          npm install
+          npm run build
+      displayName: "npm install and build"
+    - script: |
+          npm --version
+          npm run testFront
+      env:
+          MONGODB_URI: $(MONDODB_URI)
+          TEST_URI: $(TEST_URI)
+      displayName: "frontend tests"
+    - script: |
+          npm --version
+          npm run testBack
+      env:
+          MONGODB_URI: $(MONDODB_URI)
+          TEST_URI: $(TEST_URI)
+      displayName: "backend test"
