@@ -1,8 +1,7 @@
 import Head from "next/head";
 import { createContext, useState } from "react";
 import "../styles/globals.css";
-
-export const UserContext = createContext();
+import { UserContext } from "../utils/UserContext";
 
 function MyApp({ Component, pageProps }) {
 	const [user, setUser] = useState(null);

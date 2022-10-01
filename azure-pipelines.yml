@@ -34,3 +34,4 @@ steps:
           MONGODB_URI: $(MONDODB_URI)
           TEST_URI: $(TEST_URI)
       displayName: "backend test"
+      condition: succeededOrFailed()

@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
-import { HomeIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import styles from "../styles/Nav.module.css";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import TenantNav from "./TenantNav";
-import BaseNav from "./BaseNav";
-import ManagerNav from "./ManagerNav";
-import ContractorNav from "./ContractorNav";
-import { UserContext } from "../pages/_app";
+import { useEffect } from "react";
+import TenantNav from "./nav/TenantNav";
+import BaseNav from "./nav/BaseNav";
+import ManagerNav from "./nav/ManagerNav";
+import ContractorNav from "./nav/ContractorNav";
+import { UserContext } from "../utils/UserContext";
 
 const Layout = ({ children, pageType, logout }) => {
 	const userCon = useContext(UserContext);

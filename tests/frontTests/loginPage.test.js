@@ -20,6 +20,5 @@ describe("Login", () => {
 		const password = dom.getByTestId("password");
 		fireEvent.change(password, { target: { value: "fail" } });
 		expect(password.value).toBe("fail");
-		expect(0).toBe(1);
 	});
 });
