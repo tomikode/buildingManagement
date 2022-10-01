@@ -33,7 +33,7 @@ const ContractorNav = () => {
 								<p>Mail</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/noticeboard">
 							<li>
 								<p>Noticeboard</p>
 							</li>
@@ -41,6 +41,11 @@ const ContractorNav = () => {
 						<Link href="/">
 							<li>
 								<p>Work Orders</p>
+							</li>
+						</Link>
+						<Link href="/userManagement">
+							<li>
+								<p>User Management</p>
 							</li>
 						</Link>
 						<Link href="/logout">

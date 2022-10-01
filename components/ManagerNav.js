@@ -33,7 +33,7 @@ const ManagerNav = () => {
 								<p>Mail</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/noticeboard">
 							<li>
 								<p>Noticeboard</p>
 							</li>
@@ -58,9 +58,9 @@ const ManagerNav = () => {
 								<p>Rentals</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/userManagement">
 							<li>
-								<p>Users</p>
+								<p>User Management</p>
 							</li>
 						</Link>
 						<Link href="/">
