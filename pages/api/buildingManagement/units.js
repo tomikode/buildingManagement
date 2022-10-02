@@ -7,6 +7,12 @@ const getUnits = async () => {
   else return { status: 401, body: { error: "Shit the bed for Units ayy" } };
 };
 
+const getUnitsByBlock = async (blockName) => {
+  const foundUnits = await Unit.find({block: blockName});
+  if (foundUnits) return { status: 201, body: { foundUnits } };
+  else return { status: 401, body: { error: "Shit the bed for Units ayy" } };
+};
+
 const saveUnit = async (req) => {
   const { _id, tenant, landlord, block, unitNumber} = req.body;
   if (_id) {
@@ -42,7 +48,11 @@ const unitHandler = async (req, res) => {
   let result = { error: "You should call your Dad" };
   switch (method) {
     case "GET":
-      result = await getUnits();
+      if (req.query.blockName) {
+        result = await getUnitsByBlock(req.query.blockName);
+      } else {
+        result = await getUnits();
+      }
       res.status(result.status).json(result.body);
       break;
     case "POST":

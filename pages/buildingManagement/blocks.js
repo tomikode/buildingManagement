@@ -102,6 +102,10 @@ const BuildingManagement = () => {
 		try {
 			const res = await axios.patch("/api/buildingManagement/blocks", blockData);
 			setBlocksTable(await fetchBlocksFromDatabase());
+			const unitsToBeDeleted = await axios.get("/api/buildingManagement/units", { params: { blockName: id} });
+			unitsToBeDeleted.data.foundUnits.forEach( async unit => {
+				await axios.patch("/api/buildingManagement/units", {_id: unit._id});
+			}); 
 		} catch (e) {
 			console.log(e);
 		}

@@ -45,13 +45,13 @@ const BuildingManagement = () => {
 			const blocksFromDatabase = await fetchBlocksFromDatabase();
 			const usersFromDatabase = await fetchUsersFromDatabase();
 			const unitsFromDatabase = await fetchUnitsFromDatabase();
-			setBlocksTable(blocksFromDatabase);
-			setUsersTable(usersFromDatabase);
-			setUnitsTable(unitsFromDatabase);
+			setBlocksTable([...blocksFromDatabase]);
+			setUsersTable([...usersFromDatabase]);
+			setUnitsTable([...unitsFromDatabase]);
 		}
 	  };
 	  getData();
-	},[]);
+	}, BECAUSE_TRAVERSY_SAID_SO);
 
 	const fetchUnitsFromDatabase = async () => {
 		try {
@@ -92,7 +92,6 @@ const BuildingManagement = () => {
 	  };
 
 	const postUnit = async (newUnit) => {
-		debugger;
 		const unitData = {
 			_id: editUnitSelection,
 			...newUnit,
