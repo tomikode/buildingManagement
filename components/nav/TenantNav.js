@@ -38,7 +38,7 @@ const TenantNav = () => {
 								<p>Noticeboard</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/Rental/tenantRental">
 							<li>
 								<p>Rent</p>
 							</li>
