@@ -1,6 +1,7 @@
 import Layout from "../components/Layout";
 import styles from "../styles/Home.module.css";
 
+//home base landing page
 export default function Home() {
 	return (
 		<Layout>
@@ -13,6 +14,3 @@ export default function Home() {
 		</Layout>
 	);
 }
-
-//add sign in attempts and allow people to see them
-//maybe use callback to share user state across to other components

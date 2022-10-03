@@ -7,6 +7,7 @@ import userManagementTest from "./userManagementApi.test";
 let testServer;
 jest.setTimeout(15000);
 
+//wait for dev server to start for testing 10 seconds
 const waitForServer = () => {
 	return new Promise((resolve, reject) => {
 		setTimeout(() => {
@@ -15,6 +16,7 @@ const waitForServer = () => {
 	});
 };
 
+//kill any process on port 3000 and start dev server child process
 beforeAll(async () => {
 	try {
 		await killPort(3000);
@@ -41,6 +43,7 @@ beforeAll(async () => {
 	console.log("testfunc done");
 });
 
+//run all feature related tests
 loginTest();
 noticeboardTest();
 userManagementTest();
