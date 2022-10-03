@@ -36,7 +36,7 @@ Mail
 
 ### MN (12750663):
 
-Building Management (database/schemas/block.js, database/schemas/unit.js, pages/api/buildingManagement, pages/buildingManagement, )
+Building Management (database/schemas/block.js, database/schemas/unit.js, pages/api/buildingManagement, pages/buildingManagement, tests/backTests/unitAPI.test.js, tests/backTests/blockApi.test.js, tests/frontTests/blockPage.test.js, tests/frontTests/UnitPage.test.js)
 
 Contractor Management (to be completed)
 
