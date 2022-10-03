@@ -40,7 +40,7 @@ Building Management (database/schemas/block.js, database/schemas/unit.js, pages/
 
 Contractor Management (to be completed)
 
-#### SC (13820105):
+### SC (13820105):
 
 Rental Payments
 
