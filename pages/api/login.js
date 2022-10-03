@@ -18,11 +18,11 @@ const tryLogin = async (req) => {
 	if (foundUser) {
 		if (foundUser.password === password) {
 			//add successful access attempt and respond with user and 201
-			addAccessAttempt(req, foundUser, "Successful");
+			addAccessAttempt(foundUser, "Successful");
 			return { status: 201, body: { foundUser } };
 		} else {
 			//add failed access attempt and respond with error and 401
-			addAccessAttempt(req, foundUser, "Failed");
+			addAccessAttempt(foundUser, "Failed");
 			return { status: 401, body: { error: "Invalid credentials" } };
 		}
 	} else return { status: 401, body: { error: "Invalid credentials" } }; //email did not match any user
