@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const tenantRental = () => {
     return (
-        <Layout pageType="m">
+        <Layout pageType="all">
             <div className={styles.centreWrapper}>
                 <div className={styles.contentBox}>
                     <div className={styles.title}>

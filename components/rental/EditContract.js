@@ -1,29 +1,29 @@
-import { renderToHTML } from "next/dist/server/render";
 import React from "react";
 import { useState } from "react";
 import styles from "../../styles/UserManagment.module.css";
 
 const EditContract = ({ onEdit, contract = null }) => {
-    const [id, setID] = useState("");
-    const [user, setUser] = useState("");
+    const [_id, set_Id] = useState("");
+    const [tenant, setUser] = useState("");
     const [landlord, setLandlord] = useState("");
     const [unit, setUnit] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [totalPrice, setPrice] = useState("");
     const [chargeRate, setRate] = useState("");
+    const [contractLoaded, setContractLoaded] = useState(false);
 
     const onSubmit = (e) => {
         e.preventDefault();
 
-        if (!content) {
-            alert("Please enter details");
+        if (!tenant || !landlord || !unit || !startDate || !endDate || !totalPrice || !chargeRate) {
+            alert("Please fill out all forms");
             return;
         }
 
         onEdit({ id, tenant, landlord, unit, startDate, endDate, totalPrice, chargeRate });
 
-        setID("");
+        set_Id("");
         setUser("");
         setLandlord("");
         setUnit("");
@@ -34,7 +34,7 @@ const EditContract = ({ onEdit, contract = null }) => {
     };
 
     const loadContract = (contract) => {
-        setID(contract.id);
+        set_Id(contract._id);
         setUser(contract.tenant);
         setLandlord(contract.landlord);
         setUnit(contract.unit);
@@ -44,7 +44,7 @@ const EditContract = ({ onEdit, contract = null }) => {
         setRate(contract.chargeRate);
 
         setContractLoaded(true);
-    }
+    };
 
     return (
         <form onSubmit={onSubmit}>
@@ -59,7 +59,7 @@ const EditContract = ({ onEdit, contract = null }) => {
                             <input
                                 type="text"
                                 placeholder="Input Tenant Name"
-                                value={user}
+                                value={tenant}
                                 onChange={(e) => setUser(e.target.value)}
                             />
                         </td>
@@ -128,7 +128,7 @@ const EditContract = ({ onEdit, contract = null }) => {
                             <input
                                 type="number"
                                 placeholder="Input Rent Amount"
-                                value={rent}
+                                value={totalPrice}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
                         </td>
@@ -145,8 +145,7 @@ const EditContract = ({ onEdit, contract = null }) => {
                                 id="weekly"
                                 value="Weekly"
                                 name="Cycle"
-                                checked={this.state.selectedOption === "Weekly"}
-                                onChange={(e) => setRate(e.target.checked)}
+                                onChange={(e) => setRate(e.target.value)}
                             />
                             <label for="weekly">Weekly </label>
                             <input
@@ -154,8 +153,7 @@ const EditContract = ({ onEdit, contract = null }) => {
                                 id="monthly"
                                 value="Monthly"
                                 name="Cycle"
-                                checked={this.state.selectedOption === "Monthly"}
-                                onChange={(e) => setRate(e.target.checked)}
+                                onChange={(e) => setRate(e.target.value)}
                             />
                             <label for="Monthly">Monthly </label>
                             <input
@@ -163,8 +161,7 @@ const EditContract = ({ onEdit, contract = null }) => {
                                 id="yearly"
                                 value="Yearly"
                                 name="Cycle"
-                                checked={this.state.selectedOption === "Yearly"}
-                                onChange={(e) => setRate(e.target.checked)}
+                                onChange={(e) => setRate(e.target.value)}
                             />
                             <label for="yearly">Yearly</label>
                         </td>
@@ -172,9 +169,9 @@ const EditContract = ({ onEdit, contract = null }) => {
                 </tbody>
             </table>
             <br />
-            <input type="submit" value="SAVE USER" className={styles.rightButton} />
+            <input type="submit" value="SAVE CONTRACT" className={styles.rightButton} />
         </form>
-    )
+    );
 };
 
 export default EditContract;

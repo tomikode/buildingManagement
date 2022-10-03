@@ -17,13 +17,14 @@ const managerRental = () => {
         CONTRACT_LIST: 0,
         NEW_CONTRACT: 1,
         EDIT_CONTRACT: 2,
+        //CREATE_CONTRACT: 3,
     };
 
     const BECAUSE_TRAVERSY_SAID_SO = [];
-    const EMPTY = "";
+    const EMPTY = [];
     const NO_SELECTED_CONTRACT = 0;
 
-    const [contracts, setContracts] = useState([]);
+    //    const [contract, setContracts] = useState([]);
     const [editContractSelection, setEditContractSelection] =
         useState(NO_SELECTED_CONTRACT);
     const [usersTable, setUsersTable] = useState(EMPTY);
@@ -32,10 +33,13 @@ const managerRental = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const contractsFromDatabase = await fetchContractsFromDatabase();
-            setContracts(contractsFromDatabase);
-            const usersFromMongo = await fetchUsersFromDatabase();
-			setUsersTable(usersFromMongo);
+            loggedInUser = JSON.parse(sessionStorage.getItem("user"));
+            if (!loggedInUser && router) {
+                router.push("/login");
+            } else {
+                const contractsFromDatabase = await fetchContractsFromDatabase();
+                setContractTable(contractsFromDatabase);
+            }
         };
         getData();
     }, BECAUSE_TRAVERSY_SAID_SO); // eslint-disable-line
@@ -43,7 +47,7 @@ const managerRental = () => {
     const fetchUsersFromDatabase = async () => {
         try {
             const fetchResult = await axios.get("/api/userManagement");
-            var loadedNotices = fetchResult.data.foundUsers;
+            let loadedNotices = fetchResult.data.foundUsers;
             return loadedNotices;
         } catch (e) {
             console.log(e.message);
@@ -53,7 +57,7 @@ const managerRental = () => {
     const fetchContractsFromDatabase = async () => {
         try {
             const fetchResult = await axios.get("/api/rental");
-            var loadedContracts = fetchResult.data.foundContracts;
+            let loadedContracts = fetchResult.data.foundContracts;
             return loadedContracts;
         } catch (e) {
             console.log(e.message);
@@ -61,35 +65,31 @@ const managerRental = () => {
     };
 
     const getContract = (id) => {
-        return contracts.find((contract) => contract._id === id);
+        return contractTable.find((contract) => contract._id === id);
     };
 
     const getUser = (who) => {
-		return usersTable.find((user) => user._id === who);
-	};
+        return usersTable.find((user) => user._id === who);
+    };
 
     const addContract = async (newContract) => {
-        /*if (newContract.postDate === EMPTY) {
-            newContract.postDate = `${new Date()}`;
-            newContract.user = loggedInUser;
-        }*/
         const contractData = {
+            //_id: editContractSelection,
             ...newContract,
-            _id: editContractSelection,
         };
         try {
             const res = await axios.post("/api/rental", contractData);
-            setContracts(await fetchContractsFromDatabase());
+            setContractTable(await fetchContractsFromDatabase());
         } catch (e) {
-            console.log(e);
+            console.log(e.message);
         }
-        setEditContractSelection(NO_SELECTED_CONTRACT);
         setViewState(VIEW_STATES.CONTRACT_LIST);
+        setEditContractSelection(NO_SELECTED_CONTRACT);
     };
 
     const editSelectedContract = (contract) => {
-        setEditContractSelection(contract);
         setViewState(VIEW_STATES.EDIT_CONTRACT);
+        setEditContractSelection(contract);
     };
 
     const deleteContract = async (id) => {
@@ -103,11 +103,11 @@ const managerRental = () => {
     };
 
     return (
-        <Layout pageType="m">
+        <Layout pageType="all">
             <div className={styles.centreWrapper}>
                 <div className={styles.contentBox}>
                     <div className={styles.titleWithButton}>
-                        <h1>Contract Management</h1>
+                        <h2>Contract Management</h2>
                         {loggedInUser && loggedInUser.type === "m" && (
                             <Button
                                 text={
@@ -121,7 +121,7 @@ const managerRental = () => {
                                         : "papayawhip"
                                 }
                                 onClick={() => {
-                                    viewState !== VIEW_STATES.USER_LIST
+                                    viewState !== VIEW_STATES.CONTRACT_LIST
                                         ? setViewState(VIEW_STATES.CONTRACT_LIST)
                                         : setViewState(VIEW_STATES.NEW_CONTRACT);
                                 }}
@@ -130,6 +130,7 @@ const managerRental = () => {
                     </div>
                     <br />
                     <hr className={styles.hr} />
+
                     {/* Show edit/create user screen if selected */}
                     {viewState === VIEW_STATES.NEW_CONTRACT && (
                         <EditContract onEdit={addContract} />
@@ -143,27 +144,26 @@ const managerRental = () => {
 
                     {/* Show users if selected, or display message if no users to show */}
                     {viewState === VIEW_STATES.CONTRACT_LIST &&
-                        (contracts.length === EMPTY.length ? (
+                        (contractTable?.length === EMPTY.length ? (
                             "No Contracts Curently Active"
                         ) : (
                             <ContractList
-                                contracts={contracts}
+                                contracts={contractTable}
                                 /*landlord={getLandlord}
                                 unit={getUnit}
                                 startDate={getStartDate}
                                 endDate={getEndDate}
                                 totalPrice={getPrice}
                                 chargeRate={getRate}*/
-								onDelete={deleteContract}
-								onEdit={editSelectedContract}
-								getUser={getUser}
-								loggedInUser={loggedInUser}
+                                onDelete={deleteContract}
+                                getUser={getUser}
+                                onEdit={editSelectedContract}
                             />
                         ))}
                 </div>
             </div>
         </Layout>
-    )
+    );
 
 };
 
