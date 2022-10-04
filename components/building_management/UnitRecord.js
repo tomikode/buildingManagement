@@ -27,7 +27,7 @@ const UnitRecord = ({
     console.log(blocks)
     let block = blocks.find(block => {return block._id = unit.block});
     setBlock(block.name);
-	}, [tenant, landlord, block]);
+	}, [tenant, landlord, block]); // eslint-disable-line
 
 
   return (
