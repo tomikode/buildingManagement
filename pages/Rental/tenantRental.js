@@ -4,7 +4,7 @@ import axios from "axios";
 //import EditContract from "../../components/rental/EditContract"
 import Layout from "../../components/Layout";
 import React, { useEffect, useState } from "react";
-import styles from "../../styles/UserManagment.module.css";
+import styles from "../../styles/Rental.module.css";
 import ContractList from "../../components/rental/ContractList";
 import { useRouter } from "next/router";
 
