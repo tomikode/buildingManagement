@@ -1,7 +1,7 @@
 import formStyles from '../../styles/Form.module.css'
 import Layout from '../../components/Layout'
 
-export default function Home() {
+export default function DamageReport() {
   return (
     <Layout pageType="t">
     
