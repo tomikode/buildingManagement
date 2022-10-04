@@ -16,7 +16,7 @@ const ContractList = ({ contracts, onDelete, getUser, onEdit }) => {
                 </tr>
             </thead>
             <tbody>
-                {contracts?.map((contract) => (
+                {contracts.map((contract) => (
                     <ContractRecord
                         key={contract._id}
                         rowColor={++row_number % 2 === 0 ? "white" : "Gainsboro"}
