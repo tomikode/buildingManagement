@@ -1,6 +1,6 @@
 import axios from "axios";
 import Button from "../../components/Button";
-import EditUser from "../../components/user_management/EditUser";
+//import EditUser from "../../components/user_management/EditUser";
 import EditContract from "../../components/rental/EditContract"
 import Layout from "../../components/Layout";
 import React, { useEffect, useState } from "react";
@@ -33,18 +33,19 @@ const managerRental = () => {
 
     useEffect(() => {
         const getData = async () => {
-            loggedInUser = JSON.parse(sessionStorage.getItem("user"));
             if (!loggedInUser && router) {
                 router.push("/login");
             } else {
+                loggedInUser = JSON.parse(sessionStorage.getItem("user"));
+
                 const contractsFromDatabase = await fetchContractsFromDatabase();
                 setContractTable(contractsFromDatabase);
             }
         };
         getData();
-    }, BECAUSE_TRAVERSY_SAID_SO); // eslint-disable-line
+    }, BECAUSE_TRAVERSY_SAID_SO);
 
-    const fetchUsersFromDatabase = async () => {
+    /*const fetchUsersFromDatabase = async () => {
         try {
             const fetchResult = await axios.get("/api/userManagement");
             let loadedNotices = fetchResult.data.foundUsers;
@@ -52,7 +53,7 @@ const managerRental = () => {
         } catch (e) {
             console.log(e.message);
         }
-    };
+    };*/
 
     const fetchContractsFromDatabase = async () => {
         try {
@@ -74,7 +75,7 @@ const managerRental = () => {
 
     const addContract = async (newContract) => {
         const contractData = {
-            //_id: editContractSelection,
+            _id: editContractSelection,
             ...newContract,
         };
         try {
@@ -149,12 +150,6 @@ const managerRental = () => {
                         ) : (
                             <ContractList
                                 contracts={contractTable}
-                                /*landlord={getLandlord}
-                                unit={getUnit}
-                                startDate={getStartDate}
-                                endDate={getEndDate}
-                                totalPrice={getPrice}
-                                chargeRate={getRate}*/
                                 onDelete={deleteContract}
                                 getUser={getUser}
                                 onEdit={editSelectedContract}
