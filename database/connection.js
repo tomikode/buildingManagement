@@ -1,14 +1,19 @@
 import mongoose from "mongoose";
 
 const connect = async () => {
-  if (mongoose.connections[0].readyState === 0) {
-    const uri = process.env.MONGODB_URI;
-    mongoose.connect(uri);
-    mongoose.connection.on("connected", () => console.log("Connected"));
-    mongoose.connection.on("error", () =>
-      console.log("Connection failed with - ", err)
-    );
-  }
+	if (mongoose.connection.readyState === 0) {
+		let uri = process.env.MONGODB_URI;
+		let testUri = process.env.TEST_URI;
+		if (process.env.CHILD_ENV === "test") {
+			uri = testUri;
+		}
+		console.log(uri);
+		mongoose.connect(uri, {
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		});
+		console.log("connected");
+	}
 };
 
 export default connect;

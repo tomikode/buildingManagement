@@ -4,10 +4,12 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 
+//login page to allow users to access system
 const Login = () => {
 	const [error, setError] = useState("");
 	const router = useRouter();
 
+	//submit login to api/login
 	const submitLogin = async (e) => {
 		e.preventDefault();
 		setError("");
@@ -42,10 +44,22 @@ const Login = () => {
 					<div className={styles.error}>{error}</div>
 					<form onSubmit={submitLogin} className={styles.form}>
 						<label>Email</label>
-						<input name="email" type="text"></input>
+						<input
+							data-testid="email"
+							name="email"
+							type="text"
+						></input>
 						<label>Password</label>
-						<input name="password" type="password"></input>
-						<input type="submit" value="Login" />
+						<input
+							data-testid="password"
+							name="password"
+							type="password"
+						></input>
+						<input
+							data-testid="loginSubmit"
+							type="submit"
+							value="Login"
+						/>
 					</form>
 				</div>
 			</div>

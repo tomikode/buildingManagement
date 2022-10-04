@@ -1,9 +1,9 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { useState } from "react";
-import styles from "../styles/Nav.module.css";
+import styles from "../../styles/Nav.module.css";
 
-const ManagerNav = () => {
+const TenantNav = () => {
 	const [menu, setMenu] = useState(false);
 
 	const showMenu = () => {
@@ -18,12 +18,12 @@ const ManagerNav = () => {
 						<XMarkIcon className={styles.menuIcon} />
 					</button>
 					<ul id="menu" className={styles.menu}>
-						<Link href="/managerHome">
+						<Link href="/tenantHome">
 							<li>
 								<p>Home</p>
 							</li>
 						</Link>
-						<Link href="/profile">
+						<Link href="/profile" data-testid="profile">
 							<li>
 								<p>Profile</p>
 							</li>
@@ -33,44 +33,29 @@ const ManagerNav = () => {
 								<p>Mail</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/noticeboard">
 							<li>
 								<p>Noticeboard</p>
 							</li>
 						</Link>
 						<Link href="/">
 							<li>
-								<p>Work Orders</p>
+								<p>Rent</p>
 							</li>
 						</Link>
 						<Link href="/">
 							<li>
-								<p>Damages</p>
-							</li>
-						</Link>
-						<Link href="/">
-							<li>
-								<p>Contractors</p>
-							</li>
-						</Link>
-						<Link href="/">
-							<li>
-								<p>Rentals</p>
-							</li>
-						</Link>
-						<Link href="/">
-							<li>
-								<p>Users</p>
-							</li>
-						</Link>
-						<Link href="/">
-							<li>
-								<p>Building</p>
+								<p>Report Damages</p>
 							</li>
 						</Link>
 						<Link href="/">
 							<li>
 								<p>Invoices</p>
+							</li>
+						</Link>
+						<Link href="/userManagement">
+							<li>
+								<p>User Management</p>
 							</li>
 						</Link>
 						<Link href="/logout">
@@ -81,7 +66,11 @@ const ManagerNav = () => {
 					</ul>
 				</>
 			) : (
-				<button className={styles.button} onClick={showMenu}>
+				<button
+					data-testid="menu"
+					className={styles.button}
+					onClick={showMenu}
+				>
 					<Bars3Icon className={styles.menuIcon} />
 				</button>
 			)}
@@ -89,4 +78,6 @@ const ManagerNav = () => {
 	);
 };
 
-export default ManagerNav;
+//mail, profile, noticeboard, rental, damages, invoices
+
+export default TenantNav;

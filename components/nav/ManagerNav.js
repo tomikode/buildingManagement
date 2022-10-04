@@ -1,9 +1,9 @@
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React, { useState } from "react";
-import styles from "../styles/Nav.module.css";
+import styles from "../../styles/Nav.module.css";
 
-const ContractorNav = () => {
+const ManagerNav = () => {
 	const [menu, setMenu] = useState(false);
 
 	const showMenu = () => {
@@ -18,7 +18,7 @@ const ContractorNav = () => {
 						<XMarkIcon className={styles.menuIcon} />
 					</button>
 					<ul id="menu" className={styles.menu}>
-						<Link href="/contractorHome">
+						<Link href="/managerHome">
 							<li>
 								<p>Home</p>
 							</li>
@@ -33,7 +33,7 @@ const ContractorNav = () => {
 								<p>Mail</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/noticeboard">
 							<li>
 								<p>Noticeboard</p>
 							</li>
@@ -41,6 +41,36 @@ const ContractorNav = () => {
 						<Link href="/">
 							<li>
 								<p>Work Orders</p>
+							</li>
+						</Link>
+						<Link href="/">
+							<li>
+								<p>Damages</p>
+							</li>
+						</Link>
+						<Link href="/">
+							<li>
+								<p>Contractors</p>
+							</li>
+						</Link>
+						<Link href="/">
+							<li>
+								<p>Rentals</p>
+							</li>
+						</Link>
+						<Link href="/userManagement">
+							<li>
+								<p>User Management</p>
+							</li>
+						</Link>
+						<Link href="/buildingManagement/">
+							<li>
+								<p>Building</p>
+							</li>
+						</Link>
+						<Link href="/">
+							<li>
+								<p>Invoices</p>
 							</li>
 						</Link>
 						<Link href="/logout">
@@ -59,4 +89,4 @@ const ContractorNav = () => {
 	);
 };
 
-export default ContractorNav;
+export default ManagerNav;
