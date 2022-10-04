@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../../components/Layout";
-import styles from "../../styles/UserManagment.module.css";
+import styles from "../../styles/Rental.module.css";
 //import Link from "next/link";
 
 const tenantRental = () => {
