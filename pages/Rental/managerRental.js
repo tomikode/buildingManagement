@@ -33,14 +33,14 @@ const managerRental = () => {
 
     useEffect(() => {
         const getData = async () => {
-            if (!loggedInUser && router) {
+            /*if (!loggedInUser && router) {
                 router.push("/login");
-            } else {
+            } else {*/
                 loggedInUser = JSON.parse(sessionStorage.getItem("user"));
 
-                const contractsFromDatabase = await fetchContractsFromDatabase();
-                setContractTable(contractsFromDatabase);
-            }
+                //const contractsFromDatabase = await fetchContractsFromDatabase();
+                //setContractTable(contractsFromDatabase);
+            //}
         };
         getData();
     }, BECAUSE_TRAVERSY_SAID_SO);
@@ -104,7 +104,7 @@ const managerRental = () => {
     };
 
     return (
-        <Layout pageType="all">
+        <Layout pageType="m">
             <div className={styles.centreWrapper}>
                 <div className={styles.contentBox}>
                     <div className={styles.titleWithButton}>
@@ -145,16 +145,16 @@ const managerRental = () => {
 
                     {/* Show users if selected, or display message if no users to show */}
                     {viewState === VIEW_STATES.CONTRACT_LIST &&
-                        (contractTable?.length === EMPTY.length ? (
+                        /*(contractTable?.length === EMPTY.length ? (
                             "No Contracts Curently Active"
-                        ) : (
+                        ) : (*/
                             <ContractList
                                 contracts={contractTable}
                                 onDelete={deleteContract}
                                 getUser={getUser}
                                 onEdit={editSelectedContract}
                             />
-                        ))}
+                        }
                 </div>
             </div>
         </Layout>

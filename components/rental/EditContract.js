@@ -21,7 +21,7 @@ const EditContract = ({ onEdit, contract = null }) => {
             return;
         }
 
-        onEdit({ id, tenant, landlord, unit, startDate, endDate, totalPrice, chargeRate });
+        onEdit({ _id, tenant, landlord, unit, startDate, endDate, totalPrice, chargeRate });
 
         set_Id("");
         setUser("");

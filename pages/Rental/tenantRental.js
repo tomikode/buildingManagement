@@ -5,7 +5,7 @@ import styles from "../../styles/Rental.module.css";
 
 const tenantRental = () => {
     return (
-        <Layout pageType="all">
+        <Layout pageType="t">
             <div className={styles.centreWrapper}>
                 <div className={styles.contentBox}>
                     <div className={styles.title}>
