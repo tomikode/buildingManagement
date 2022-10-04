@@ -59,13 +59,13 @@
   cursor: pointer;
   }
   
-  .col-25 {
+  .col25 {
     float: left;
     width: 25%;
     margin-top: 6px;
   }
   
-  .col-75 {
+  .col75 {
     float: left;
     width: 75%;
     margin-top: 6px;

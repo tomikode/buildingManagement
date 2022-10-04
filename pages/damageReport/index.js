@@ -1,34 +1,31 @@
-import Head from 'next/head'
-import formStyles from '../styles/Form.module.css'
+import formStyles from '../../styles/Form.module.css'
+import Layout from '../../components/Layout'
 
 export default function Home() {
   return (
-    <>
+    <Layout pageType="t">
     
     <div>
-      <Head>
-        <title>Damage Reporting</title>
-      </Head>
       <h1>Damage Reporting Form</h1>
     </div>
     
-    <div class={formStyles.container}>
+    <div className={formStyles.container}>
         <form>
-              <div class={formStyles.row}>
-                   <div class={formStyles.col-25}>
+              <div className={formStyles.row}>
+                   <div className={formStyles.col25}>
                    <label>Description of Inciddent</label>
                    </div>
-                   <div class={formStyles.col-75}>
-                   <input type='text' class={formStyles.a} placeholder='Write something..'/>
+                   <div className={formStyles.col75}>
+                   <input type='text' className={formStyles.a} placeholder='Write something..'/>
                    </div>
               </div>
   
-              <div class={formStyles.row}>
-                    <div class={formStyles.col-25}>
+              <div className={formStyles.row}>
+                    <div className={formStyles.col25}>
                     <label>Submitted by</label>
                     </div>
-                    <div class={formStyles.col-75}>
-                    <input type='text' class={formStyles.b} placeholder='Your name..'/>
+                    <div className={formStyles.col75}>
+                    <input type='text' className={formStyles.b} placeholder='Your name..'/>
                     </div>
               </div>
 
@@ -38,11 +35,11 @@ export default function Home() {
                     <input type='checkbox' />
                </div>
               <br/>
-              <div class={formStyles.row}>
-                    <input type='submit' value='Submit your application' class={formStyles.btn}/>
+              <div className={formStyles.row}>
+                    <input type='submit' value='Submit your application' className={formStyles.btn}/>
                </div>
           </form>
       </div>
-    </>
+    </Layout>
  )
 }
