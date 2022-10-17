@@ -10,7 +10,9 @@
     "lint": "next lint",
     "childServer": "cross-env CHILD_ENV=test next dev",
     "testFront": "jest ./tests/frontTests/ --env=jsdom --runInBand --forceExit",
-    "testBack": "jest ./tests/backTests/fullApi.test.js --runInBand --env=node --forceExit"
+    "testBack": "jest ./tests/backTests/fullApi.test.js --runInBand --env=node --forceExit",
+    "postinstall": "next build"
+    
   },
   "dependencies": {
     "@heroicons/react": "^2.0.10",
