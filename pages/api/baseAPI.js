@@ -17,7 +17,7 @@ const createUser = async (req) => {
 };
 
 //api handler function, splits get and post requests
-export default async function (req, res) {
+export default async function baseHandler(req, res) {
 	const method = req.method;
 	console.log(method + " User");
 	connect().catch((err) => console.log(err));

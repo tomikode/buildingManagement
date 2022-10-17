@@ -28,5 +28,6 @@ describe("Tenant Home", () => {
 		const menu = dom.getByTestId("menu");
 		fireEvent.click(menu);
 		expect(screen.getByText("Profile")).toBeVisible();
+		expect(1).toBe(0);
 	});
 });

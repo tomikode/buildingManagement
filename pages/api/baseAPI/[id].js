@@ -26,7 +26,7 @@ const deleteUser = async (req) => {
 //handler function, requires id of object to be in the url
 //e.g. api/baseAPI/1234
 //this id can be retrieved via req.query.id
-export default async function (req, res) {
+export default async function baseHandlerId(req, res) {
 	const method = req.method;
 	console.log(method + " user");
 	connect().catch((err) => console.log(err));
