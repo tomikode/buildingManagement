@@ -35,4 +35,18 @@ steps:
           TEST_URI: $(TEST_URI)
       displayName: "backend test"
       condition: succeededOrFailed()
+      
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '.'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
 
