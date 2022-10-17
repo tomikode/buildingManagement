@@ -35,3 +35,4 @@ steps:
           TEST_URI: $(TEST_URI)
       displayName: "backend test"
       condition: succeededOrFailed()
+
