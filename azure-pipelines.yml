@@ -36,17 +36,9 @@ steps:
       displayName: "backend test"
       condition: succeededOrFailed()
       
-    - task: ArchiveFiles@2
+    - task: AzureStaticWebApp@0
       inputs:
-        rootFolderOrFile: '.'
-        includeRootFolder: true
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-        replaceExistingArchive: true
-
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+        app_location: '/'
+        api_location: 'pages/api'
+        azure_static_web_apps_api_token: $(DEPLOY_TOKEN)
 
