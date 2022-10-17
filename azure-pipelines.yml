@@ -36,11 +36,3 @@ steps:
       displayName: "backend test"
       condition: succeededOrFailed()
 
-    - task: AzureRmWebAppDeployment@4
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'Azure subscription 1(ecc3ac05-4677-4a1f-939f-52d9f49c567d)'
-        appType: 'webAppLinux'
-        WebAppName: 'ASDApp'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
