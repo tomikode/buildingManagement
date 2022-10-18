@@ -1,0 +1,76 @@
+.wrapper {
+    height: calc(100vh - 80px);
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../public/skyscraper.jpg");
+    background-size: cover;
+}
+
+.box {
+    background-color: white;
+    height: 500px;
+    width: 70%;
+    max-width: 1100px;
+    border: 1px solid black;
+    box-shadow: 0px 10px 10px rgb(180, 180, 180);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tableContainer {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: center;
+}
+
+.table {
+    user-select: none;
+    overflow-x: auto;
+    display: inline-block;
+    border-collapse: collapse;
+}
+
+.thead td {
+    color: white;
+    background-color: var(--primary);
+}
+
+.table td{
+    border: 1px solid black;
+    padding: 10px;
+    /* max-width: 40px; */
+}
+
+.table tbody tr:hover {
+    background-color: var(--light);
+    cursor: pointer;
+} 
+
+.button {
+    width: 100px;
+    height: 40px;
+    background-color: var(--primary);
+    color: white;
+    border: 1px solid black;
+
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: var(--light);
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.buttons * {
+    margin: 3px;
+}
