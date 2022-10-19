@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import CreateWorkOrder from "../components/CreateWorkOrder";
 import Layout from "../components/Layout";
+import ViewWorkOrder from "../components/ViewWorkOrder";
 import styles from "../styles/WorkOrders.module.css";
 
 const ManagerWorkOrders = () => {
@@ -20,6 +21,7 @@ const ManagerWorkOrders = () => {
 	]);
 	const [filterOrders, setFilterOrders] = useState(workOrders.current);
 	const [showCreate, setShowCreate] = useState(false);
+	const [showView, setShowView] = useState(null);
 	const [contractors, setContractors] = useState([]);
 	const [units, setUnits] = useState([]);
 
@@ -49,8 +51,13 @@ const ManagerWorkOrders = () => {
 		fetchUnits();
 	}, []);
 
-	const viewOrder = (order) => {
-		console.log(order);
+	const openView = (order) => {
+		console.log("thing");
+		setShowView(order);
+	};
+
+	const closeView = () => {
+		setShowView(null);
 	};
 
 	const filter = (e) => {
@@ -64,7 +71,7 @@ const ManagerWorkOrders = () => {
 
 	const createOrder = async (order) => {
 		workOrders.current.push(order);
-		const onlyIds = {
+		const format = {
 			unit: order.unit,
 			submissionUser: order.submissionUser,
 			contractor: order.contractor,
@@ -74,7 +81,7 @@ const ManagerWorkOrders = () => {
 			status: order.status,
 		};
 
-		await axios.post("http://localhost:3000/api/workOrders", onlyIds);
+		await axios.post("http://localhost:3000/api/workOrders", format);
 		fetchWorkOrders();
 		closeCreate();
 	};
@@ -87,6 +94,21 @@ const ManagerWorkOrders = () => {
 		setShowCreate(false);
 	};
 
+	const updateOrder = async (order) => {
+		const res = await axios.put(
+			`http://localhost:3000/api/workOrders/${order._id}`,
+			order
+		);
+		console.log(res);
+		fetchWorkOrders();
+		closeView();
+	};
+
+	const formatDate = (date) => {
+		if (date.day) return `${date.day}/${date.month}/${date.year}`;
+		return "No date";
+	};
+
 	return (
 		<Layout pageType="m">
 			{showCreate ? (
@@ -95,6 +117,15 @@ const ManagerWorkOrders = () => {
 					createOrder={createOrder}
 					contractors={contractors}
 					units={units}
+				/>
+			) : null}
+			{showView ? (
+				<ViewWorkOrder
+					units={units}
+					order={showView}
+					closeView={closeView}
+					contractors={contractors}
+					updateOrder={updateOrder}
 				/>
 			) : null}
 			<div className={styles.wrapper}>
@@ -137,7 +168,7 @@ const ManagerWorkOrders = () => {
 								{filterOrders.map((order, index) => (
 									<tr
 										key={index}
-										onClick={() => viewOrder(order)}
+										onClick={() => openView(order)}
 									>
 										<td>{order._id}</td>
 										<td>{order.status}</td>
@@ -156,7 +187,7 @@ const ManagerWorkOrders = () => {
 										<td>{order.response}</td>
 										<td>
 											{order.workDate
-												? order.workDate.getUTCDate()
+												? formatDate(order.workDate)
 												: "No date"}
 										</td>
 									</tr>

@@ -15,7 +15,11 @@ const workOrderSchema = new mongoose.Schema({
 	},
 	description: String,
 	response: String,
-	workDate: Date,
+	workDate: {
+		day: Number,
+		month: Number,
+		year: Number,
+	},
 	status: String,
 });
 
