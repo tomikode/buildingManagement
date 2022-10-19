@@ -1,33 +1,52 @@
 import axios from "axios";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
+import CreateWorkOrder from "../components/CreateWorkOrder";
 import Layout from "../components/Layout";
 import styles from "../styles/WorkOrders.module.css";
 
 const ManagerWorkOrders = () => {
 	const workOrders = useRef([
-		{
-			id: 1,
-			block: 1,
-			unit: 1,
-			submissionUser: 1,
-			contractor: 1001,
-			description: "stuff broke",
-			response: "fixed bruh",
-			workDate: new Date(),
-			status: "fixed",
-		},
+		// {
+		// 	id: 1,
+		// 	unit: 1,
+		// 	submissionUser: 1,
+		// 	contractor: 1001,
+		// 	description: "stuff broke",
+		// 	response: "fixed bruh",
+		// 	workDate: new Date(),
+		// 	status: "Complete",
+		// },
 	]);
 	const [filterOrders, setFilterOrders] = useState(workOrders.current);
+	const [showCreate, setShowCreate] = useState(false);
+	const [contractors, setContractors] = useState([]);
+	const [units, setUnits] = useState([]);
+
+	const fetchWorkOrders = async () => {
+		const response = await axios.get(
+			"http://localhost:3000/api/workOrders"
+		);
+		workOrders.current = response.data;
+		setFilterOrders(workOrders.current);
+	};
 
 	useEffect(() => {
-		const fetchWorkOrders = async () => {
+		const fetchContractors = async () => {
 			const response = await axios.get(
-				"http://localhost:3000/api/workOrders"
+				"http://localhost:3000/api/contractors"
 			);
-			console.log(response);
+			setContractors(response.data);
+		};
+		const fetchUnits = async () => {
+			const response = await axios.get(
+				"http://localhost:3000/api/buildingManagement/units"
+			);
+			setUnits(response.data.foundUnits);
 		};
 		fetchWorkOrders();
+		fetchContractors();
+		fetchUnits();
 	}, []);
 
 	const viewOrder = (order) => {
@@ -43,13 +62,48 @@ const ManagerWorkOrders = () => {
 			);
 	};
 
+	const createOrder = async (order) => {
+		workOrders.current.push(order);
+		const onlyIds = {
+			unit: order.unit,
+			submissionUser: order.submissionUser,
+			contractor: order.contractor,
+			description: order.description,
+			response: "",
+			workDate: null,
+			status: order.status,
+		};
+
+		await axios.post("http://localhost:3000/api/workOrders", onlyIds);
+		fetchWorkOrders();
+		closeCreate();
+	};
+
+	const openCreate = () => {
+		setShowCreate(true);
+	};
+
+	const closeCreate = () => {
+		setShowCreate(false);
+	};
+
 	return (
 		<Layout pageType="m">
+			{showCreate ? (
+				<CreateWorkOrder
+					closeCreate={closeCreate}
+					createOrder={createOrder}
+					contractors={contractors}
+					units={units}
+				/>
+			) : null}
 			<div className={styles.wrapper}>
 				<div className={styles.box}>
 					<h1>Work Orders</h1>
 					<div className={styles.buttons}>
-						<button className={styles.button}>Create</button>
+						<button className={styles.button} onClick={openCreate}>
+							Create
+						</button>
 						<div>
 							<p>Status Filter</p>
 							<select
@@ -71,7 +125,6 @@ const ManagerWorkOrders = () => {
 								<tr>
 									<td>ID</td>
 									<td>Status</td>
-									<td>Block</td>
 									<td>Unit</td>
 									<td>Submission User</td>
 									<td>Contractor</td>
@@ -86,15 +139,26 @@ const ManagerWorkOrders = () => {
 										key={index}
 										onClick={() => viewOrder(order)}
 									>
-										<td>{order.id}</td>
+										<td>{order._id}</td>
 										<td>{order.status}</td>
-										<td>{order.block}</td>
-										<td>{order.unit}</td>
-										<td>{order.submissionUser}</td>
-										<td>{order.contractor}</td>
+										<td>{order.unit.unitNumber}</td>
+										<td>
+											{order.submissionUser.firstName +
+												" " +
+												order.submissionUser.lastName}
+										</td>
+										<td>
+											{order.contractor.firstName +
+												" " +
+												order.contractor.lastName}
+										</td>
 										<td>{order.description}</td>
 										<td>{order.response}</td>
-										<td>{order.workDate.getUTCDate()}</td>
+										<td>
+											{order.workDate
+												? order.workDate.getUTCDate()
+												: "No date"}
+										</td>
 									</tr>
 								))}
 							</tbody>

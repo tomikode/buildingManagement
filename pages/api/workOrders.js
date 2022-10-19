@@ -3,7 +3,10 @@ import WorkOrder from "../../database/schemas/workOrder";
 
 //gets all workOrders
 const getWorkOrders = async () => {
-	const workOrders = await WorkOrder.find({});
+	const workOrders = await WorkOrder.find({})
+		.populate("unit")
+		.populate("submissionUser")
+		.populate("contractor");
 	return { status: 200, message: workOrders };
 };
 
