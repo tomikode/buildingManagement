@@ -7,18 +7,7 @@ import ViewWorkOrder from "../components/ViewWorkOrder";
 import styles from "../styles/WorkOrders.module.css";
 
 const ManagerWorkOrders = () => {
-	const workOrders = useRef([
-		// {
-		// 	id: 1,
-		// 	unit: 1,
-		// 	submissionUser: 1,
-		// 	contractor: 1001,
-		// 	description: "stuff broke",
-		// 	response: "fixed bruh",
-		// 	workDate: new Date(),
-		// 	status: "Complete",
-		// },
-	]);
+	const workOrders = useRef([]);
 	const [filterOrders, setFilterOrders] = useState(workOrders.current);
 	const [showCreate, setShowCreate] = useState(false);
 	const [showView, setShowView] = useState(null);

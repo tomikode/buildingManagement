@@ -1,5 +1,7 @@
 import connect from "../../database/connection";
 import WorkOrder from "../../database/schemas/workOrder";
+import Unit from "../../database/schemas/unit";
+import User from "../../database/schemas/user";
 
 //gets all workOrders
 const getWorkOrders = async () => {
