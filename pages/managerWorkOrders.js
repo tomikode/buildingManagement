@@ -15,24 +15,18 @@ const ManagerWorkOrders = () => {
 	const [units, setUnits] = useState([]);
 
 	const fetchWorkOrders = async () => {
-		const response = await axios.get(
-			"http://localhost:3000/api/workOrders"
-		);
+		const response = await axios.get("api/workOrders");
 		workOrders.current = response.data;
 		setFilterOrders(workOrders.current);
 	};
 
 	useEffect(() => {
 		const fetchContractors = async () => {
-			const response = await axios.get(
-				"http://localhost:3000/api/contractors"
-			);
+			const response = await axios.get("api/contractors");
 			setContractors(response.data);
 		};
 		const fetchUnits = async () => {
-			const response = await axios.get(
-				"http://localhost:3000/api/buildingManagement/units"
-			);
+			const response = await axios.get("api/buildingManagement/units");
 			setUnits(response.data.foundUnits);
 		};
 		fetchWorkOrders();
@@ -70,7 +64,7 @@ const ManagerWorkOrders = () => {
 			status: order.status,
 		};
 
-		await axios.post("http://localhost:3000/api/workOrders", format);
+		await axios.post("api/workOrders", format);
 		fetchWorkOrders();
 		closeCreate();
 	};
@@ -84,10 +78,7 @@ const ManagerWorkOrders = () => {
 	};
 
 	const updateOrder = async (order) => {
-		const res = await axios.put(
-			`http://localhost:3000/api/workOrders/${order._id}`,
-			order
-		);
+		const res = await axios.put(`api/workOrders/${order._id}`, order);
 		console.log(res);
 		fetchWorkOrders();
 		closeView();

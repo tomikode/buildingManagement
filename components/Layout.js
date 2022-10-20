@@ -37,7 +37,6 @@ const Layout = ({ children, pageType, logout }) => {
 	}, []); // eslint-disable-line
 
 	const renderNav = () => {
-		console.log("render nav");
 		if (!userCon || !userCon.user) {
 			return <BaseNav />;
 		}

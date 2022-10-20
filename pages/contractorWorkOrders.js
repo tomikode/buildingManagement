@@ -16,9 +16,7 @@ const ContractorWorkOrders = () => {
 	const [units, setUnits] = useState([]);
 
 	const fetchWorkOrders = async () => {
-		const response = await axios.get(
-			"http://localhost:3000/api/workOrders"
-		);
+		const response = await axios.get("api/workOrders");
 		workOrders.current = response.data.filter(
 			(order) => order.contractor._id === userCtx.user._id
 		);
@@ -48,10 +46,7 @@ const ContractorWorkOrders = () => {
 	};
 
 	const updateOrder = async (order) => {
-		const res = await axios.put(
-			`http://localhost:3000/api/workOrders/${order._id}`,
-			order
-		);
+		const res = await axios.put(`api/workOrders/${order._id}`, order);
 		console.log(res);
 		fetchWorkOrders();
 		closeView();
