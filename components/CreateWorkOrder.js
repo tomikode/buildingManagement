@@ -51,8 +51,11 @@ const CreateWorkOrder = ({ units, closeCreate, createOrder, contractors }) => {
 								<td>
 									<select required name="unit">
 										{units
-											? units.map((unit) => (
-													<option value={unit._id}>
+											? units.map((unit, index) => (
+													<option
+														key={index}
+														value={unit._id}
+													>
 														{unit.unitNumber}
 													</option>
 											  ))
@@ -67,14 +70,23 @@ const CreateWorkOrder = ({ units, closeCreate, createOrder, contractors }) => {
 								<td>
 									<select required name="contractor">
 										{contractors
-											? contractors.map((contractor) => (
-													<option
-														value={contractor._id}
-													>
-														{contractor.firstName}{" "}
-														{contractor.lastName}
-													</option>
-											  ))
+											? contractors.map(
+													(contractor, index) => (
+														<option
+															key={index}
+															value={
+																contractor._id
+															}
+														>
+															{
+																contractor.firstName
+															}{" "}
+															{
+																contractor.lastName
+															}
+														</option>
+													)
+											  )
 											: null}
 									</select>
 								</td>

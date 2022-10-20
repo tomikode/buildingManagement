@@ -27,7 +27,7 @@ const ContractorWorkOrders = () => {
 
 	useEffect(() => {
 		if (userCtx.user) fetchWorkOrders();
-	}, [userCtx]);
+	}, [userCtx]); // eslint-disable-line
 
 	const openView = (order) => {
 		console.log("thing");
