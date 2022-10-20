@@ -6,8 +6,6 @@ import styles from "../styles/UserHome.module.css";
 const ContractorHome = () => {
 	const userCtx = useContext(UserContext);
 
-	console.log(userCtx);
-
 	return (
 		<Layout pageType="c">
 			<div className={styles.centreWrapper}>

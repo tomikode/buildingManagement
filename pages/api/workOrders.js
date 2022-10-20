@@ -22,7 +22,7 @@ const createWorkOrder = async (req) => {
 };
 
 //api handler function, splits get and post requests
-export default async function baseHandler(req, res) {
+export default async function workOrderHandler(req, res) {
 	const method = req.method;
 	console.log(method + " Work Order");
 	connect().catch((err) => console.log(err));

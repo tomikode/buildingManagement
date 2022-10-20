@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import TenantHome from "../../pages/tenantHome";
+import ContractorWorkOrders from "../../pages/contractorWorkOrders";
 import { UserContext } from "../../utils/UserContext";
 
-let user = { email: "tom@mail", password: "tom", type: "t" };
+let user = { email: "john@mail", password: "tom", type: "c" };
 const setUser = (data) => {
 	user = data;
 };
@@ -14,16 +14,14 @@ jest.mock("../../pages/_app", () => {
 	});
 });
 
-describe("Tenant Home", () => {
-	it("Tenant home renders", () => {
+describe("Contractor work orders", () => {
+	it("Contractor work order page renders", () => {
 		const dom = render(
 			<UserContext.Provider value={{ user, setUser }}>
-				<TenantHome />
+				<ContractorWorkOrders />
 			</UserContext.Provider>
 		);
-		expect(screen.getByText("Home")).toBeVisible();
-		const menu = dom.getByTestId("menu");
-		fireEvent.click(menu);
-		expect(screen.getByText("Profile")).toBeVisible();
+		expect(screen.getByText("My Work Orders")).toBeVisible();
+		expect(screen.getByText("ID")).toBeVisible();
 	});
 });

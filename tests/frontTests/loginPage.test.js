@@ -2,14 +2,6 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Login from "../../pages/login";
 
-//add data-testid to everything important
-//fireEvent change to type into inputs
-//fireEvent click on buttons
-
-//https://testing-library.com/
-//https://jestjs.io/docs/tutorial-react
-//https://github.com/testing-library/jest-dom
-
 describe("Login", () => {
 	it("Login page renders inputs", () => {
 		const dom = render(<Login />);

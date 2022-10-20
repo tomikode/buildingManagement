@@ -18,6 +18,7 @@ const Layout = ({ children, pageType, logout }) => {
 			return;
 		}
 		const prevUser = sessionStorage.getItem("user");
+		console.log(prevUser);
 		if (prevUser) {
 			prevUser = JSON.parse(prevUser);
 			userCon.setUser(prevUser);
@@ -35,6 +36,12 @@ const Layout = ({ children, pageType, logout }) => {
 				}
 			}
 		}
+
+		// else {
+		// 	if (pageType) {
+		// 		router.push("/");
+		// 	}
+		// }
 	}, []); // eslint-disable-line
 
 	const renderNav = () => {
