@@ -11,14 +11,12 @@ import { UserContext } from "../utils/UserContext";
 const Layout = ({ children, pageType, logout }) => {
 	const userCon = useContext(UserContext);
 	const router = useRouter();
-
 	useEffect(() => {
 		if (logout) {
 			userCon.setUser(null);
 			return;
 		}
 		const prevUser = sessionStorage.getItem("user");
-		console.log(prevUser);
 		if (prevUser) {
 			prevUser = JSON.parse(prevUser);
 			userCon.setUser(prevUser);
@@ -36,15 +34,10 @@ const Layout = ({ children, pageType, logout }) => {
 				}
 			}
 		}
-
-		// else {
-		// 	if (pageType) {
-		// 		router.push("/");
-		// 	}
-		// }
 	}, []); // eslint-disable-line
 
 	const renderNav = () => {
+		console.log("render nav");
 		if (!userCon || !userCon.user) {
 			return <BaseNav />;
 		}

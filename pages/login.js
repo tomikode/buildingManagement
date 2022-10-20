@@ -32,7 +32,9 @@ const Login = () => {
 					break;
 			}
 		} catch (e) {
+			console.log("catch");
 			setError(e.response.data.error);
+			console.log("tings");
 		}
 	};
 
