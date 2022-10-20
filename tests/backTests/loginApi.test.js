@@ -14,7 +14,6 @@ export default function loginTest() {
 			} catch (e) {
 				expect(e.response.status).toBe(401);
 				expect(e.response.data.error).toBe("Something went wrong");
-				jest.retryTimes(1000);
 			}
 		});
 		it("post request with no credentials", async () => {

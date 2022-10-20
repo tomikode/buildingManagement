@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 
 const workOrderSchema = new mongoose.Schema({
-	block: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "Block",
-	},
 	unit: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "Unit",
@@ -19,7 +15,11 @@ const workOrderSchema = new mongoose.Schema({
 	},
 	description: String,
 	response: String,
-	workDate: Date,
+	workDate: {
+		day: Number,
+		month: Number,
+		year: Number,
+	},
 	status: String,
 });
 

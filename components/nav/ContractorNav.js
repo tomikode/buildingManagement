@@ -38,7 +38,7 @@ const ContractorNav = () => {
 								<p>Noticeboard</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/contractorWorkOrders">
 							<li>
 								<p>Work Orders</p>
 							</li>
