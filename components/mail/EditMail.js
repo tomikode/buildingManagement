@@ -40,17 +40,41 @@ const EditMail = ({ onEdit, mail = null }) => {
       {mail && !mailLoaded && loadMail(mail)}
       <table style={{ borderSpacing: "10px 15px" }}>
         <tbody>
+        <tr>
+            <td style={{ textAlign: "right" }}>
+              <label>TO</label>
+            </td>
+            <td>
+              <input
+                type="email"
+                className={formStyles.b} 
+                placeholder="Receiver email address"
+              />
+            </td>
+          </tr>
           <tr>
             <td style={{ textAlign: "right" }}>
-              <label>Massage</label>
+              <label>Subject</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                className={formStyles.b} 
+                placeholder="Add Massage subject"
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right" }}>
+              <label>Massage Description</label>
             </td>
             <td>
               <input
                 type="text"
                 className={formStyles.a} 
                 placeholder="Add your massage"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
               />
             </td>
           </tr>

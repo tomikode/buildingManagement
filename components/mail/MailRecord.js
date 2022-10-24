@@ -27,7 +27,13 @@ const MailRecord = ({
             onClick={() => onDelete(mail._id)}
           />
         )}
-       
+       {withEdit && (
+          <Button
+            color="papayawhip"
+            text="Edit"
+            onClick={() => onEdit(mail._id)}
+          />
+        )}
       </td>
     </tr>
   );
