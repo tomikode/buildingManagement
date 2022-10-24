@@ -11,7 +11,6 @@ import { UserContext } from "../utils/UserContext";
 const Layout = ({ children, pageType, logout }) => {
 	const userCon = useContext(UserContext);
 	const router = useRouter();
-
 	useEffect(() => {
 		if (logout) {
 			userCon.setUser(null);

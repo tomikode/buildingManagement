@@ -1,0 +1,21 @@
+.centreWrapper {
+    height: calc(100vh - 80px);
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../public/skyscraper.jpg");
+    background-size: cover;
+}
+
+.box {
+    background-color: white;
+    height: 400px;
+    width: 400px;
+    border: 1px solid black;
+    box-shadow: 0px 10px 10px rgb(180, 180, 180);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}

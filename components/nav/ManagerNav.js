@@ -38,12 +38,12 @@ const ManagerNav = () => {
 								<p>Noticeboard</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/managerWorkOrders">
 							<li>
 								<p>Work Orders</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/damageReport/incident">
 							<li>
 								<p>Damages</p>
 							</li>

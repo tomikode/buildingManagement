@@ -5,6 +5,7 @@ import noticeboardTest from "./noticeboardApi.test";
 import userManagementTest from "./userManagementApi.test";
 import blockTest from "./blockApi.test";
 import unitTest from "./unitAPI.test";
+import workOrderTest from "./workOrderApi.test";
 
 let testServer;
 jest.setTimeout(15000);
@@ -51,3 +52,4 @@ noticeboardTest();
 userManagementTest();
 blockTest();
 unitTest();
+workOrderTest();

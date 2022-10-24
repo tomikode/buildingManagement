@@ -1,6 +1,8 @@
 import Layout from "../components/Layout";
 import styles from "../styles/Home.module.css";
 
+//https://dotnetthoughts.net/deploying-a-static-webapp-via-azure-devops-pipeline/
+
 //home base landing page
 export default function Home() {
 	return (
@@ -8,7 +10,7 @@ export default function Home() {
 			<div className={styles.container}>
 				<div>
 					<h1>Building Management App</h1>
-					<p>Prototype interface</p>
+					<p>Prototype interface AHHH</p>
 				</div>
 			</div>
 		</Layout>

@@ -51,7 +51,7 @@ const BuildingManagement = () => {
 		}
 	  };
 	  getData();
-	}, BECAUSE_TRAVERSY_SAID_SO);
+	}, BECAUSE_TRAVERSY_SAID_SO); // eslint-disable-line
 
 	const fetchUnitsFromDatabase = async () => {
 		try {

@@ -35,3 +35,10 @@ steps:
           TEST_URI: $(TEST_URI)
       displayName: "backend test"
       condition: succeededOrFailed()
+      
+    - task: AzureStaticWebApp@0
+      inputs:
+        app_location: '/'
+        api_location: ''
+        azure_static_web_apps_api_token: $(DEPLOY_TOKEN)
+
