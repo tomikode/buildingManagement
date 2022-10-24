@@ -1,12 +1,12 @@
 import axios from "axios";
 
-let rentalApi = "http://localhost:3000/api/rental";
+let invoiceApi = "http://localhost:3000/api/Invoicev2";
 
-export default function rentalTest() {
-	describe("rental api", () => {
+export default function invoiceTest() {
+	describe("invoice api", () => {
 		it("get request", async () => {
 			try {
-				const res = await axios.get(rentalApi);
+				const res = await axios.get(invoiceApi);
 			} catch (e) {
 				expect(e.response.status).toBe(401);
 				expect(e.response.data.error).toBe("Something went wrong");
