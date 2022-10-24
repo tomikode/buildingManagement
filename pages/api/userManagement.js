@@ -18,10 +18,6 @@ function validateEmail(email) {
   return re.test(email);
 }
 
-// console.log(validateEmail("my email is anystring@anystring.any")); // true
-
-// console.log(validateEmail("my email is anystring@anystring .any")); // false
-
 const saveUser = async (req) => {
   const { _id, firstName, lastName, email, password, password2, phone, type } =
     req.body;

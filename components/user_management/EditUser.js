@@ -3,12 +3,17 @@ import React from "react";
 import { useState } from "react";
 import styles from "../../styles/UserManagment.module.css";
 
+// Simple regex for email validation in form x@y.z
+// Not designed for rigorous testing but simple validation to catch errors
 function validateEmail(email) {
   var re = /\S+@\S+\.\S+/;
   return re.test(email);
 }
 
+// Update (or create) the user passed in
+// Will validate fields before processing
 const EditUser = ({ onEdit, user = null }) => {
+  // Clear stored user form
   const [_id, set_Id] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -17,9 +22,9 @@ const EditUser = ({ onEdit, user = null }) => {
   const [type, setType] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
-
   const [userLoaded, setUserLoaded] = useState(false);
 
+  // Validate form data
   const onSubmit = (e) => {
     e.preventDefault();
     const validEmail = validateEmail(email);
@@ -41,6 +46,7 @@ const EditUser = ({ onEdit, user = null }) => {
       return;
     }
 
+    // Update user as per form
     var x = onEdit({
       _id,
       firstName,
@@ -51,8 +57,8 @@ const EditUser = ({ onEdit, user = null }) => {
       password,
       password2,
     });
-    console.log("x", x);
 
+    // Clear form
     setFirstName("");
     setLastName("");
     setPhone("");
@@ -62,6 +68,7 @@ const EditUser = ({ onEdit, user = null }) => {
     setPassword2("");
   };
 
+  // Load specified user into data
   const loadUser = (user) => {
     set_Id(user._id);
     setFirstName(user.firstName);
@@ -77,6 +84,7 @@ const EditUser = ({ onEdit, user = null }) => {
 
   return (
     <form onSubmit={onSubmit}>
+      {/* Conditional to load user data if applicable */}
       {user && !userLoaded && loadUser(user)}
       {_id}
       <table style={{ borderSpacing: "10px 15px" }}>
