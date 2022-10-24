@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styles from "../../styles/UserManagment.module.css";
+import styles from "../../styles/Rental.module.css";
 import { UserContext } from "../../utils/UserContext";
 
 const CreateInvoice = ({closeCreate, createInvoice}) => {
@@ -30,12 +30,10 @@ const CreateInvoice = ({closeCreate, createInvoice}) => {
                                     <label>Job</label>
                                 </td>
                                 <td>
-                                    <select required name="job">
-                                        <input
+                                        <input required name="job"
                                             type="text"
                                             placeholder="Input Completed Job"
                                         />
-                                    </select>
                                 </td>
                             </tr>
 
@@ -44,12 +42,10 @@ const CreateInvoice = ({closeCreate, createInvoice}) => {
                                     <label>Job Costs</label>
                                 </td>
                                 <td>
-                                    <select required name="amount">
-                                        <input
+                                        <input required name="amount"
                                             type="number"
                                             placeholder="Input Amount to be Paid"
                                         />
-                                    </select>
                                 </td>
                             </tr>
 
@@ -58,11 +54,9 @@ const CreateInvoice = ({closeCreate, createInvoice}) => {
                                     <label>Job Date</label>
                                 </td>
                                 <td>
-                                    <select required name="date">
-                                        <input
+                                        <input required name="date"
                                             type="date"
                                         />
-                                    </select>
                                 </td>
                             </tr>
 
@@ -71,12 +65,10 @@ const CreateInvoice = ({closeCreate, createInvoice}) => {
                                     <label>Job Description</label>
                                 </td>
                                 <td>
-                                    <select required name="description">
-                                        <input
+                                        <input required name="description"
                                             type="text"
                                             placeholder="Input Job Description"
                                         />
-                                    </select>
                                 </td>
                             </tr>
                             <tr>

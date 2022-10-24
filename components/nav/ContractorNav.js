@@ -43,7 +43,7 @@ const ContractorNav = () => {
 								<p>Work Orders</p>
 							</li>
 						</Link>
-						<Link href="/Invoice/contractorInvoice">
+						<Link href="/Invoice/contractorInvoicev2">
 							<li>
 								<p>Invoice</p>
 							</li>

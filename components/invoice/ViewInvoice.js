@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../../styles/UserManagment.module.css";
+import styles from "../../styles/Rental.module.css";
 
 const ViewInvoice = ({
     invoice,
@@ -43,12 +43,10 @@ const ViewInvoice = ({
                                     <label>Job</label>
                                 </td>
                                 <td>
-                                    <select defaultValue={invoice.job} required name="job">
-                                        <input
+                                        <input defaultValue={invoice.job} required name="job"
                                             type="text"
                                             placeholder="Input Completed Job"
                                         />
-                                    </select>
                                 </td>
                             </tr>
 
@@ -57,12 +55,10 @@ const ViewInvoice = ({
                                     <label>Job Costs</label>
                                 </td>
                                 <td>
-                                    <select defaultValue={invoice.amount} required name="amount">
-                                        <input
+                                        <input defaultValue={invoice.amount} required name="amount"
                                             type="number"
                                             placeholder="Input Amount to be Paid"
                                         />
-                                    </select>
                                 </td>
                             </tr>
 
@@ -71,11 +67,9 @@ const ViewInvoice = ({
                                     <label>Job Date</label>
                                 </td>
                                 <td>
-                                    <select defaultValue={invoice.date} required name="date">
-                                        <input
+                                        <input defaultValue={invoice.date} required name="date"
                                             type="date"
                                         />
-                                    </select>
                                 </td>
                             </tr>
 
@@ -84,12 +78,10 @@ const ViewInvoice = ({
                                     <label>Job Description</label>
                                 </td>
                                 <td>
-                                    <select defaultValue={invoice.description} required name="description">
-                                        <input
+                                        <input defaultValue={invoice.description} required name="description"
                                             type="text"
                                             placeholder="Input Job Description"
                                         />
-                                    </select>
                                 </td>
                             </tr>
                             <tr>

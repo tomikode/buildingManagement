@@ -151,3 +151,17 @@
     padding: 5px;
     width: 100%;
 }
+
+.closeButton {
+    width: 100px;
+    height: 40px;
+    background-color: var(--light);
+    color: white;
+    border: 1px solid black;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}

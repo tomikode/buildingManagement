@@ -57,7 +57,7 @@ const managerRental = () => {
 
     const fetchContractsFromDatabase = async () => {
         try {
-            const fetchResult = await axios.get("/api/rental");
+            const fetchResult = await axios.get("/api/rentalv2");
             let loadedContracts = fetchResult.data.foundContracts;//Look at this to fix
             return loadedContracts;
         } catch (e) {
@@ -79,7 +79,7 @@ const managerRental = () => {
             ...newContract,
         };
         try {
-            const res = await axios.post("/api/rental", contractData);
+            const res = await axios.post("/api/rentalv2", contractData);
             setContractTable(await fetchContractsFromDatabase());
         } catch (e) {
             console.log(e.message);
@@ -96,7 +96,7 @@ const managerRental = () => {
     const deleteContract = async (id) => {
         const contractData = { _id: id };
         try {
-            const res = await axios.patch("/api/rental", contractData);
+            const res = await axios.patch("/api/rentalv2", contractData);
             setContractTable(await fetchContractsFromDatabase());
         } catch (e) {
             console.log(e.message);

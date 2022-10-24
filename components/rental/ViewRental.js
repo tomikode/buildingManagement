@@ -1,66 +1,41 @@
 import React from "react";
-import { useState } from "react";
 import styles from "../../styles/Rental.module.css";
 
-const EditContract = ({ onEdit, contract = null }) => {
-    const [_id, set_Id] = useState("");
-    const [tenant, setUser] = useState("");
-    const [landlord, setLandlord] = useState("");
-    const [unit, setUnit] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [totalPrice, setPrice] = useState("");
-    const [chargeRate, setRate] = useState("");
-    const [contractLoaded, setContractLoaded] = useState(false);
-
-    const onSubmit = (e) => {
+const ViewContract = ({
+    contract,
+    user,
+    closeView,
+    updateContract,
+}) => {
+    const submitContract = (e) => {
         e.preventDefault();
-
-        if (!tenant || !landlord || !unit || !startDate || !endDate || !totalPrice || !chargeRate) {
-            alert("Please fill out all forms");
-            return;
-        }
-
-        onEdit({ id, tenant, landlord, unit, startDate, endDate, totalPrice, chargeRate });
-
-        set_Id("");
-        setUser("");
-        setLandlord("");
-        setUnit("");
-        setStartDate("");
-        setEndDate("");
-        setPrice("");
-        setRate("");
-    };
-
-    const loadContract = (contract) => {
-        set_Id(contract._id);
-        setUser(contract.tenant);
-        setLandlord(contract.landlord);
-        setUnit(contract.unit);
-        setStartDate(contract.startDate);
-        setEndDate(contract.endDate);
-        setPrice(contract.totalPrice);
-        setRate(contract.chargeRate);
-
-        setContractLoaded(true);
+        const updated = {
+            user: contract.tenant,
+            landlord: contract.landlord,
+            unti: contract.unit,
+            startDate: contract.startDate,
+            endDate: contract.endDate,
+            price: contract.totalPrice,
+            rate: contract.chargeRate,
+        };
+        updateContract(updated);
     };
 
     return (
-        <form onSubmit={onSubmit}>
-            {contract && !contractLoaded && loadContract(contract)}
-            <table style={{ borderSpacing: "10px 15px" }}>
-                <tbody>
+        <div className={styles.createWrapper}>
+            <div className={styles.createBox}>
+                <h1>Create Contract</h1>
+                <form onSubmit={submitContract}>
+                    <table style={{ borderSpacing: "10px 15px" }}>
+                    <tbody>
                     <tr>
                         <td style={{ textAlign: "right" }}>
                             <label>Tenant Name</label>
                         </td>
                         <td>
-                            <input
+                            <input defaultValue={contract.tenant} required name="tenant"
                                 type="text"
                                 placeholder="Input Tenant Name"
-                                value={tenant}
-                                onChange={(e) => setUser(e.target.value)}
                             />
                         </td>
                     </tr>
@@ -70,11 +45,9 @@ const EditContract = ({ onEdit, contract = null }) => {
                             <label>Landlord Name</label>
                         </td>
                         <td>
-                            <input
+                            <input defaultValue={contract.landlord} required name="landlord"
                                 type="text"
                                 placeholder="Input Landlord Name"
-                                value={landlord}
-                                onChange={(e) => setLandlord(e.target.value)}
                             />
                         </td>
                     </tr>
@@ -84,11 +57,9 @@ const EditContract = ({ onEdit, contract = null }) => {
                             <label>Unit Number</label>
                         </td>
                         <td>
-                            <input
+                            <input defaultValue={contract.unit} required name="unit"
                                 type="number"
                                 placeholder="Input Unit Number"
-                                value={unit}
-                                onChange={(e) => setUnit(e.target.value)}
                             />
                         </td>
                     </tr>
@@ -99,10 +70,8 @@ const EditContract = ({ onEdit, contract = null }) => {
                             <label>Start Date</label>
                         </td>
                         <td>
-                            <input
+                            <input defaultValue={contract.startDate} required name="startdate"
                                 type="date"
-                                value={startDate}
-                                onChange={(e) => setStartDate(e.target.value)}
                             />
                         </td>
                     </tr>
@@ -112,10 +81,8 @@ const EditContract = ({ onEdit, contract = null }) => {
                             <label>End Date</label>
                         </td>
                         <td>
-                            <input
+                            <input defaultValue={contract.endDate} required name="enddate"
                                 type="date"
-                                value={endDate}
-                                onChange={(e) => setEndDate(e.target.value)}
                             />
                         </td>
                     </tr>
@@ -125,11 +92,9 @@ const EditContract = ({ onEdit, contract = null }) => {
                             <label>Rent Amount</label>
                         </td>
                         <td>
-                            <input
+                            <input defaultValue={contract.price} required name="rent"
                                 type="number"
                                 placeholder="Input Rent Amount"
-                                value={totalPrice}
-                                onChange={(e) => setPrice(e.target.value)}
                             />
                         </td>
                     </tr>
@@ -145,7 +110,6 @@ const EditContract = ({ onEdit, contract = null }) => {
                                 id="weekly"
                                 value="Weekly"
                                 name="Cycle"
-                                onChange={(e) => setRate(e.target.value)}
                             />
                             <label for="weekly">Weekly </label>
                             <input
@@ -153,7 +117,6 @@ const EditContract = ({ onEdit, contract = null }) => {
                                 id="monthly"
                                 value="Monthly"
                                 name="Cycle"
-                                onChange={(e) => setRate(e.target.value)}
                             />
                             <label for="Monthly">Monthly </label>
                             <input
@@ -161,17 +124,18 @@ const EditContract = ({ onEdit, contract = null }) => {
                                 id="yearly"
                                 value="Yearly"
                                 name="Cycle"
-                                onChange={(e) => setRate(e.target.value)}
                             />
                             <label for="yearly">Yearly</label>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <br />
-            <input type="submit" value="SAVE CONTRACT" className={styles.rightButton} />
-        </form>
-    );
+                    <br />
+                    <input type="submit" value="UPDATE CONTRACT" className={styles.rightButton} />
+                </form>
+            </div>
+        </div>
+    )
 };
 
-export default EditContract;
+export default ViewContract;

@@ -2,50 +2,50 @@ import axios from "axios";
 import Layout from "../../components/Layout";
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { UserContext } from "../../utils/UserContext";
-import CreateInvoice from "../../components/invoice/CreateInvoice";
-import ViewInvoice from "../../components/invoice/ViewInvoice";
-import styles from "../../styles/Rental.module.css";
+import CreateRental from "../../components/rental/CreateRental";
+import ViewRental from "../../components/rental/ViewRental";
+import styles from "../../styles/UserManagment.module.css";
 
-const contractorInvoice = () => {
+const contractorRental = () => {
     const userCont = useContext(UserContext);
-    const contractInvoices = useRef([]);
+    const contractRentals = useRef([]);
     const [showCreate, setShowCreate] = useState(false);
-    const [filterInvoice, setFilterInvoice] = useState(contractInvoices.current);
+    const [filterRental, setFilterRental] = useState(contractRentals.current);
     const [showView, setShowView] = useState(null);
 
-    const fetchInvoices = async () => {
-        const response = await axios.get("api/Invoicev2");
-        contractInvoices.current = response.data.filter(
-            (invoice) => invoice.user._id === userCont.user._id
+    const fetchRentals = async () => {
+        const response = await axios.get("api/rental");
+        contractRentals.current = response.data.filter(
+            (rental) => rental.user._id === userCont.user._id
         );
-        setFilterInvoice(contractInvoices.current);
+        setFilterRental(contractRentals.current);
     };
 
     useEffect(() => {
-        if (userCont.user) fetchInvoices();
+        if (userCont.user) fetchRentals();
     }, [userCont]);
 
-    const openView = (invoice) => {
+    const openView = (rental) => {
         console.log("thing");
-        setShowView(invoice);
+        setShowView(rental);
     }
 
     const closeView = () => {
         setShowView(null);
     }
 
-    const createInvoice = async (invoice) => {
-        contractInvoices.current.push(invoice);
+    const createRental = async (rental) => {
+        contractRentals.current.push(rental);
         const format = {
-            user: invoice.user,
-            job: invoice.job,
-            amount: invoice.amount,
-            date: invoice.date,
-            description: invoice.description,
+            user: rental.user,
+            job: rental.job,
+            amount: rental.amount,
+            date: rental.date,
+            description: rental.description,
         };
 
-        await axios.post("api/Invoicev2", format);
-        fetchInvoices();
+        await axios.post("api/rental", format);
+        fetchRentals();
         closeCreate();
     }
 
@@ -57,8 +57,8 @@ const contractorInvoice = () => {
         setShowCreate(false);
     };
 
-    const updateInvoice = async (invoice) => {
-        const res = await axios.put(`api/Invoicev2/${invoice._id}`, invoice);
+    const updateRental = async (rental) => {
+        const res = await axios.put(`api/Rentalv2/${rental._id}`, rental);
         console.log(res);
         fetchWorkOrders();
         closeView();
@@ -67,23 +67,23 @@ const contractorInvoice = () => {
     return (
         <Layout pageType="c">
             {showCreate ? (
-                <CreateInvoice
+                <CreateRental
                     closeCreate={closeCreate}
-                    createInvoice={createInvoice}
+                    createRental={createRental}
                 />
             ) : null}
             {showView ? (
-                <ViewInvoice
-                    invoice={showView}
+                <ViewRental
+                    rental={showView}
                     user={userCont}
                     closeView={closeView}
-                    updateInvoice={updateInvoice}
+                    updateRental={updateRental}
                 />
             ) : null}
 
             <div className={styles.wrapper}>
                 <div className={styles.box}>
-                    <h1>Invoices</h1>
+                    <h1>Rentals</h1>
                     <div className={styles.buttons}>
                         <button classname={styles.buttons} onClick={openCreate}> Create </button>
                     </div>
@@ -100,13 +100,13 @@ const contractorInvoice = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {filterInvoice.map((invoice, index) => (
-                                <tr key = {index} onClick={() => openView(invoice)}>
-                                    <td>{invoice.user.firstName}</td>
-                                    <td>{invoice.job}</td>
-                                    <td>{invoice.amount}</td>
-                                    <td>{invoice.date}</td>
-                                    <td>{invoice.description}</td>
+                            {filterRental.map((rental, index) => (
+                                <tr key = {index} onClick={() => openView(rental)}>
+                                    <td>{rental.user.firstName}</td>
+                                    <td>{rental.job}</td>
+                                    <td>{rental.amount}</td>
+                                    <td>{rental.date}</td>
+                                    <td>{rental.description}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -117,4 +117,4 @@ const contractorInvoice = () => {
     )
 };
 
-export default contractorInvoice;
+export default contractorRental;
