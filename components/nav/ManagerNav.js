@@ -28,7 +28,7 @@ const ManagerNav = () => {
 								<p>Profile</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/mail">
 							<li>
 								<p>Mail</p>
 							</li>
