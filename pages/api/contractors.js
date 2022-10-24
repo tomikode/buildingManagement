@@ -9,6 +9,8 @@ const getContractors = async () => {
 			_id: cont._id.toString(),
 			firstName: cont.firstName,
 			lastName: cont.lastName,
+			email: cont.email,
+			phone: cont.phone
 		};
 	});
 	return { status: 200, message: contractors };
