@@ -9,6 +9,9 @@ const getNotices = async () => {
 
 const postNotice = async (req) => {
   const { _id, postDate, content, user } = req.body;
+  const validContent = content !== "";
+
+  if (!validContent) return { status: 401, body: { error: "Invalid content" } };
   if (_id) {
     if (user) {
       const newNotice = await Notice.updateOne(

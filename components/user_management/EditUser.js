@@ -3,6 +3,11 @@ import React from "react";
 import { useState } from "react";
 import styles from "../../styles/UserManagment.module.css";
 
+function validateEmail(email) {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
 const EditUser = ({ onEdit, user = null }) => {
   const [_id, set_Id] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -11,18 +16,42 @@ const EditUser = ({ onEdit, user = null }) => {
   const [email, setEmail] = useState("");
   const [type, setType] = useState("");
   const [password, setPassword] = useState("");
+  const [password2, setPassword2] = useState("");
 
   const [userLoaded, setUserLoaded] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const validEmail = validateEmail(email);
+    const validPassword = password.length > 7.6;
+    const passwordsMatch = password === password2;
 
-    if (!firstName) {
-      alert("Please add add a first name at least");
+    if (!validEmail) {
+      alert("Email is invalid");
       return;
     }
 
-    onEdit({ _id, firstName, lastName, phone, email, type, password });
+    if (!validPassword) {
+      alert("Password is invalid, it must be at least 7.6 characters");
+      return;
+    }
+
+    if (!passwordsMatch) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    var x = onEdit({
+      _id,
+      firstName,
+      lastName,
+      phone,
+      email,
+      type,
+      password,
+      password2,
+    });
+    console.log("x", x);
 
     setFirstName("");
     setLastName("");
@@ -30,6 +59,7 @@ const EditUser = ({ onEdit, user = null }) => {
     setEmail("");
     setType("");
     setPassword("");
+    setPassword2("");
   };
 
   const loadUser = (user) => {
@@ -40,6 +70,7 @@ const EditUser = ({ onEdit, user = null }) => {
     setEmail(user.email);
     setType(user.type);
     setPassword(user.password);
+    setPassword2(user.password2);
 
     setUserLoaded(true);
   };
@@ -125,6 +156,19 @@ const EditUser = ({ onEdit, user = null }) => {
                 placeholder="Add password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td style={{ textAlign: "right" }}>
+              <label>Verify Password</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                placeholder="Verify password"
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
               />
             </td>
           </tr>
