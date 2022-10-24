@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import styles from "../../styles/UserManagment.module.css";
+import formStyles from '../../styles/Form.module.css'
 
 const EditIncident = ({ onEdit, incident = null }) => {
   const [id, setID] = useState("");
@@ -46,7 +47,8 @@ const EditIncident = ({ onEdit, incident = null }) => {
             <td>
               <input
                 type="text"
-                placeholder="Add post content"
+                className={formStyles.a} 
+                placeholder="Add Incident Description"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
