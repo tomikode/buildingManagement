@@ -4,6 +4,7 @@ import styles from "../../styles/UserManagment.module.css";
 
 const EditInvoice = ({ onEdit, invoice = null }) => {
     const [_id, set_Id] = useState("");
+    const [user, setUser] = useState("");
     const [job, setJob] = useState("");
     const [amount, setAmount] = useState("");
     const [date, setDate] = useState("");
@@ -18,9 +19,10 @@ const EditInvoice = ({ onEdit, invoice = null }) => {
             return;
         }
 
-        onEdit({_id, job, amount, date, description});
+        onEdit({_id, user, job, amount, date, description});
 
         set_Id("");
+        setUser("");
         setJob("");
         setAmount("");
         setDate("");
@@ -29,6 +31,7 @@ const EditInvoice = ({ onEdit, invoice = null }) => {
 
     const loadInvoice = (invoice) => {
         set_Id(invoice._id);
+        setUser(invoice.user);
         setJob(invoice.job);
         setAmount(invoice.amount);
         setDate(invoice.date);
