@@ -6,11 +6,12 @@ const IncidentList = ({ incidents, onDelete, getUser, onEdit, loggedInUser }) =>
     <table style={{ borderCollapse: "collapse" }}>
       <thead>
         <tr>
+          <th>Submitted by</th>
           <th>Incident Description</th>
         </tr>
       </thead>
       <tbody>
-        {incidents?.map((incident) => (
+        {incidents.map((incident) => (
           <IncidentRecord
             key={incident._id}
             rowColor={++row_number % 2 === 0 ? "white" : "Gainsboro"}

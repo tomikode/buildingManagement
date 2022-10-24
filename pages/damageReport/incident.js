@@ -43,7 +43,7 @@ const Incident = () => {
 		try {
 			const fetchResult = await axios.get("/api/incident");
 			console.log(fetchResult)
-			var loadedIncidents = fetchResult.data;
+			var loadedIncidents = fetchResult.data.foundIncidents;
 			return loadedIncidents;
 		} catch (e) {
 			console.log(e.message);
@@ -154,7 +154,7 @@ const Incident = () => {
 
 					{/* Display message if no notices to show */}
 					{viewState === ACTIVE_VIEW.INCIDENT_LIST &&
-						(incidents?.length === 0 ? (
+						(incidents.length === 0 ? (
 							"No incidents"
 						) : (
 							<IncidentList

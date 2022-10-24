@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 
 const incidentSchema = new mongoose.Schema({
-  
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }, 
     content: String,
     postDate: Date,
 })

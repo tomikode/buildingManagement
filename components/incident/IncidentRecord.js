@@ -30,7 +30,7 @@ const IncidentRecord = ({
         {withEdit && (
           <Button
             color="papayawhip"
-            text="EDIT"
+            text="Approve pending"
             onClick={() => onEdit(incident._id)}
           />
         )}

@@ -1,38 +1,69 @@
 import connect from "../../database/connection";
 import Incident from "../../database/schemas/incident";
 
-//gets all incidents
 const getIncidents = async () => {
-	const incidents = await Incident.find({});
-	return { status: 200, message: incidents };
-};
-
-//creates new incidents via post request
-const createIncident = async (req) => {
-	if (!req.body)
-		return { status: 400, message: { error: "No resource details given" } };
-	const newIncident = new Incident(req.body);
-	await newIncident.save();
-	return { status: 201, message: newIncident };
-};
-
-//api handler function, splits get and post requests
-export default async function baseHandler(req, res) {
-	const method = req.method;
-	console.log(method + " Incident");
-	connect().catch((err) => console.log(err));
-	let result = { error: "Invalid request" };
-	switch (method) {
-		case "GET":
-			result = await getIncidents();
-			res.status(result.status).json(result.message);
-			break;
-		case "POST":
-			result = await createIncident(req);
-			res.status(result.status).json(result.message);
-			break;
-		default:
-			res.status(400).json(result);
-			break;
+	const foundIncidents = await Incident.find();
+	if (foundIncidents) return { status: 201, body: { foundIncidents } };
+	else return { status: 401, body: { error: "Shit the bed" } };
+  };
+  
+  const postIncident = async (req) => {
+	const { _id, postDate, content, user } = req.body;
+	if (_id) {
+	  if (user) {
+		const newIncident = await Incident.updateOne(
+		  { _id: [`${_id}`] },
+		  { user: `${user}`, content: `${content}` }
+		);
+		if (newIncident) return { status: 201, body: { newIncident } };
+	  } else {
+		const newIncident = await Incident.updateOne(
+		  { _id: [`${_id}`] },
+		  { content: `${content}` }
+		);
+		if (newIncident) return { status: 201, body: { newIncident } };
+	  }
+	} else {
+	  const newIncident = await Incident.create({ content, user, postDate });
+	  if (newIncident) return { status: 201, body: { newIncident} };
 	}
-}
+	return { status: 401, body: { error: "Shit the bed" } };
+  };
+  
+  const deleteIncident = async (req) => {
+	const { _id } = req.body;
+  
+	const foundUser = await Incident.findById({ _id });
+  
+	const deletedIncident = await Incident.deleteOne({ _id });
+	if (deletedIncident) return { status: 201, body: { deletedIncident } };
+	else return { status: 401, body: { error: "Shit the bed" } };
+  };
+  
+  const incidentHandler = async (req, res) => {
+	const method = req.method;
+  
+	await connect().catch((err) => console.log(err));
+  
+	let result = { error: "Something went horribly wrong" };
+	switch (method) {
+	  case "GET":
+		result = await getIncidents();
+		res.status(result.status).json(result.body);
+		break;
+	  case "POST":
+		result = await postIncident(req);
+		res.status(result.status).json(result.body);
+		break;
+	  case "PATCH":
+		result = await deleteIncident(req);
+		res.status(result.status).json(result.body);
+		break;
+	  default:
+		res.status(401).json(result);
+		break;
+	}
+  };
+  
+  export default incidentHandler;
+  
