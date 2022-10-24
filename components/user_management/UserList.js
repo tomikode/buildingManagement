@@ -3,7 +3,12 @@ import UserRecord from "../user_management/UserRecord";
 const UserList = ({ users, onDisable, onDelete, onEdit, lUser }) => {
   let row_number = 0;
   return (
-    <table style={{ borderSpacing: "50px 0", borderCollapse: "collapse" }}>
+    <table
+      style={{
+        borderSpacing: "50px 0",
+        borderCollapse: "collapse",
+      }}
+    >
       <thead>
         <tr>
           <th>First Name</th>

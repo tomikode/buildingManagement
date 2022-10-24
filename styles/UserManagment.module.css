@@ -9,6 +9,9 @@
 }
 
 .contentBox {
+    /* max-height: 40%;
+    overflow: scroll; */
+
     background-color: white;
     border: 1px solid black;
     border-right: 60px solid white;
