@@ -26,15 +26,15 @@ const managerRental = () => {
 
     useEffect(() => {
         const getData = async () => {
-            if (!loggedInUser && router) {
-                router.push("/login");
-            } else {
+        //    if (!loggedInUser && router) {
+        //        router.push("/login");
+        //    } else {
                 loggedInUser = JSON.parse(sessionStorage.getItem("user"));
 
                 const contractsFromDatabase = await fetchContractsFromDatabase();
                 setContractTable(contractsFromDatabase);
             }
-        };
+       // };
         getData();
     }, BECAUSE_TRAVERSY_SAID_SO);
 

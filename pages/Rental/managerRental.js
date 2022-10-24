@@ -33,14 +33,14 @@ const managerRental = () => {
 
     useEffect(() => {
         const getData = async () => {
-            if (!loggedInUser && router) {
-                router.push("/login");
-            } else {
+            //if (!loggedInUser && router) {
+            //    router.push("/login");
+            //} else {
                 loggedInUser = JSON.parse(sessionStorage.getItem("user"));
 
                 const contractsFromDatabase = await fetchContractsFromDatabase();
                 setContractTable(contractsFromDatabase);
-            }
+            //}
         };
         getData();
     }, BECAUSE_TRAVERSY_SAID_SO);
@@ -58,7 +58,7 @@ const managerRental = () => {
     const fetchContractsFromDatabase = async () => {
         try {
             const fetchResult = await axios.get("/api/rental");
-            let loadedContracts = fetchResult.data.foundContracts;
+            let loadedContracts = fetchResult.data.foundContracts;//Look at this to fix
             return loadedContracts;
         } catch (e) {
             console.log(e.message);
@@ -104,7 +104,7 @@ const managerRental = () => {
     };
 
     return (
-        <Layout pageType="all">
+        <Layout pageType="m">
             <div className={styles.centreWrapper}>
                 <div className={styles.contentBox}>
                     <div className={styles.titleWithButton}>
