@@ -119,7 +119,7 @@ const Incident = () => {
 							<Button
 								text={
 									viewState === ACTIVE_VIEW.INCIDENT_LIST
-										? "POST INCIDENT"
+										? "ADD INCIDENT"
 										: "CANCEL"
 								}
 								color={

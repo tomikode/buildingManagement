@@ -6,8 +6,7 @@ const IncidentList = ({ incidents, onDelete, getUser, onEdit, loggedInUser }) =>
     <table style={{ borderCollapse: "collapse" }}>
       <thead>
         <tr>
-          <th>Poster</th>
-          <th>Message</th>
+          <th>Incident Description</th>
         </tr>
       </thead>
       <tbody>
