@@ -10,7 +10,7 @@ export default function Home() {
 			<div className={styles.container}>
 				<div>
 					<h1>Building Management App</h1>
-					<p>Prototype interface AHHH</p>
+					<p>Prototype interface, making a change</p>
 				</div>
 			</div>
 		</Layout>
