@@ -33,6 +33,7 @@ const Incident = () => {
 	const [usersTable, setUsersTable] = useState([]);
 	const [viewState, setViewState] = useState(ACTIVE_VIEW.INCIDENT_LIST);
 
+	//useEffect is used to get data in this case incident data from database
 	useEffect(() => {
 		const getData = async () => {
 			const incidentsFromDatabase = await fetchIncidentsFromDatabase();
@@ -43,6 +44,7 @@ const Incident = () => {
 		getData();
 	}, BECAUSE_TRAVERSY_SAID_SO); // eslint-disable-line
 
+	//getting data from incident under api
 	const fetchIncidentsFromDatabase = async () => {
 		try {
 			const fetchResult = await axios.get("/api/incident");
@@ -105,7 +107,7 @@ const Incident = () => {
 			console.log(e);
 		}
 	};
-
+//main page to display
 	return (
 		<Layout pageType="all">
 			<div className={styles.centreWrapper}>
