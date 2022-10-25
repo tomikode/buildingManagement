@@ -40,6 +40,18 @@ const EditIncident = ({ onEdit, incident = null }) => {
       {incident && !incidentLoaded && loadIncident(incident)}
       <table style={{ borderSpacing: "10px 15px" }}>
         <tbody>
+        <tr>
+            <td style={{ textAlign: "right" }}>
+              <label>Submitted by</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                className={formStyles.b} 
+                placeholder="Add your name"
+              />
+            </td>
+          </tr>
           <tr>
             <td style={{ textAlign: "right" }}>
               <label>Incident Description</label>
