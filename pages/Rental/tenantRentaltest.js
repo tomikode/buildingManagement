@@ -13,7 +13,7 @@ var loggedInUser = ANONYMOUS_USER;
 
 let contractFound = false;
 
-const managerRental = () => {
+const ManagerRental = () => {
     const router = useRouter();
 
     const BECAUSE_TRAVERSY_SAID_SO = [];
@@ -38,7 +38,7 @@ const managerRental = () => {
             }
         };
         getData();
-    }, BECAUSE_TRAVERSY_SAID_SO);
+    }, BECAUSE_TRAVERSY_SAID_SO); // eslint-disable-line
 
     /*const fetchUsersFromDatabase = async () => {
         try {
@@ -89,4 +89,4 @@ const managerRental = () => {
 
 };
 
-export default managerRental;
+export default ManagerRental;

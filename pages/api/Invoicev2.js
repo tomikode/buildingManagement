@@ -2,9 +2,8 @@ import connect from "../../database/connection";
 import Invoice from "../../database/schemas/invoice";
 
 const getInvoice = async () => {
-    const invoices = await Invoice.find({})
-                .populate("user");
-    return{ status: 200, message: workOrders};
+    const invoices = await Invoice.find({}).populate("user");
+    return{ status: 200, message: invoices};
 };
 
 const createInvoice = async (req) => {

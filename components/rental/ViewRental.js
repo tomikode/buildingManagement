@@ -111,21 +111,21 @@ const ViewContract = ({
                                 value="Weekly"
                                 name="Cycle"
                             />
-                            <label for="weekly">Weekly </label>
+                            <label htmlFor="weekly">Weekly </label>
                             <input
                                 type="radio"
                                 id="monthly"
                                 value="Monthly"
                                 name="Cycle"
                             />
-                            <label for="Monthly">Monthly </label>
+                            <label htmlFor="Monthly">Monthly </label>
                             <input
                                 type="radio"
                                 id="yearly"
                                 value="Yearly"
                                 name="Cycle"
                             />
-                            <label for="yearly">Yearly</label>
+                            <label htmlFor="yearly">Yearly</label>
                         </td>
                     </tr>
                 </tbody>

@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 const ANONYMOUS_USER = undefined;
 var loggedInUser = ANONYMOUS_USER;
 
-const managerRental = () => {
+const ManagerRental = () => {
     const router = useRouter();
     const VIEW_STATES = {
         CONTRACT_LIST: 0,
@@ -33,7 +33,6 @@ const managerRental = () => {
 
     useEffect(() => {
         const getData = async () => {
-<<<<<<< HEAD
             /*if (!loggedInUser && router) {
                 router.push("/login");
             } else {*/
@@ -41,19 +40,10 @@ const managerRental = () => {
 
                 //const contractsFromDatabase = await fetchContractsFromDatabase();
                 //setContractTable(contractsFromDatabase);
-=======
-            //if (!loggedInUser && router) {
-            //    router.push("/login");
-            //} else {
-                loggedInUser = JSON.parse(sessionStorage.getItem("user"));
-
-                const contractsFromDatabase = await fetchContractsFromDatabase();
-                setContractTable(contractsFromDatabase);
->>>>>>> 39ba969f0949f9f167ebf16f46d98c3ac153cdc7
             //}
         };
         getData();
-    }, BECAUSE_TRAVERSY_SAID_SO);
+    }, BECAUSE_TRAVERSY_SAID_SO); // eslint-disable-line
 
     /*const fetchUsersFromDatabase = async () => {
         try {
@@ -172,4 +162,4 @@ const managerRental = () => {
 
 };
 
-export default managerRental;
+export default ManagerRental;

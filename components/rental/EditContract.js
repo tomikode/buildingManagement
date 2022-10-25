@@ -147,7 +147,7 @@ const EditContract = ({ onEdit, contract = null }) => {
                                 name="Cycle"
                                 onChange={(e) => setRate(e.target.value)}
                             />
-                            <label for="weekly">Weekly </label>
+                            <label htmlFor="weekly">Weekly </label>
                             <input
                                 type="radio"
                                 id="monthly"
@@ -155,7 +155,7 @@ const EditContract = ({ onEdit, contract = null }) => {
                                 name="Cycle"
                                 onChange={(e) => setRate(e.target.value)}
                             />
-                            <label for="Monthly">Monthly </label>
+                            <label htmlFor="Monthly">Monthly </label>
                             <input
                                 type="radio"
                                 id="yearly"
@@ -163,7 +163,7 @@ const EditContract = ({ onEdit, contract = null }) => {
                                 name="Cycle"
                                 onChange={(e) => setRate(e.target.value)}
                             />
-                            <label for="yearly">Yearly</label>
+                            <label htmlFor="yearly">Yearly</label>
                         </td>
                     </tr>
                 </tbody>

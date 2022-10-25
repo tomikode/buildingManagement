@@ -15,6 +15,7 @@ const CreateInvoice = ({closeCreate, createInvoice}) => {
             date: e.target.date.value,
             description: e.target.description.value,
         };
+        console.log(invoice);
         createInvoice(invoice);
     };
 
