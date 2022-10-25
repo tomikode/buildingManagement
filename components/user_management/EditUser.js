@@ -160,7 +160,7 @@ const EditUser = ({ onEdit, user = null }) => {
             </td>
             <td>
               <input
-                type="text"
+                type="password"
                 placeholder="Add password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -173,7 +173,7 @@ const EditUser = ({ onEdit, user = null }) => {
             </td>
             <td>
               <input
-                type="text"
+                type="password"
                 placeholder="Verify password"
                 value={password2}
                 onChange={(e) => setPassword2(e.target.value)}
