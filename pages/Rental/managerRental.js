@@ -33,6 +33,7 @@ const managerRental = () => {
 
     useEffect(() => {
         const getData = async () => {
+<<<<<<< HEAD
             /*if (!loggedInUser && router) {
                 router.push("/login");
             } else {*/
@@ -40,6 +41,15 @@ const managerRental = () => {
 
                 //const contractsFromDatabase = await fetchContractsFromDatabase();
                 //setContractTable(contractsFromDatabase);
+=======
+            //if (!loggedInUser && router) {
+            //    router.push("/login");
+            //} else {
+                loggedInUser = JSON.parse(sessionStorage.getItem("user"));
+
+                const contractsFromDatabase = await fetchContractsFromDatabase();
+                setContractTable(contractsFromDatabase);
+>>>>>>> 39ba969f0949f9f167ebf16f46d98c3ac153cdc7
             //}
         };
         getData();
@@ -57,8 +67,8 @@ const managerRental = () => {
 
     const fetchContractsFromDatabase = async () => {
         try {
-            const fetchResult = await axios.get("/api/rental");
-            let loadedContracts = fetchResult.data.foundContracts;
+            const fetchResult = await axios.get("/api/rentalv2");
+            let loadedContracts = fetchResult.data.foundContracts;//Look at this to fix
             return loadedContracts;
         } catch (e) {
             console.log(e.message);
@@ -79,7 +89,7 @@ const managerRental = () => {
             ...newContract,
         };
         try {
-            const res = await axios.post("/api/rental", contractData);
+            const res = await axios.post("/api/rentalv2", contractData);
             setContractTable(await fetchContractsFromDatabase());
         } catch (e) {
             console.log(e.message);
@@ -96,7 +106,7 @@ const managerRental = () => {
     const deleteContract = async (id) => {
         const contractData = { _id: id };
         try {
-            const res = await axios.patch("/api/rental", contractData);
+            const res = await axios.patch("/api/rentalv2", contractData);
             setContractTable(await fetchContractsFromDatabase());
         } catch (e) {
             console.log(e.message);

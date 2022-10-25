@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const invoiceSchema = new mongoose.Schema({
-    contract: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Contract'
+        ref: 'User'
     },
     amount: Number,
     date: Date,
