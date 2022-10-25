@@ -28,7 +28,7 @@ const TenantNav = () => {
 								<p>Profile</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/mail">
 							<li>
 								<p>Mail</p>
 							</li>

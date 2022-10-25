@@ -28,7 +28,7 @@ const ManagerNav = () => {
 								<p>Profile</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/mail">
 							<li>
 								<p>Mail</p>
 							</li>
@@ -43,12 +43,12 @@ const ManagerNav = () => {
 								<p>Work Orders</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/damageReport/incident">
 							<li>
 								<p>Damages</p>
 							</li>
 						</Link>
-						<Link href="/">
+						<Link href="/contractors">
 							<li>
 								<p>Contractors</p>
 							</li>
