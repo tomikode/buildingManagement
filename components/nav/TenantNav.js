@@ -43,7 +43,7 @@ const TenantNav = () => {
 								<p>Rent</p>
 							</li>
 						</Link>
-						<Link href="/damageReport">
+						<Link href="/damageReport/incident">
 							<li>
 								<p>Report Damages</p>
 							</li>
