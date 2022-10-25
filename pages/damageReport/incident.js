@@ -7,9 +7,12 @@ import IncidentList from "../../components/incident/IncidentList";
 import React, { createContext, useEffect, useState } from "react";
 import styles from "../../styles/UserManagment.module.css";
 
+//Creating variables for users
+
 const ANONYMOUS_USER = undefined;
 var loggedInUser = ANONYMOUS_USER;
 
+//incident function to create incident pages
 const Incident = () => {
 	const ACTIVE_VIEW = {
 		INCIDENT_LIST: 0,
@@ -17,7 +20,8 @@ const Incident = () => {
 		EDIT_INCIDENT: 2,
 		CREATE_INCIDENT: 3,
 	};
-
+//Creating variables for useState
+//useState is used to exptress different states 
 	const NOT_LOGGED_IN = 0;
 	const BECAUSE_TRAVERSY_SAID_SO = [];
 	const EMPTY = "";

@@ -1,11 +1,18 @@
 import connect from "../../database/connection";
 import Incident from "../../database/schemas/incident";
 
+//Get incidents from backend server
+//In this case incident schemas under database
+//If someone create a damage report then it store in database using incident schemas and it creates an id
+
 const getIncidents = async () => {
 	const foundIncidents = await Incident.find();
 	if (foundIncidents) return { status: 201, body: { foundIncidents } };
 	else return { status: 401, body: { error: "Shit the bed" } };
   };
+
+  //User create a damage report and send it
+  //It store into database like adding incidents one by one
   
   const postIncident = async (req) => {
 	const { _id, postDate, content, user } = req.body;
@@ -29,6 +36,8 @@ const getIncidents = async () => {
 	}
 	return { status: 401, body: { error: "Shit the bed" } };
   };
+
+  //deleting incident from database
   
   const deleteIncident = async (req) => {
 	const { _id } = req.body;
@@ -39,6 +48,10 @@ const getIncidents = async () => {
 	if (deletedIncident) return { status: 201, body: { deletedIncident } };
 	else return { status: 401, body: { error: "Shit the bed" } };
   };
+
+  //handle incident using switch method
+  //three cases are used where GET means get incident from database, POST means add/put the incident content in databas under separate id
+  //PATCH means delete incident from database
   
   const incidentHandler = async (req, res) => {
 	const method = req.method;

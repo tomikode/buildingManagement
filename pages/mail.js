@@ -7,9 +7,12 @@ import MailList from "../components/mail/MailList";
 import React, { createContext, useEffect, useState } from "react";
 import styles from "../styles/UserManagment.module.css";
 
+//Creating variables for users
+
 const ANONYMOUS_USER = undefined;
 var loggedInUser = ANONYMOUS_USER;
 
+//mail function to create mail pages
 const Mail = () => {
 	const ACTIVE_VIEW = {
 		MAIL_LIST: 0,
@@ -17,7 +20,8 @@ const Mail = () => {
 		EDIT_MAIL: 2,
 		CREATE_MAIL: 3,
 	};
-
+//Creating variables for useState
+//useState is used to exptress different states 
 	const NOT_LOGGED_IN = 0;
 	const BECAUSE_TRAVERSY_SAID_SO = [];
 	const EMPTY = "";
@@ -29,6 +33,7 @@ const Mail = () => {
 	const [usersTable, setUsersTable] = useState([]);
 	const [viewState, setViewState] = useState(ACTIVE_VIEW.MAIL_LIST);
 
+//useEffect is used to get data in this case mail data from database
 	useEffect(() => {
 		const getData = async () => {
 			const mailsFromDatabase = await fetchMailsFromDatabase();
@@ -39,6 +44,7 @@ const Mail = () => {
 		getData();
 	}, BECAUSE_TRAVERSY_SAID_SO); // eslint-disable-line
 
+	//getting data from mail under api
 	const fetchMailsFromDatabase = async () => {
 		try {
 			const fetchResult = await axios.get("/api/mail");
@@ -101,7 +107,7 @@ const Mail = () => {
 			console.log(e);
 		}
 	};
-
+//main page to display
 	return (
 		<Layout pageType="all">
 			<div className={styles.centreWrapper}>

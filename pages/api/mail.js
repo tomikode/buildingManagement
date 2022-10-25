@@ -1,12 +1,17 @@
 import connect from "../../database/connection";
 import Mail from "../../database/schemas/mail";
 
+//Get mail from backend server
+//In this case mail schemas under database
+//If someone send mail then it store in database using mail schemas and it creates an id
 const getMails = async () => {
 	const foundMails = await Mail.find();
 	if (foundMails) return { status: 201, body: { foundMails } };
 	else return { status: 401, body: { error: "Shit the bed" } };
   };
   
+  //User compose an email and send it
+  //It store into database like adding email one by one
   const postMail = async (req) => {
 	const { _id, postDate, content, user } = req.body;
 	if (_id) {
@@ -29,6 +34,8 @@ const getMails = async () => {
 	}
 	return { status: 401, body: { error: "Shit the bed" } };
   };
+
+  //deleting email from database
   
   const deleteMail = async (req) => {
 	const { _id } = req.body;
@@ -39,6 +46,10 @@ const getMails = async () => {
 	if (deletedMail) return { status: 201, body: { deletedMail} };
 	else return { status: 401, body: { error: "Shit the bed" } };
   };
+
+  //handle email using switch method
+  //three cases are used where GET means get email from database, POST means add/put the email content in databas under separate id
+  //PATCH means delete mail from database
   
   const mailHandler = async (req, res) => {
 	const method = req.method;
