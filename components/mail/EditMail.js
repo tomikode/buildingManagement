@@ -60,7 +60,7 @@ const EditMail = ({ onEdit, mail = null }) => {
               <input
                 type="text"
                 className={formStyles.b} 
-                placeholder="Add Massage subject"
+                placeholder="Add Message subject"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
@@ -68,13 +68,13 @@ const EditMail = ({ onEdit, mail = null }) => {
           </tr>
           <tr>
             <td style={{ textAlign: "right" }}>
-              <label>Massage Description</label>
+              <label>Message Description</label>
             </td>
             <td>
               <input
                 type="text"
                 className={formStyles.a} 
-                placeholder="Add your massage"
+                placeholder="Add your message"
               />
             </td>
           </tr>

@@ -1,4 +1,5 @@
 import Button from "../Button";
+import React, { useState } from "react";
 
 const IncidentRecord = ({
   incident,
@@ -15,6 +16,7 @@ const IncidentRecord = ({
       userName = user.firstName + " " + user.lastName;
     }
   }
+  const [approved, setApproved] = useState(false)
   return (
     <tr style={{ backgroundColor: rowColor }}>
       <td style={{ padding: "1em 50px" }}>{incident.user && userName}</td>
@@ -27,13 +29,13 @@ const IncidentRecord = ({
             onClick={() => onDelete(incident._id)}
           />
         )}
-        {withEdit && (
+        {withEdit && approved ? <h2>Approved</h2> :
           <Button
             color="papayawhip"
             text="Approve pending"
-            onClick={() => onEdit(incident._id)}
+            onClick={() => setApproved(true)}
           />
-        )}
+        }
       </td>
     </tr>
   );
