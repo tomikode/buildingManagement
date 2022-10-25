@@ -101,7 +101,7 @@ const contractorInvoice = () => {
                         </thead>
                         <tbody>
                             {filterInvoice.map((invoice, index) => (
-                                <tr key = {index} onClick={() => openView(invoice)}>
+                                <tr key = {index}> //onClick={() => openView(invoice)}>
                                     <td>{invoice.user.firstName}</td>
                                     <td>{invoice.job}</td>
                                     <td>{invoice.amount}</td>
