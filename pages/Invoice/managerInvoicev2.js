@@ -8,14 +8,14 @@ import styles from "../../styles/Rental.module.css";
 const managerInvoice = () => {
     const allInvoices = useContext(UserContext);
     const contractInvoices = useRef([]);
-    const [filterInvoice, setFilterInvoice] = useState(contractInvoices.current);
+    const [filterInvoice, setFilterInvoice] = useState(contractInvoices.current); //Used to finter invoices chosen
     const [showView, setShowView] = useState(null);
 
 
     const fetchInvoices = async () => {
         const response = await axios.get("api/Invoicev2");
         allInvoices = response.data;
-        setFilterInvoice(allInvoices.current);
+        setFilterInvoice(allInvoices.current);  //Filters out invoices
     };
 
     useEffect(() => {
@@ -49,7 +49,7 @@ const managerInvoice = () => {
                 </div>
                 <div className={styles.tableContainer}>
                     <table className={styles.table}>
-                        <thead className={styles.thead}>
+                        <thead className={styles.thead}>        //Initialises table for displaying data
                             <tr>
                                 <td>ID</td>
                                 <td>Job</td>
@@ -67,7 +67,7 @@ const managerInvoice = () => {
                                     <td>2150</td>//{invoice.amount}</td>
                                     <td>22-10-2022</td>//{invoice.date}</td>
                                     <td>Did some work</td>//{invoice.description}</td>
-                                    <td><button classname={styles.buttons}>Pay</button></td>
+                                    <td><button classname={styles.buttons}>Pay</button></td> //Button to pay invoice
                                 </tr>
                             //))}
                         </tbody>
