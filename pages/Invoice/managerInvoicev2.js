@@ -60,16 +60,16 @@ const managerInvoice = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {filterInvoice.map((invoice, index) => (
-                                <tr key={index} onClick={() => openView(invoice)}>
-                                    <td>{invoice._id}</td>
-                                    <td>{invoice.job}</td>
-                                    <td>{invoice.amount}</td>
-                                    <td>{invoice.date}</td>
-                                    <td>{invoice.description}</td>
+                            //{filterInvoice.map((invoice, index) => (
+                                <tr key={index}>
+                                    <td>1</td>//{invoice._id}</td>
+                                    <td>Fix things</td>//{invoice.job}</td>
+                                    <td>2150</td>//{invoice.amount}</td>
+                                    <td>22-10-2022</td>//{invoice.date}</td>
+                                    <td>Did some work</td>//{invoice.description}</td>
                                     <td><button classname={styles.buttons}>Pay</button></td>
                                 </tr>
-                            ))}
+                            //))}
                         </tbody>
                     </table>
                 </div>
